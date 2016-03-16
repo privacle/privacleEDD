@@ -11,3 +11,16 @@ const cn = {
 };
 
 const db = pgp(cn);
+
+function getEvents(req, res, next) {
+  db.any(`select * from events`)
+  .then(function(data) {
+    res.events = data;
+    next();
+  })
+  .catch(function(err){
+    console.error('error with select * from events', err);
+  })
+}
+
+module.exports.getEvents = getEvents;
