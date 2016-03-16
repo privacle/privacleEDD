@@ -48,38 +48,38 @@ module.exports = {
 
 function loginRequest(email, pass, cb) {
 
-  setTimeout(() => {
-    if (email === 'joe@example.com' && pass === 'password1') {
+  var loginCreds = {
+    email: email,
+    password: pass
+  }
+
+  $.post('/users/login', loginCreds)
+    .done((data) => {
+      console.log(data);
       cb({
         authenticated: true,
-        token: Math.random().toString(36).substring(7)
+        token: data.token
+        
       })
-    } else {
-      cb({ authenticated: false })
-    }
-  }, 0)
+    })
+    .error((error) => {
+      console.log(error);
+      cb({
+        authenticated: false
+        
+      })
+    })
 }
 
 
 
-  // var loginCreds = {
-  //   email: email,
-  //   password: pass
-  // }
-
-  // $.post('/users/login', loginCreds)
-  //   .done((data) => {
-  //     console.log(data);
+  // setTimeout(() => {
+  //   if (email === 'joe@example.com' && pass === 'password1') {
   //     cb({
   //       authenticated: true,
-  //       token: data.token
-        
+  //       token: Math.random().toString(36).substring(7)
   //     })
-  //   })
-  //   .error((error) => {
-  //     console.log(error);
-  //     cb({
-  //       authenticated: false
-        
-  //     })
-  //   })
+  //   } else {
+  //     cb({ authenticated: false })
+  //   }
+  // }, 0)

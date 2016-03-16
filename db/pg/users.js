@@ -37,14 +37,13 @@ function createUser(req, res, next) {
     }
 
 function login(req, res, next) {
-  console.log('login user',req.body);
   var email = req.body.email
   var password = req.body.password
-  console.log(email);
-  db.one(`SELECT * FROM users WHERE email LIKE $1/email/`, req.body)
+  
+  db.one(`SELECT * FROM users WHERE email LIKE $/email/`, req.body)
     .then((data) => {
       console.log(data)
-        if (bcrypt.compareSync(password, data.password_digest)) {
+        if (bcrypt.compareSync(password, data.password_hash)) {
           res.rows = data
           next()
         }
