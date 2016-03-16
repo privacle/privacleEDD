@@ -69,7 +69,22 @@ function allUsers(req, res, next) {
 function myFriends(req, res, next) {
   db.any(`select players.email from friends
        inner join players on friends.user_2 = users.user_id
-       where links.p1 = $/user_id`,
+       where links.p1 = $/user_id/`,
+      [req.body.user])
+  .then(function(data) {
+    res.events = data;
+    next();
+  })
+  .catch(function(err){
+    console.error('error with select * from events', err);
+  })
+}
+
+function myCircle(req, res, next) {
+  db.any(`select players.email from friends
+       inner join players on friends.user_2 = users.user_id
+       where links.p1 = $/user_id/
+       and `,
       [req.body.user])
   .then(function(data) {
     res.events = data;
@@ -84,3 +99,4 @@ module.exports.login = login;
 module.exports.createUser = createUser;
 module.exports.allUsers = allUsers;
 module.exports.myFriends = myFriends;
+module.exports.myCircle = myCircle;
