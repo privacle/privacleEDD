@@ -12,11 +12,6 @@ const Link = require('react-router').Link;
 const auth = require('./auth');
 
 
-
-
-
-
-
 const App = React.createClass({
   getInitialState : function() {
     return {
@@ -85,6 +80,9 @@ const Dashboard = React.createClass({
       this.setState({me: data.agent.email})
     })
   },
+  componentDidMount : function() {
+    loadJS("https://maps.googleapis.com/maps/api/js?key=AIzaSyDZwpThrbZbJVY1yt-oTlYePJ_s5I-GZIU&callback=initMap");
+  },
   render : function() {
     const token = auth.getToken()
     return (
@@ -92,6 +90,9 @@ const Dashboard = React.createClass({
         <h1>Dashboard</h1>
         <p>You made it!</p>
         <p>{token}</p>
+        <div id="map">
+
+        </div>
       </div>
     )
   }
@@ -245,4 +246,7 @@ ReactDOM.render((
     </Route>
   </Router>
 ), document.getElementById('container'))
+
+
+
 
