@@ -144,7 +144,7 @@ const Login = React.createClass({
 
           <div className="button" style={{width: 330, marginLeft: '-14px'}}>
             <input className="btn btn-lg btn-defult btn-block" style={{display: 'inline', width: 150}} type="submit" defaultValue="Sign in" />
-            <a href="/signup" className="btn btn-lg btn-defult btn-block" role="button" style={{display: 'inline', width: 150, marginTop: 0}}>Sign up</a>
+            <a href="#" className="btn btn-lg btn-defult btn-block" role="button" style={{display: 'inline', width: 150, marginTop: 0}}>Sign up</a>
           </div>
           {this.state.error && (
             <p>Bad login information</p>
@@ -223,7 +223,7 @@ const Signup = React.createClass({
     return (
       <div>
           <div className="form">
-            <form className="form-signin" action="/users/mypage/" method="POST">
+            <form className="form-signin" onSubmit={}>
               <h2 className="form-signin-heading">Please sign up</h2>
               <label htmlFor="inputEmail" className="sr-only">Email address</label>
               <input name="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" autofocus />
