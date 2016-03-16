@@ -127,14 +127,37 @@ const Login = React.createClass({
   },
   render : function() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
-        <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />
-        <button type="submit">login</button>
-        {this.state.error && (
-          <p>Bad login information</p>
-        )}
-      </form>
+        <form className="form-signin" onSubmit={this.handleSubmit}>
+          <h2 className="form-signin-heading">Log in</h2>
+
+          <label htmlFor="inputEmail" className="sr-only">Email address</label>
+          <input name="email" ref="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" autofocus />
+
+          <label htmlFor="inputPassword" className="sr-only">Password</label>
+          <input name="password" ref="pass" type="password" id="inputPassword" className="form-control" placeholder="Password" />
+
+          <div className="checkbox">
+            <label>
+              <input type="checkbox" defaultValue="remember-me" /> Remember me
+            </label>
+          </div>
+
+          <div className="button" style={{width: 330, marginLeft: '-14px'}}>
+            <input className="btn btn-lg btn-defult btn-block" style={{display: 'inline', width: 150}} type="submit" defaultValue="Sign in" />
+            <a href="/signup" className="btn btn-lg btn-defult btn-block" role="button" style={{display: 'inline', width: 150, marginTop: 0}}>Sign up</a>
+          </div>
+          {this.state.error && (
+            <p>Bad login information</p>
+          )}
+        </form>
+      // <form onSubmit={this.handleSubmit}>
+      //   <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
+      //   <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />
+      //   <button type="submit">login</button>
+      //   {this.state.error && (
+      //     <p>Bad login information</p>
+      //   )}
+      // </form>
     )
   }
 })
@@ -199,7 +222,21 @@ const Signup = React.createClass({
   render : function() {
     return (
       <div>
-        <h1>sign up form</h1>
+          <div className="form">
+            <form className="form-signin" action="/users/mypage/" method="POST">
+              <h2 className="form-signin-heading">Please sign up</h2>
+              <label htmlFor="inputEmail" className="sr-only">Email address</label>
+              <input name="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" autofocus />
+              <label htmlFor="inputPassword" className="sr-only">Password</label>
+              <input name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" />
+              <div className="checkbox">
+                <label>
+                  <input type="checkbox" defaultValue="remember-me" /> Remember me
+                </label>
+              </div>
+              <input type="submit" defaultValue="Submit" className="btn btn-lg btn-defult btn-block" style={{display: 'inline', width: 150, marginTop: 0}} />
+            </form>
+          </div>
       </div>
     )
   }
@@ -245,4 +282,3 @@ ReactDOM.render((
     </Route>
   </Router>
 ), document.getElementById('container'))
-
