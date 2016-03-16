@@ -10,8 +10,9 @@ create table users(
 );
 
 create table events(
-  event_id serial primary key
-
+  event_id serial primary key,
+  name text,
+  owner text
 );
 
 create table rsvp(
