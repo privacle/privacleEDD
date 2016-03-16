@@ -31,8 +31,8 @@ function createUser(req, res, next) {
             .then(() => {
               next()
             })
-            .catch(() => {
-              console.log('error signing up')
+            .catch((err) => {
+              console.log('error signing up', err)
             })
       }
     }
