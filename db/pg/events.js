@@ -23,4 +23,18 @@ function allEvents(req, res, next) {
   })
 }
 
+function newEvents(req, res, next) {
+  db.one(`insert into events (name, owner)
+  values ($/name/, $/owner/)
+  returning event_id`,req.body)
+    .then(function(data) {
+      res.event_id = data;
+      next();
+    })
+    .catch(function(err) {
+      console.error('error with insert into events',err);
+    })
+}
+
 module.exports.allEvents = allEvents;
+module.exports.newEvents = newEvents;
