@@ -1,3 +1,4 @@
+'use strict';
 const pgp = require('pg-promise')({});
 const cn = {
     host: process.env.HOST, // server name or IP address;
@@ -39,7 +40,7 @@ function createUser(req, res, next) {
 function login(req, res, next) {
   var email = req.body.email
   var password = req.body.password
-  
+
   db.one(`SELECT * FROM users WHERE email LIKE $/email/`, req.body)
     .then((data) => {
       console.log(data)
@@ -54,5 +55,32 @@ function login(req, res, next) {
       })
 }
 
+function allUsers(req, res, next) {
+  db.any(`select * from users`)
+  .then(function(data) {
+    res.users = data;
+    next();
+  })
+  .catch(function(err){
+    console.error('error with select * from users', err);
+  })
+}
+
+function myFriends(req, res, next) {
+  db.any(`select players.email from friends
+       inner join players on friends.user_2 = users.user_id
+       where links.p1 = $/user_id`,
+      [req.body.user])
+  .then(function(data) {
+    res.events = data;
+    next();
+  })
+  .catch(function(err){
+    console.error('error with select * from events', err);
+  })
+}
+
 module.exports.login = login;
 module.exports.createUser = createUser;
+module.exports.allUsers = allUsers;
+module.exports.myFriends = myFriends;
