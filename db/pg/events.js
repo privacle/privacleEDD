@@ -12,7 +12,7 @@ const cn = {
 
 const db = pgp(cn);
 
-function getEvents(req, res, next) {
+function allEvents(req, res, next) {
   db.any(`select * from events`)
   .then(function(data) {
     res.events = data;
@@ -23,4 +23,4 @@ function getEvents(req, res, next) {
   })
 }
 
-module.exports.getEvents = getEvents;
+module.exports.allEvents = allEvents;
