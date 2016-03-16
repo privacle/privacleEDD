@@ -3,7 +3,7 @@ const pgp = require('pg-promise')({
     // Initialization Options
 });
 const cn = {
-    host: 'localhost', // server name or IP address;
+    host: process.env.HOST, // server name or IP address;
     port: 5432,
     database: process.env.DB_NAME,
     user: process.env.DB_USER,
