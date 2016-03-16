@@ -21,14 +21,23 @@ After login, user can either find friends by their emails or create an events wi
 
 #### User Stories
 
-- As a new user, I need to be able to signup/login/logout
+MVP
+- As a guest, I need to be able to signup
+- As a return user, I need to login/logout
 - As an admin, I need to have full CRUD on events and users.
 - As a user, I want to be able to create a private event
+- Aa a user, I want to edit a specific event's(created by me) details
+- As a user, I need to be able to delete a event.
 - As a user, I need to see a google map shows all of my events in my home page
-- As a user, I want to be able to find/add/unfriend a friend via search by email or via import from Facebook account
-- As a user, I want to be able to view my friends and my events via friends/location/name.
+- As a user, I want to be able to find friends via their email address
+- As a user, I want to add friend
+- As a user, I need to be able to unfriend a friend
+- As a user, I want to be able to view all my friends
+
+Add-on Features
+
 - As a user, I want to organize my friends into different circles
-- As a user, I need to know which of my friends attendees of a specific event
+- As a user, I need to know which of my friends are attendees of a specific event
 - As a user, I need to be able to login with my Facebook account and import my friends info
 - As a user, I need to upload my event profile pictures
 - As a user, I need to modify my profiles
@@ -86,6 +95,8 @@ Whole Day Test
 All codes are pushed to dev at the end of the day, remember to create pull request, only duty officer can merge codes into master<br />
 
 Only push to master when everything works perfectly<br />
+
+Pull first and then Push
 
 
 
