@@ -5,6 +5,8 @@ Prepared by: Emma, Doug, Dan
 March 15, 2016
 
 <br />
+
+### Mission Statement: The Social Network for the real world
 #### EXECUTIVE SUMMARY
 ##### Objective
 
