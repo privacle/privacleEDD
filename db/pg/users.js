@@ -39,7 +39,7 @@ function createUser(req, res, next) {
 function login(req, res, next) {
   var email = req.body.email
   var password = req.body.password
-  
+
   db.one(`SELECT * FROM users WHERE email LIKE $/email/`, req.body)
     .then((data) => {
       console.log(data)
@@ -54,5 +54,17 @@ function login(req, res, next) {
       })
 }
 
+function allUsers(req, res, next) {
+  db.any(`select * from users`)
+  .then(function(data) {
+    res.users = data;
+    next();
+  })
+  .catch(function(err){
+    console.error('error with select * from users', err);
+  })
+}
+
 module.exports.login = login;
 module.exports.createUser = createUser;
+module.exports.allUsers = allUsers;
