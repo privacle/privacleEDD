@@ -5,11 +5,22 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const $ = require('jquery');
 
+const Login = require('./components/login.js');
+const Signup = require('./components/signup.js');
+const Logout = require('./components/logout.js');
+const Dashboard = require('./components/dashboard.js');
+const Create = require('./components/create.js');
+const Find = require('./components/find.js');
+const Friends = require('./components/friends.js');
+const Events = require('./components/events.js');
+const Profile = require('./components/profile.js');
+
 const browserHistory = require('react-router').browserHistory;
 const Router = require('react-router').Router;
 const Route = require('react-router').Route;
 const Link = require('react-router').Link;
 const auth = require('./auth');
+
 
 
 const App = React.createClass({
@@ -22,10 +33,6 @@ const App = React.createClass({
     this.setState({
       loggedIn: loggedIn
     })
-  },
-  componentWillMount : function() {
-    auth.onChange = this.updateAuth
-    auth.login()
   },
   render : function() {
 
@@ -44,6 +51,7 @@ const App = React.createClass({
             </ul>
 
           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+
         </div>
       )
 
@@ -64,168 +72,7 @@ const App = React.createClass({
   }
 });
 
-const Dashboard = React.createClass({
-  getInitialState : function() {
-    return {
-      me: ''
-    }
-  },
-  seeMe : function() {
-    $.ajax({
-      url: 'users/me',
-      beforeSend: function( xhr ) {
-        xhr.setRequestHeader("Authorization", auth.getToken() );
-      }
-    }).done((data) => {
-      this.setState({me: data.agent.email})
-    })
-  },
-  componentDidMount : function() {
-    loadJS("https://maps.googleapis.com/maps/api/js?key=AIzaSyDZwpThrbZbJVY1yt-oTlYePJ_s5I-GZIU&callback=initMap");
-  },
-  render : function() {
-    const token = auth.getToken()
-    return (
-      <div>
-        <h1>Dashboard</h1>
-        <p>You made it!</p>
-        <p>{token}</p>
-        <div id="map">
 
-        </div>
-      </div>
-    )
-  }
-})
-
-const Login = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.object.isRequired
-  },
-  getInitialState : function() {
-    return {
-      error: false
-    }
-  },
-  handleSubmit : function(event) {
-    event.preventDefault()
-
-    const email = this.refs.email.value
-    const pass = this.refs.pass.value
-
-    auth.login(email, pass, (loggedIn) => {
-      if (!loggedIn)
-        return this.setState({ error: true })
-
-      const { location } = this.props
-
-      if (location.state && location.state.nextPathname) {
-        this.context.router.replace(location.state.nextPathname)
-      } else {
-        this.context.router.replace('/')
-      }
-    })
-  },
-  render : function() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
-        <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />
-        <button type="submit">login</button>
-        {this.state.error && (
-          <p>Bad login information</p>
-        )}
-      </form>
-    )
-  }
-})
-
-const Create = React.createClass({
-
-  render : function() {
-    return (
-      <div>
-        <h1>Create event</h1>
-      </div>
-    )
-  }
-});
-
-const Find = React.createClass({
-
-  render : function() {
-    return (
-      <div>
-        <h1>Find stuff</h1>
-      </div>
-    )
-  }
-});
-
-const Friends = React.createClass({
-
-  render : function() {
-    return (
-      <div>
-        <h1>My friends</h1>
-      </div>
-    )
-  }
-});
-
-const Events = React.createClass({
-
-  render : function() {
-    return (
-      <div>
-        <h1>My events</h1>
-      </div>
-    )
-  }
-});
-
-const Profile = React.createClass({
-
-  render : function() {
-    return (
-      <div>
-        <h1>Profile</h1>
-      </div>
-    )
-  }
-});
-
-const Signup = React.createClass({
-
-  render : function() {
-    return (
-      <div>
-        <h1>sign up form</h1>
-      </div>
-    )
-  }
-});
-
-
-
-const Logout = React.createClass({
-  componentDidMount : function() {
-    auth.logout()
-  },
-
-  render : function() {
-    return <p>You are now logged out</p>
-  }
-})
-
-// function requireAuth(nextState, replace) {
-//   if (!auth.loggedIn()) {
-//     replace({
-//       pathname: '/login',
-//       state: { nextPathname: nextState.location.pathname }
-//     })
-//   }
-// }
 
 
 
@@ -250,3 +97,11 @@ ReactDOM.render((
 
 
 
+// function requireAuth(nextState, replace) {
+//   if (!auth.loggedIn()) {
+//     replace({
+//       pathname: '/login',
+//       state: { nextPathname: nextState.location.pathname }
+//     })
+//   }
+// }
