@@ -223,7 +223,7 @@ const Signup = React.createClass({
     return (
       <div>
           <div className="form">
-            <form className="form-signin" onSubmit={}>
+            <form className="form-signin">
               <h2 className="form-signin-heading">Please sign up</h2>
               <label htmlFor="inputEmail" className="sr-only">Email address</label>
               <input name="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" autofocus />
