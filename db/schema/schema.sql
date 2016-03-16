@@ -5,8 +5,9 @@ drop table if exists friends;
 drop table if exists users;
 
 create table users(
-  user_id serial primary key
-
+  user_id serial primary key,
+  password_hash text,
+  email text
 );
 
 create table events(
