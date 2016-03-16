@@ -13,7 +13,9 @@ create table users(
 create table events(
   event_id serial primary key,
   name text,
-  owner text
+  owner text,
+  lat numeric,
+  lng numeric
 );
 
 create table rsvp(
