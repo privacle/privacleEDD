@@ -15,19 +15,19 @@ create table events(
 );
 
 create table rsvp(
-  user_id references users,
-  event_id references events,
-  rsvp_id primary key (user_id, event_id)
+  user_id integer references users,
+  event_id integer references events,
+  primary key (user_id, event_id)
 );
 
 create table friends(
-  user_1 references users,
-  user_2 references users,
-  friend_id primary key (user_1, user_2)
+  user_1 integer references users,
+  user_2 integer references users,
+  primary key (user_1, user_2)
 );
 
 create table circles(
   circle_id serial primary key,
-  friendship references friends,
+  friendship integer references friends,
   tag text
 );
