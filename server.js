@@ -4,6 +4,8 @@ const express      = require('express');
 const logger       = require('morgan');
 const path         = require('path');
 const bodyParser   = require('body-parser');
+const secret       = "sweet sweet secret";
+const expressJWT   = require('express-jwt');
 const userRoutes   = require( path.join(__dirname, '/routes/users'));
 const eventRoutes  = require( path.join(__dirname, '/routes/events'));
 const friendRoutes = require( path.join(__dirname, '/routes/friends'));
@@ -24,9 +26,9 @@ app.get('/',(req,res)=>{
   res.sendFile(path.join(__dirname,'index.html'));
 })
 
-app.use('/users',userRoutes)
-app.use('/events',eventRoutes)
-app.use('/friends',friendRoutes)
+app.use('/users',expressJWT({secret:secret}),userRoutes)
+app.use('/events',expressJWT({secret:secret}),eventRoutes)
+app.use('/friends',expressJWT({secret:secret}),friendRoutes)
 
 // turn me on!
 app.listen(_port , ()=>
