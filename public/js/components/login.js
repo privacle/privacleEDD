@@ -31,7 +31,7 @@ const Login = React.createClass({
   render : function() {
     return (
       <div>
-        <div className="form">
+      <div id="loginform" style={{width: '30%', margin: 'auto', marginTop: '10px'}}>
           <aside className="card-panel">
             <form className="form-signin" onSubmit={this.handleSubmit}>
               <h2 className="form-signin-heading">Please Login</h2>
