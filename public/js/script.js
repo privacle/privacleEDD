@@ -58,35 +58,22 @@ const App = React.createClass({
 
       return (
         <div className="container">
-        <nav id="nav-mobile" className="left hide-on-med-and-down light-blue darken-4" role="navigation">
-            <ul className="nav">
-              <li className="active"><Link to="/">Home</Link></li>
-            </ul>
+        <nav className="light-blue darken-4">
+          <a id="logo-container" href="/" className="brand-logo">Privacle</a>
+          <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <li className="active"><Link to="/">Home</Link></li>
+          </ul>
         </nav>
           <div className="row">
-            <section className="col s12">
+            <section className="col s12" style={{marginTop: 20, position: 'relative', left: '30%'}}>
               <section className="col s5">
                 <aside className="card-panel">
                 <form onSubmit={this.handleSubmit}>
 
                   <h3>Welcome!</h3>
                   <div className="row">
-
-                    <div className="input-field col s4">
-                      <label htmlFor="Email">Email</label>
-                      <input type="text"  id="email" ref="email" />
-                    </div>
-
-                    <div className="input-field col s8">
-                      <label htmlFor="password">Password</label>
-                      <input type="text"  id="pass" ref="pass" />
-                    </div>
-
-                  </div>
-
-                  <div className="row">
-                    <button className="btn waves-effect waves-light col s6 light-blue darken-4" type="Login" name="action"><Link to="/login">Log in</Link></button>
-                    <button className="btn waves-effect waves-light col s6 light-blue darken-4" type="submit" name="action"><Link to="/signup">Signup</Link></button>
+                    <button className="btn waves-effect waves-light col s6 light-blue darken-4"><Link to="/login">Log in</Link></button>
+                    <button className="btn waves-effect waves-light col s6 light-blue darken-4"><Link to="/signup">Signup</Link></button>
                   </div>
                 </form>
                 </aside>
@@ -158,37 +145,28 @@ const Login = React.createClass({
   },
   render : function() {
     return (
-        <form className="form-signin" onSubmit={this.handleSubmit}>
-          <h2 className="form-signin-heading">Log in</h2>
-
-          <label htmlFor="inputEmail" className="sr-only">Email address</label>
-          <input ref="email" type="text" id="inputEmail" className="form-control" placeholder="Email address" />
-
-          <label htmlFor="inputPassword" className="sr-only">Password</label>
-          <input ref="pass" type="text" id="inputPassword" className="form-control" placeholder="Password" />
-
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" defaultValue="remember-me" /> Remember me
-            </label>
-          </div>
-
-          <div className="button" style={{width: 330, marginLeft: '-14px'}}>
-            <input className="btn btn-lg btn-defult btn-block" style={{display: 'inline', width: 150}} type="submit" defaultValue="Sign in" />
-            <a href="#" className="btn btn-lg btn-defult btn-block" role="button" style={{display: 'inline', width: 150, marginTop: 0}}>Sign up</a>
+      <div>
+          <div className="form">
+            <aside className="card-panel">
+            <form className="form-signin" onSubmit={this.handleSubmit}>
+              <h2 className="form-signin-heading">Please Login</h2>
+              <label htmlFor="inputEmail" className="sr-only">Email address</label>
+              <input ref="email" type="text" id="inputEmail" className="form-control"  placeholder="Email address" autofocus />
+              <label htmlFor="inputPassword" className="sr-only">Password</label>
+              <input ref="pass" name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" />
+              <div className="checkbox">
+                <label>
+                  <input type="checkbox" defaultValue="remember-me" /> Remember me
+                </label>
+              </div>
+              <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{display: 'inline', width: 150, marginTop: 0}}>Submit</button>
+            </form>
+            </aside>
           </div>
           {this.state.error && (
             <p>Bad login information</p>
           )}
-        </form>
-      // <form onSubmit={this.handleSubmit}>
-      //   <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
-      //   <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />
-      //   <button type="submit">login</button>
-      //   {this.state.error && (
-      //     <p>Bad login information</p>
-      //   )}
-      // </form>
+      </div>
     )
   }
 })
@@ -357,8 +335,9 @@ const Signup = React.createClass({
   render : function() {
     return (
       <div>
-          <div className="form" onSubmit={this.handleSubmit}>
-            <form className="form-signin">
+          <div className="form">
+            <aside className="card-panel">
+            <form className="form-signin" onSubmit={this.handleSubmit}>
               <h2 className="form-signin-heading">Please sign up</h2>
               <label htmlFor="inputEmail" className="sr-only">Email address</label>
               <input ref="email" type="text" id="inputEmail" className="form-control"  placeholder="Email address" autofocus />
@@ -369,8 +348,9 @@ const Signup = React.createClass({
                   <input type="checkbox" defaultValue="remember-me" /> Remember me
                 </label>
               </div>
-              <input type="submit" defaultValue="Submit" className="btn waves-effect waves-light" style={{display: 'inline', width: 150, marginTop: 0}} />
+              <button type="submit" className="btn waves-effect waves-light light-blue darken-4" >Submit</button>
             </form>
+            </aside>
           </div>
       </div>
     )
