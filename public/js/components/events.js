@@ -5,24 +5,27 @@ const Events = React.createClass({
 
   getInitialState : function() {
     return {
-      events: {
-        'event1': {
-          name: 'event1',
-          location: 'new york',
-          date: '12/12/2012',
-          description: 'this is an event'
-        },
-        'event2': {
-          name: 'event2',
-          location: 'London',
-          date: '12/12/2012',
-          description: 'this is an event2'
-        }
-      }
+      events: {}
     }
   },
+  componentWillMount : function() {
+    console.log('hered');
+    $.ajax({
+      url: '/events/myevents',
+      type: 'GET',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      }
+    })
+    .done((data) => {
+      data.forEach((el) => {
+        this.state.events[el.event_id] = el;
+        this.setState({ events: this.state.events });
+      })
+    });
 
-  
+
+  },
   renderEvent : function(key) {
     return (
       <Event key={key} index={key} details={this.state.events[key]} />
@@ -51,10 +54,10 @@ const Event = React.createClass({
     return (
       <li>
         <div>
-          {this.props.details.name}
-          {this.props.details.location}
-          {this.props.details.date}
-          {this.props.details.description}
+          Name: {this.props.details.name} <br />
+          Location: {this.props.details.location} <br />
+          Date: {this.props.details.date} <br />
+          Description: {this.props.details.description} <br />
         </div>
       </li>
     )
