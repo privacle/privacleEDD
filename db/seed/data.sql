@@ -19,4 +19,4 @@ values(
   'somewhere',
   'url');
 
-insert into friends (user_1, user_2)values (1, 2)
+insert into friends (user_1, user_2)values (1, 2);
