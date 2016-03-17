@@ -27,7 +27,7 @@ function newEvents(req, res, next) {
   req.body.user_id = req.user.user_id;
   db.one(`insert into events
     (name,
-      owner, 
+      owner,
       event_date,
       event_time,
       description,
@@ -52,7 +52,7 @@ function newEvents(req, res, next) {
 }
 
 function myEvents(req, res, next) {
-  db.any(`select * from events where owner like $1`,
+  db.any(`select * from events where owner = $1`,
     [req.user.user_id])
   .then(function(data) {
     res.events = data;
