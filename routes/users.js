@@ -15,7 +15,7 @@ users.use(function(error, request, response, next) {
 });
 
 function test(req, res, next) {
-  console.log(req.body);
+  console.log(req.user);
   next()
 }
 
