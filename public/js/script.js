@@ -56,13 +56,30 @@ const App = React.createClass({
 
       return (
         <div>
-          <h1>Privacle test environment</h1>
-            <ul>
-              <li className="btn btn-lg btn-defult btn-block"><Link to="/login">Log in</Link></li>
-              <li className="btn btn-lg btn-defult btn-block"><Link to="/signup">Sign up</Link></li>
-            </ul>
-
-          {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+          <div className="site-wrapper">
+            <div className="site-wrapper-inner">
+              <div className="cover-container">
+                <div className="masthead clearfix">
+                  <div className="inner">
+                    <h3 className="masthead-brand">Privacle</h3>
+                    <nav>
+                      <ul className="nav masthead-nav">
+                        <li className="active"><a href="/">Home</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">All Events</a></li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div></div></div>
+          <div>
+            <h1>Privacle test environment</h1>
+              <ul>
+                <li className="btn btn-lg btn-defult btn-block"><Link to="/login">Log in</Link></li>
+                <li className="btn btn-lg btn-defult btn-block"><Link to="/signup">Sign up</Link></li>
+              </ul>
+            {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+          </div>
         </div>
       )
     }
@@ -163,12 +180,59 @@ const Login = React.createClass({
 })
 
 const Create = React.createClass({
+  //name, img_url, date, time, locaiton, description
 
   render : function() {
     return (
       <div>
         <h1>Create event</h1>
-      </div>
+        <form className="form-horizontal">
+        <fieldset style={{marginTop: 20}}>
+          <div className="form-group">
+            <label className="col-md-4 control-label" htmlFor="name">Event Name</label>
+            <div className="col-md-6">
+              <input id="name" ref="name" type="text" placeholder="Event Name" className="form-control input-md" required />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="col-md-4 control-label" htmlFor="name">Image URL</label>
+            <div className="col-md-6">
+              <input id="img_url" ref="img_url" type="text" placeholder="Image URL" className="form-control input-md" />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="col-md-4 control-label" htmlFor="name">Date</label>
+            <div className="col-md-6">
+              <input id="date" ref="date" type="date" placeholder="Date" className="form-control input-md" />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="col-md-4 control-label" htmlFor="name">Time</label>
+            <div className="col-md-6">
+              <input id="time" ref="time" type="time" placeholder="Time" className="form-control input-md" />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="col-md-4 control-label" htmlFor="name">Location</label>
+            <div className="col-md-6">
+              <input id="location" ref="location" type="text" placeholder="Location" className="form-control input-md" />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="col-md-4 control-label" htmlFor="name">Description</label>
+            <div className="col-md-6">
+              <input id="discription" ref="description" type="text" placeholder="Description" className="form-control input-md" />
+            </div>
+          </div>
+          {/* Button */}
+          <div className="form-group">
+            <div className="col-md-4">
+              <button id="submit" type="submit" className="btn btn-lg" style={{marginTop: 50, backgroundImage: 'linear-gradient(to bottom,#a94442 0,#a94442 100%)', color: 'white'}}>Submit</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
     )
   }
 });
