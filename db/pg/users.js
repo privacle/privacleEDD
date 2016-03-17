@@ -7,22 +7,22 @@ const cn = {
     user: process.env.DB_USER,
     password: process.env.DB_PASS
 };
-
+const auth = require('./auth')
 const bcrypt = require('bcrypt');
 const salt = bcrypt.genSaltSync(10);
 const db = pgp(cn)
 
-function createSecure(email, password, callback) {
-    bcrypt.genSalt(function(err, salt) {
-      bcrypt.hash(password, salt, function(err, hash){
-        callback(email, hash)
-      })
-    })
-  }
+// function createSecure(email, password, callback) {
+//     bcrypt.genSalt(function(err, salt) {
+//       bcrypt.hash(password, salt, function(err, hash){
+//         callback(email, hash)
+//       })
+//     })
+//   }
 
 
 function createUser(req, res, next) {
-  createSecure(req.body.email, req.body.password, saveUser)
+  auth.createSecure(req.body.email, req.body.password, saveUser)
 
       function saveUser(email, hash) {
         db.none(`INSERT INTO users (email, password_hash)
@@ -91,7 +91,7 @@ function myCircle(req, res, next) {
     next();
   })
   .catch(function(err){
-    console.error('error with select * from events', err);
+    console.error('error with nyCircle', err);
   })
 }
 
