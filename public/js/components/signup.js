@@ -27,10 +27,15 @@ handleSubmit : function(event) {
       })
   },
 
+  handleForms: function(){
+    $('#signupForm').hide()
+    $('#coverButtons').show()
+  },
+
   render : function() {
     return (
       <div>
-        <div className="form">
+        <div id="signupForm">
           <aside className="card-panel">
             <form ref="formSignup" onSubmit={this.handleSubmit}>
               <h2 className="form-signin-heading">Please sign up</h2>
@@ -38,7 +43,7 @@ handleSubmit : function(event) {
               <input ref="email" type="email" id="inputEmail" className="form-control"  placeholder="Email address" autofocus />
               <label htmlFor="inputPassword" className="sr-only">Password</label>
               <input ref="pass"  type="text" id="inputPassword" className="form-control" placeholder="Password" />
-              <button type="submit" className="btn waves-effect waves-light light-blue darken-4">Submit</button>
+              <button type="submit" onClick={this.handleForms} className="btn waves-effect waves-light light-blue darken-4">Submit</button>
             </form>
           </aside>
           {}
