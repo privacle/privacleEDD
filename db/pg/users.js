@@ -70,7 +70,7 @@ function myFriends(req, res, next) {
   db.any(`select players.email from friends
        inner join players on friends.user_2 = users.user_id
        where links.p1 = $/user_id/`,
-      [req.body.user])
+      [req.user.user_id])
   .then(function(data) {
     res.events = data;
     next();
