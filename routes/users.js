@@ -28,7 +28,7 @@ users.route('/')
 //   .delete( db.logout, (req,res)=>res.json(res.rows) )
 //
 
-users.route('/:user_id/friends')
+users.route('/friends')
   .get( db.myFriends, (req,res)=>res.json(res.rows) ) //test
 
 users.route('/:user_id/friends')

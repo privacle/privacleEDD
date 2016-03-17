@@ -3,11 +3,17 @@ const auth = require('../auth');
 
 const Create = React.createClass({
 
+  handleSubmit : function(event) {
+    event.preventDefault();
+
+    console.log(this.refs);
+  },
+
   render : function() {
     return (
       <div>
         <h1>Create event</h1>
-        <form className="form-horizontal">
+        <form className="form-horizontal" onSubmit={this.handleSubmit} >
           <fieldset style={{marginTop: 20}}>
             <div className="form-group">
               <label className="col-md-4 control-label" htmlFor="name">Event Name</label>
