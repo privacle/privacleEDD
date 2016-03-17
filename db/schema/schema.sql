@@ -15,7 +15,12 @@ create table events(
   name text,
   owner text,
   lat numeric,
-  lng numeric
+  lng numeric,
+  event_date text,
+  event_time text,
+  description text,
+  location text,
+  img_url text
 );
 
 create table rsvp(

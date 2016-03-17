@@ -12,13 +12,17 @@ const db = pgp(cn);
 
 function newFriend(req, res, next) {
   db.none(`insert into friends (user_1, user_2)
-  values ($/current_user/, $/new_friend/)`, req.body)
+  values ($1, $2)`, [req.user.user_id, req.body.friend_id])
   .then(function() {
     next();
   })
   .catch(function(err) {
     console.error(err);
   })
+}
+
+function deleteFriend(req, res, next) {
+  db.none(`delete from friends`)
 }
 
 module.exports.newFriend = newFriend;
