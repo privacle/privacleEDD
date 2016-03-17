@@ -9,3 +9,10 @@ const cn = {
 };
 
 const db = pgp(cn);
+
+function newFriend(req, res, next) {
+  db.none(`insert into friends (user_1, user_2)
+  values ($/current_user/, $/new_friend/)`, req.body)
+}
+
+module.exports.newFriend = newFriend;
