@@ -1,4 +1,5 @@
 insert into users (email, password_hash) values ('steve', 'can not log in');
+insert into users (email, password_hash) values ('tom', 'can not log in');
 
 
 insert into events(
