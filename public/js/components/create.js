@@ -15,10 +15,17 @@ const Create = React.createClass({
       img_url: this.refs.img_url.value
     }
 
-    $.post('/events', newEvent)
-      .done((data) => {
-        console.log(data);
-      })
+    $.ajax({
+      url: '/events',
+      type: 'post', 
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      },
+      data: newEvent
+    })
+    .done((data) => {
+      console.log(data);
+    })
   },
 
   render : function() {
