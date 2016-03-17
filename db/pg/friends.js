@@ -21,4 +21,8 @@ function newFriend(req, res, next) {
   })
 }
 
+function deleteFriend(req, res, next) {
+  db.none(`delete from friends`)
+}
+
 module.exports.newFriend = newFriend;
