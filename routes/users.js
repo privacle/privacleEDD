@@ -14,10 +14,13 @@ users.use(function(error, request, response, next) {
   }
 });
 
-
+function test(req, res, next) {
+  console.log(req.body);
+  next()
+}
 
 users.route('/')
-  .get( db.allUsers, (req,res)=>res.json(res.users) ) //test
+  .get( test, db.allUsers, (req,res)=>res.json(res.users) ) //test
   // Only admin can get all users from the database
   .post( db.createUser, (req,res)=>res.json(res.rows) )
   // Create a new user
