@@ -23,19 +23,29 @@ const auth = require('./auth');
 
 
 
+
+// initial state of the application
 const App = React.createClass({
-  getInitialState : function() {
+  getInitialState() {
     return {
       loggedIn: auth.loggedIn()
     }
   },
-  updateAuth : function(loggedIn) {
+
+  // function to set loggedIn state
+  updateAuth(loggedIn) {
     this.setState({
       loggedIn: loggedIn
     })
   },
-  render : function() {
 
+  // executes on app load, assigns auth.onChange to equal this.updateAuth
+  componentWillMount() {
+    auth.onChange = this.updateAuth
+    auth.login()
+  },
+
+  render() {
     if(this.state.loggedIn) {
       return (
         <div>
@@ -70,11 +80,7 @@ const App = React.createClass({
       )
     }
   }
-});
-
-
-
-
+})
 
 
 
@@ -97,11 +103,4 @@ ReactDOM.render((
 
 
 
-// function requireAuth(nextState, replace) {
-//   if (!auth.loggedIn()) {
-//     replace({
-//       pathname: '/login',
-//       state: { nextPathname: nextState.location.pathname }
-//     })
-//   }
-// }
+
