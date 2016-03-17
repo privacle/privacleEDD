@@ -6,7 +6,19 @@ const Create = React.createClass({
   handleSubmit : function(event) {
     event.preventDefault();
 
-    console.log(this.refs);
+    let newEvent = {
+      name: this.refs.name.value,
+      event_date: this.refs.date.value,
+      event_time: this.refs.time.value,
+      description: this.refs.description.value,
+      location: this.refs.location.value,
+      img_url: this.refs.img_url.value
+    }
+
+    $.post('/events', newEvent)
+      .done((data) => {
+        console.log(data);
+      })
   },
 
   render : function() {
