@@ -13,10 +13,6 @@ const auth = require('./auth');
 
 
 
-
-
-
-
 const App = React.createClass({
   getInitialState : function() {
     return {
@@ -39,8 +35,8 @@ const App = React.createClass({
         <div>
           <div className="masthead">
           <h3 className="text-muted">Privacle</h3>
-          <nav>
-            <ul className="nav nav-justified">
+          <nav className="light-blue darken-4">
+            <ul className="nav nav-justified light-blue accent-3">
               <li className="active"><a href="#">Home</a></li>
               <li><Link to="/create">Create</Link></li>
               <li><Link to="/find">Find</Link></li>
@@ -61,12 +57,42 @@ const App = React.createClass({
     } else {
 
       return (
-        <div>
-          <h1>Privacle test environment</h1>
-            <ul>
-              <li className="btn btn-lg btn-defult btn-block"><Link to="/login">Log in</Link></li>
-              <li className="btn btn-lg btn-defult btn-block"><Link to="/signup">Sign up</Link></li>
+        <div className="container">
+        <nav id="nav-mobile" className="left hide-on-med-and-down light-blue darken-4" role="navigation">
+            <ul className="nav">
+              <li className="active"><Link to="/">Home</Link></li>
             </ul>
+        </nav>
+          <div className="row">
+            <section className="col s12">
+              <section className="col s5">
+                <aside className="card-panel">
+                <form onSubmit={this.handleSubmit}>
+
+                  <h3>Welcome!</h3>
+                  <div className="row">
+
+                    <div className="input-field col s4">
+                      <label htmlFor="Email">Email</label>
+                      <input type="text"  id="email" ref="email" />
+                    </div>
+
+                    <div className="input-field col s8">
+                      <label htmlFor="password">Password</label>
+                      <input type="text"  id="pass" ref="pass" />
+                    </div>
+
+                  </div>
+
+                  <div className="row">
+                    <button className="btn waves-effect waves-light col s6 light-blue darken-4" type="Login" name="action"><Link to="/login">Log in</Link></button>
+                    <button className="btn waves-effect waves-light col s6 light-blue darken-4" type="submit" name="action"><Link to="/signup">Signup</Link></button>
+                  </div>
+                </form>
+                </aside>
+                </section>
+              </section>
+          </div>
           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
         </div>
       )
@@ -343,7 +369,7 @@ const Signup = React.createClass({
                   <input type="checkbox" defaultValue="remember-me" /> Remember me
                 </label>
               </div>
-              <input type="submit" defaultValue="Submit" className="btn btn-lg btn-defult btn-block" style={{display: 'inline', width: 150, marginTop: 0}} />
+              <input type="submit" defaultValue="Submit" className="btn waves-effect waves-light" style={{display: 'inline', width: 150, marginTop: 0}} />
             </form>
           </div>
       </div>
