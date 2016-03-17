@@ -13,7 +13,7 @@ create table users(
 create table events(
   event_id serial primary key,
   name text,
-  owner text,
+  owner integer,
   lat numeric,
   lng numeric,
   event_date text,
