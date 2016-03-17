@@ -39,7 +39,7 @@ function createUser(req, res, next) {
 function login(req, res, next) {
   var email = req.body.email
   var password = req.body.password
-  
+
   db.one(`SELECT * FROM users WHERE email LIKE $/email/`, req.body)
     .then((data) => {
       console.log(data)

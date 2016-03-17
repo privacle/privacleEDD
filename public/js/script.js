@@ -58,7 +58,7 @@ const App = React.createClass({
         <div>
           <h1>Privacle test environment</h1>
             <ul>
-              <li className="btn btn-lg btn-defult btn-block"><Link to="/login">Login in</Link></li>
+              <li className="btn btn-lg btn-defult btn-block"><Link to="/login">Log in</Link></li>
               <li className="btn btn-lg btn-defult btn-block"><Link to="/signup">Sign up</Link></li>
             </ul>
 
@@ -131,10 +131,10 @@ const Login = React.createClass({
           <h2 className="form-signin-heading">Log in</h2>
 
           <label htmlFor="inputEmail" className="sr-only">Email address</label>
-          <input name="email" ref="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" autofocus />
+          <input ref="email" type="text" id="inputEmail" className="form-control" placeholder="Email address" />
 
           <label htmlFor="inputPassword" className="sr-only">Password</label>
-          <input name="password" ref="pass" type="password" id="inputPassword" className="form-control" placeholder="Password" />
+          <input ref="pass" type="text" id="inputPassword" className="form-control" placeholder="Password" />
 
           <div className="checkbox">
             <label>
@@ -218,17 +218,35 @@ const Profile = React.createClass({
 });
 
 const Signup = React.createClass({
+  handleSubmit : function(event) {
+    event.preventDefault()
+    const email = this.refs.email.value
+    const pass  = this.refs.pass.value
+
+    const signupInfo = {
+      email: email,
+      password: pass
+    }
+
+    $.post('/users/', signupInfo)
+      .done((data) => {
+        console.log(data);
+      })
+      .error((error) => {
+        console.error(error);
+      })
+  },
 
   render : function() {
     return (
       <div>
-          <div className="form">
+          <div className="form" onSubmit={this.handleSubmit}>
             <form className="form-signin">
               <h2 className="form-signin-heading">Please sign up</h2>
               <label htmlFor="inputEmail" className="sr-only">Email address</label>
-              <input name="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" autofocus />
+              <input ref="email" type="text" id="inputEmail" className="form-control"  placeholder="Email address" autofocus />
               <label htmlFor="inputPassword" className="sr-only">Password</label>
-              <input name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" />
+              <input ref="pass" name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" />
               <div className="checkbox">
                 <label>
                   <input type="checkbox" defaultValue="remember-me" /> Remember me
