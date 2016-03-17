@@ -47,6 +47,7 @@ const App = React.createClass({
 
   hideButtons(){
     $('#coverButtons').hide()
+    $('#signupform').show()
   },
 
   showButtons(){
@@ -79,16 +80,16 @@ const App = React.createClass({
 
       return (
         <div>
-          <nav className="light-blue darken-4">
+          <nav className="light-blue darken-4" style={{textAlign: 'center', width: '80%', margin: 'auto'}}>
             <a id="logo-container" href="/" className="brand-logo">Privacle</a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li className="active" onClick={this.showButtons}><Link to="/">Home</Link></li>
             </ul>
           </nav>
           <div className="row" id="coverButtons">
-            <section className="col s12" style={{marginTop: 20, position: 'relative', left: '30%'}}>
-              <section className="col s5">
-                <aside className="card-panel">
+            <section className="col s12" style={{width: '100%', textAlign: 'center', marginTop: 70, position: 'relative'}}>
+              <section className="col s5" style={{marginLeft: '30%'}}>
+                <aside className="card-panel" style={{width: '100%', margin: 'auto', position: 'relative', marginTop: 7}}>
                   <form onSubmit={this.handleSubmit}>
                     <h3>Welcome!</h3>
                     <div className="row">
