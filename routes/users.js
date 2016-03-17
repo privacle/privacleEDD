@@ -14,23 +14,20 @@ users.use(function(error, request, response, next) {
   }
 });
 
-
+function test(req, res, next) {
+  console.log(req.user);
+  next()
+}
 
 users.route('/')
-  .get( db.allUsers, (req,res)=>res.json(res.rows) ) //test
+  .get( test, db.allUsers, (req,res)=>res.json(res.users) ) //test
   // Only admin can get all users from the database
-  .post( db.createUser, (req,res)=>res.json(res.rows) )
-  // Create a new user
 
-users.route('/login')
-  .post( db.login, (req,res)=> {
-    var token = jwt.sign(res.rows, secret);
-    res.json({users: res.rows, token: token});
-  })
 
 // users.route('/logout')
 //   .delete( db.logout, (req,res)=>res.json(res.rows) )
 //
+
 users.route('/:user_id/friends')
   .get( db.myFriends, (req,res)=>res.json(res.rows) ) //test
 

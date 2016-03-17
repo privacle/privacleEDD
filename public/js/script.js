@@ -14,6 +14,7 @@ const Find = require('./components/find.js');
 const Friends = require('./components/friends.js');
 const Events = require('./components/events.js');
 const Profile = require('./components/profile.js');
+const NotFound = require('./components/404.js');
 
 const browserHistory = require('react-router').browserHistory;
 const Router = require('react-router').Router;
@@ -116,6 +117,7 @@ ReactDOM.render((
       <Route path="events" component={Events} />
       <Route path="profile" component={Profile} />
     </Route>
+    <Route path="*" component={NotFound} />
   </Router>
 ), document.getElementById('container'))
 
