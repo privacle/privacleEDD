@@ -22,13 +22,19 @@ function test(req, res, next) {
 users.route('/')
   .get( test, db.allUsers, (req,res)=>res.json(res.users) ) //test
   // Only admin can get all users from the database
+  .post( db.createUser, (req,res)=>res.json(res.rows) )
+  // Create a new user
 
+users.route('/login')
+  .post( db.login, (req,res)=> {
+    var token = jwt.sign(res.rows, secret);
+    res.json({users: res.rows, token: token});
+  })
 
 // users.route('/logout')
 //   .delete( db.logout, (req,res)=>res.json(res.rows) )
 //
-
-users.route('/:user_id/friends')
+users.route('/friends')
   .get( db.myFriends, (req,res)=>res.json(res.rows) ) //test
 
 users.route('/:user_id/friends')
