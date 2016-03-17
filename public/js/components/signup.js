@@ -13,7 +13,7 @@ handleSubmit : function(event) {
       password: pass
     }
 
-    $.post('/users/', signupInfo)
+    $.post('/guests/', signupInfo)
       .done((data) => {
         console.log(data);
         if(data) {
