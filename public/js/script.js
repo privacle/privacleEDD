@@ -152,14 +152,11 @@ const Login = React.createClass({
               <h2 className="form-signin-heading">Please Login</h2>
               <label htmlFor="inputEmail" className="sr-only">Email address</label>
               <input ref="email" type="text" id="inputEmail" className="form-control"  placeholder="Email address" autofocus />
+
               <label htmlFor="inputPassword" className="sr-only">Password</label>
               <input ref="pass" name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" />
-              <div className="checkbox">
-                <label>
-                  <input type="checkbox" defaultValue="remember-me" /> Remember me
-                </label>
-              </div>
-              <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{display: 'inline', width: 150, marginTop: 0}}>Login</button>
+
+              <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{display: 'inline', width: 150, marginTop: 0}}>Submit</button>
             </form>
             </aside>
           </div>
