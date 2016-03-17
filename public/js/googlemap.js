@@ -3,7 +3,12 @@ var destin = [];
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: -34.397, lng: 150.644},
-    zoom: 8
+    zoom: 8,
+    disableDefaultUI: true,
+    zoomControl: false, 
+    scrollwheel: false,
+    draggable: false,
+    disableDoubleClickZoom: true
   });
 
   setMarkers(map);

@@ -51,7 +51,7 @@ const App = React.createClass({
         <div>
           <h1>Privacle test environment</h1>
             <ul>
-              <li><Link to="/dashboard">Dashboard</Link> (authenticated) </li>
+              <li><Link to="/dashboard">Dashboard</Link></li>
               <li><Link to="/create">Create</Link></li>
               <li><Link to="/find">Find</Link></li>
               <li><Link to="/friends">Friends</Link></li>
