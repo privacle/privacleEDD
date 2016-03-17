@@ -74,11 +74,33 @@ const App = React.createClass({
             </nav>
           </div>
           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+          <footer style={{position: 'relative', bottom: '0px !important', width: '100%'}} className="page-footer light-blue darken-4">
+            <div className="container">
+              <div className="row">
+                <div className="col l6 s12">
+                  <h5 className="white-text">Made by EDD</h5>
+                  <p className="grey-text text-lighten-4">General Assembly NYC WDI Bowie Group Project</p>
+                </div>
+                <div className="col l4 offset-l2 s12">
+                  <h5 className="white-text">Links</h5>
+                  <ul>
+                    <li><a className="grey-text text-lighten-3" href="https://generalassemb.ly/new-york-city">General Assembly</a></li>
+                    <li><a className="grey-text text-lighten-3" href="https://github.com/privacle/privacleEDD">Privacle Github Page</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="footer-copyright">
+              <div className="container">
+                © 2016 Copyright Text
+                <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
+              </div>
+            </div>
+          </footer>
         </div>
       )
 
     } else {
-
       return (
         <div>
           <nav className="light-blue darken-4" style={{textAlign: 'center', width: '80%', margin: 'auto'}}>
@@ -103,7 +125,30 @@ const App = React.createClass({
             </section>
           </div>
           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
-        </div>
+        <footer style={{position: 'absolute', bottom: '0px !important', width: '100%'}} className="page-footer light-blue darken-4">
+          <div className="container">
+            <div className="row">
+              <div className="col l6 s12">
+                <h5 className="white-text">Made by EDD</h5>
+                <p className="grey-text text-lighten-4">General Assembly NYC WDI Bowie Group Project</p>
+              </div>
+              <div className="col l4 offset-l2 s12">
+                <h5 className="white-text">Links</h5>
+                <ul>
+                  <li><a className="grey-text text-lighten-3" href="https://generalassemb.ly/new-york-city">General Assembly</a></li>
+                  <li><a className="grey-text text-lighten-3" href="https://github.com/privacle/privacleEDD">Privacle Github Page</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="footer-copyright">
+            <div className="container">
+              © 2016 Copyright Text
+              <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+      </div>
       )
     }
   }
