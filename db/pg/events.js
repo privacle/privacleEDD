@@ -24,9 +24,24 @@ function allEvents(req, res, next) {
 }
 
 function newEvents(req, res, next) {
-  db.one(`insert into events (name, owner)
-  values ($1, $2)
-  returning event_id`,[req.body.event_name, req.user.user_id])
+  req.body.user_id = req.user.user_id;
+  db.one(`insert into events
+    (name,
+      owner, 
+      event_date,
+      event_time,
+      description,
+      location,
+      img_url)
+  values
+  ($/name/,
+    $/user_id/,
+    $/event_date/,
+    $/event_time/,
+    $/description/,
+    $/location/,
+    $/img_url/)
+  returning event_id`,req.body)
     .then(function(data) {
       res.event_id = data;
       next();

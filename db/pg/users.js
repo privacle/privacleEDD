@@ -95,6 +95,10 @@ function myCircle(req, res, next) {
   })
 }
 
+function searchUserByEmail(req, res, next) {
+
+}
+
 module.exports.login = login;
 module.exports.createUser = createUser;
 module.exports.allUsers = allUsers;
