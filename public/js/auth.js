@@ -59,14 +59,13 @@ function loginRequest(email, pass, cb) {
       cb({
         authenticated: true,
         token: data.token
-        
       })
     })
     .error((error) => {
       console.log(error);
       cb({
         authenticated: false
-        
+
       })
     })
 }
