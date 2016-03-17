@@ -1,4 +1,5 @@
-drop table if exists rsvp;
+drop table if exists invitations;
+drop table if exists permissions
 drop table if exists events;
 drop table if exists circles;
 drop table if exists friends;
@@ -23,9 +24,16 @@ create table events(
   img_url text
 );
 
-create table rsvp(
+create table permissions(
+  permission_id serial primary key,
+  event integer references events,
+  tag text
+);
+
+create table invitations(
   user_id integer references users,
   event_id integer references events,
+  accepted boolean not null default false,
   primary key (user_id, event_id)
 );
 
