@@ -37,18 +37,24 @@ const App = React.createClass({
     if(this.state.loggedIn) {
       return (
         <div>
-          <h1>Privacle test environment</h1>
-            <ul>
-              <li><Link to="/dashboard">Dashboard</Link> (authenticated) </li>
+          <div className="masthead">
+          <h3 className="text-muted">Privacle</h3>
+          <nav>
+            <ul className="nav nav-justified">
+              <li className="active"><a href="#">Home</a></li>
               <li><Link to="/create">Create</Link></li>
               <li><Link to="/find">Find</Link></li>
               <li><Link to="/friends">Friends</Link></li>
               <li><Link to="/events">Events</Link></li>
               <li><Link to="/profile">Profile</Link></li>
-              <li><Link to="/logout">Log out</Link></li>
+              <li><Link to="/logout">Logout</Link></li>
             </ul>
-
+          </nav>
+        </div>
           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+          <div>
+          GOOGLE MAP GOES HERE
+          </div>
         </div>
       )
 
@@ -56,30 +62,12 @@ const App = React.createClass({
 
       return (
         <div>
-          <div className="site-wrapper">
-            <div className="site-wrapper-inner">
-              <div className="cover-container">
-                <div className="masthead clearfix">
-                  <div className="inner">
-                    <h3 className="masthead-brand">Privacle</h3>
-                    <nav>
-                      <ul className="nav masthead-nav">
-                        <li className="active"><a href="/">Home</a></li>
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">All Events</a></li>
-                      </ul>
-                    </nav>
-                  </div>
-                </div>
-              </div></div></div>
-          <div>
-            <h1>Privacle test environment</h1>
-              <ul>
-                <li className="btn btn-lg btn-defult btn-block"><Link to="/login">Log in</Link></li>
-                <li className="btn btn-lg btn-defult btn-block"><Link to="/signup">Sign up</Link></li>
-              </ul>
-            {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
-          </div>
+          <h1>Privacle test environment</h1>
+            <ul>
+              <li className="btn btn-lg btn-defult btn-block"><Link to="/login">Log in</Link></li>
+              <li className="btn btn-lg btn-defult btn-block"><Link to="/signup">Sign up</Link></li>
+            </ul>
+          {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
         </div>
       )
     }
