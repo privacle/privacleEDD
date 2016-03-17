@@ -46,6 +46,15 @@ const App = React.createClass({
     auth.login()
   },
 
+  hideButtons(){
+    $('#coverButtons').hide()
+    $('#signupform').show()
+  },
+
+  showButtons(){
+    $('#coverButtons').show()
+  },
+
   render() {
     if(this.state.loggedIn) {
       return (
@@ -71,22 +80,22 @@ const App = React.createClass({
     } else {
 
       return (
-        <div className="container">
-          <nav className="light-blue darken-4">
+        <div>
+          <nav className="light-blue darken-4" style={{textAlign: 'center', width: '80%', margin: 'auto'}}>
             <a id="logo-container" href="/" className="brand-logo">Privacle</a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li className="active"><Link to="/">Home</Link></li>
+              <li className="active" onClick={this.showButtons}><Link to="/">Home</Link></li>
             </ul>
           </nav>
-          <div className="row">
-            <section className="col s12" style={{marginTop: 20, position: 'relative', left: '30%'}}>
-              <section className="col s5">
-                <aside className="card-panel">
+          <div className="row" id="coverButtons">
+            <section className="col s12" style={{width: '100%', textAlign: 'center', marginTop: 70, position: 'relative'}}>
+              <section className="col s5" style={{marginLeft: '30%'}}>
+                <aside className="card-panel" style={{width: '100%', margin: 'auto', position: 'relative', marginTop: 7}}>
                   <form onSubmit={this.handleSubmit}>
                     <h3>Welcome!</h3>
                     <div className="row">
-                      <Link to="/login"><button className="btn waves-effect waves-light col s6 light-blue darken-4">Log in</button></Link>
-                      <Link to="/signup"><button className="btn waves-effect waves-light col s6 light-blue darken-4">Signup</button></Link>
+                      <Link to="/login"><button onClick={this.hideButtons} className="btn waves-effect waves-light col s6 light-blue darken-4">Log in</button></Link>
+                      <Link to="/signup"><button onClick={this.hideButtons} className="btn waves-effect waves-light col s6 light-blue darken-4">Signup</button></Link>
                     </div>
                   </form>
                 </aside>
@@ -120,5 +129,3 @@ ReactDOM.render((
     <Route path="*" component={NotFound} />
   </Router>
 ), document.getElementById('container'))
-
-
