@@ -14,7 +14,11 @@ users.use(function(error, request, response, next) {
   }
 });
 
-
+// header {Authorization: Bearer token}
+users.get('/me', expressJWT({secret: secret}), (req, res) => {
+ // var user = jwt.decode(req.headers.authorization, secret);
+ res.json({data: 'success', agent: req.user});
+})
 
 users.route('/')
   .get( db.allUsers, (req,res)=>res.json(res.rows) ) //test
