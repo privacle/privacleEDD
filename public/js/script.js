@@ -58,8 +58,8 @@ const App = React.createClass({
         <div>
           <h1>Privacle test environment</h1>
             <ul>
-              <li><Link to="/login">Login in</Link></li>
-              <li><Link to="/signup">Sign up</Link></li>
+              <li className="btn btn-lg btn-defult btn-block"><Link to="/login">Login in</Link></li>
+              <li className="btn btn-lg btn-defult btn-block"><Link to="/signup">Sign up</Link></li>
             </ul>
 
           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
