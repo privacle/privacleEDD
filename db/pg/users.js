@@ -85,7 +85,7 @@ function myCircle(req, res, next) {
        inner join players on friends.user_2 = users.user_id
        where links.p1 = $/user_id/
        and `,
-      [req.body.user])
+      [req.user.user_id])
   .then(function(data) {
     res.events = data;
     next();
