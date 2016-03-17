@@ -7,7 +7,7 @@ drop table if exists users;
 create table users(
   user_id serial primary key,
   password_hash text,
-  email text
+  email text unique
 );
 
 create table events(
@@ -25,9 +25,9 @@ create table rsvp(
 );
 
 create table friends(
+  friend_id serial primary key,
   user_1 integer references users,
-  user_2 integer references users,
-  primary key (user_1, user_2)
+  user_2 integer references users
 );
 
 create table circles(
