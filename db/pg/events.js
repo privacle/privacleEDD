@@ -28,6 +28,8 @@ function newEvents(req, res, next) {
   db.one(`insert into events
     (name,
       owner,
+      lat,
+      lng,
       event_date,
       event_time,
       description,
@@ -36,6 +38,8 @@ function newEvents(req, res, next) {
   values
   ($/name/,
     $/user_id/,
+    $/lat/,
+    $/lng/,
     $/event_date/,
     $/event_time/,
     $/description/,
