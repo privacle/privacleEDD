@@ -27,6 +27,7 @@ const Login = React.createClass({
         this.context.router.replace('/')
       }
     })
+    $('#coverButtons').hide()
   },
   render : function() {
     return (

@@ -45,6 +45,14 @@ const App = React.createClass({
     auth.login()
   },
 
+  hideButtons(){
+    $('#coverButtons').hide()
+  },
+
+  showButtons(){
+    $('#coverButtons').show()
+  },
+
   render() {
     if(this.state.loggedIn) {
       return (
@@ -70,22 +78,22 @@ const App = React.createClass({
     } else {
 
       return (
-        <div className="container">
+        <div>
           <nav className="light-blue darken-4">
             <a id="logo-container" href="/" className="brand-logo">Privacle</a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li className="active"><Link to="/">Home</Link></li>
+              <li className="active" onClick={this.showButtons}><Link to="/">Home</Link></li>
             </ul>
           </nav>
-          <div className="row">
+          <div className="row" id="coverButtons">
             <section className="col s12" style={{marginTop: 20, position: 'relative', left: '30%'}}>
               <section className="col s5">
                 <aside className="card-panel">
                   <form onSubmit={this.handleSubmit}>
                     <h3>Welcome!</h3>
                     <div className="row">
-                      <Link to="/login"><button className="btn waves-effect waves-light col s6 light-blue darken-4">Log in</button></Link>
-                      <Link to="/signup"><button className="btn waves-effect waves-light col s6 light-blue darken-4">Signup</button></Link>
+                      <Link to="/login"><button onClick={this.hideButtons} className="btn waves-effect waves-light col s6 light-blue darken-4">Log in</button></Link>
+                      <Link to="/signup"><button onClick={this.hideButtons} className="btn waves-effect waves-light col s6 light-blue darken-4">Signup</button></Link>
                     </div>
                   </form>
                 </aside>
