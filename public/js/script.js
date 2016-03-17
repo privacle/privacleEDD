@@ -60,7 +60,7 @@ const App = React.createClass({
       return (
         <div>
           <div className="masthead">
-          <h3 className="text-muted">Privacle</h3>
+          <h2 className="text-muted">Privacle</h2>
             <nav className="light-blue darken-4">
               <ul className="nav nav-justified light-blue accent-3">
                 <li><Link to="/dashboard">Dashboard</Link></li>
@@ -69,7 +69,7 @@ const App = React.createClass({
                 <li><Link to="/friends">Friends</Link></li>
                 <li><Link to="/events">Events</Link></li>
                 <li><Link to="/profile">Profile</Link></li>
-                <li><Link to="/logout">Logout</Link></li>
+                <li className="right"><Link to="/logout">Logout</Link></li>
               </ul>
             </nav>
           </div>
@@ -103,12 +103,14 @@ const App = React.createClass({
     } else {
       return (
         <div>
-          <nav className="light-blue darken-4" style={{textAlign: 'center', width: '80%', margin: 'auto'}}>
-            <a id="logo-container" href="/" className="brand-logo">Privacle</a>
-            <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li className="active" onClick={this.showButtons}><Link to="/">Home</Link></li>
-            </ul>
-          </nav>
+          <div className="nav-wrapper">
+            <nav className="light-blue darken-4" style={{width: '80%', margin: 'auto'}}>
+              <a href="/" className="brand-logo">Privacle</a>
+              <ul id="nav-mobile" className="right hide-on-med-and-down">
+                <li onClick={this.showButtons}><Link to="/">Home</Link></li>
+              </ul>
+            </nav>
+          </div>
           <div className="row" id="coverButtons">
             <section className="col s12" style={{width: '100%', textAlign: 'center', marginTop: 70, position: 'relative'}}>
               <section className="col s5" style={{marginLeft: '30%'}}>
