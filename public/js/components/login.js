@@ -31,14 +31,25 @@ const Login = React.createClass({
   },
   render : function() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label><input ref="email" placeholder="email" defaultValue="test@gmail.com" /></label>
-        <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />
-        <button type="submit">login</button>
+      <div>
+        <div className="form">
+          <aside className="card-panel">
+            <form className="form-signin" onSubmit={this.handleSubmit}>
+              <h2 className="form-signin-heading">Please Login</h2>
+              <label htmlFor="inputEmail" className="sr-only">Email address</label>
+              <input ref="email" type="text" id="inputEmail" className="form-control"  placeholder="Email address" autofocus />
+
+              <label htmlFor="inputPassword" className="sr-only">Password</label>
+              <input ref="pass" name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" />
+
+              <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{display: 'inline', width: 150, marginTop: 0}}>Submit</button>
+            </form>
+          </aside>
+        </div>
         {this.state.error && (
-          <p>Bad login information</p>
+        <p>Bad login information</p>
         )}
-      </form>
+      </div>
     )
   }
 })

@@ -69,6 +69,10 @@ function loginRequest(email, pass, cb) {
         
       })
     })
+}
+
+
+
   // setTimeout(() => {
   //   if (email === 'joe@example.com' && pass === 'password1') {
   //     cb({
@@ -79,7 +83,3 @@ function loginRequest(email, pass, cb) {
   //     cb({ authenticated: false })
   //   }
   // }, 0)
-}
-
-
-

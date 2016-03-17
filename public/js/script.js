@@ -49,38 +49,56 @@ const App = React.createClass({
     if(this.state.loggedIn) {
       return (
         <div>
-          <h1>Privacle test environment</h1>
-            <ul>
-              <li><Link to="/dashboard">Dashboard</Link></li>
-              <li><Link to="/create">Create</Link></li>
-              <li><Link to="/find">Find</Link></li>
-              <li><Link to="/friends">Friends</Link></li>
-              <li><Link to="/events">Events</Link></li>
-              <li><Link to="/profile">Profile</Link></li>
-              <li><Link to="/logout">Log out</Link></li>
-            </ul>
-
+          <div className="masthead">
+          <h3 className="text-muted">Privacle</h3>
+            <nav className="light-blue darken-4">
+              <ul className="nav nav-justified light-blue accent-3">
+                <li><Link to="/dashboard">Dashboard</Link></li>
+                <li><Link to="/create">Create</Link></li>
+                <li><Link to="/find">Find</Link></li>
+                <li><Link to="/friends">Friends</Link></li>
+                <li><Link to="/events">Events</Link></li>
+                <li><Link to="/profile">Profile</Link></li>
+                <li><Link to="/logout">Logout</Link></li>
+              </ul>
+            </nav>
+          </div>
           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
-
         </div>
       )
 
     } else {
 
       return (
-        <div>
-          <h1>Privacle test environment</h1>
-            <ul>
-              <li><Link to="/login">Login in</Link></li>
-              <li><Link to="/signup">Sign up</Link></li>
+        <div className="container">
+          <nav className="light-blue darken-4">
+            <a id="logo-container" href="/" className="brand-logo">Privacle</a>
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
+              <li className="active"><Link to="/">Home</Link></li>
             </ul>
-
+          </nav>
+          <div className="row">
+            <section className="col s12" style={{marginTop: 20, position: 'relative', left: '30%'}}>
+              <section className="col s5">
+                <aside className="card-panel">
+                  <form onSubmit={this.handleSubmit}>
+                    <h3>Welcome!</h3>
+                    <div className="row">
+                      <Link to="/login"><button className="btn waves-effect waves-light col s6 light-blue darken-4">Log in</button></Link>
+                      <Link to="/signup"><button className="btn waves-effect waves-light col s6 light-blue darken-4">Signup</button></Link>
+                    </div>
+                  </form>
+                </aside>
+              </section>
+            </section>
+          </div>
           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
         </div>
       )
     }
   }
 })
+
 
 
 
