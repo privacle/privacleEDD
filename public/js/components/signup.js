@@ -29,8 +29,6 @@ handleSubmit : function(event) {
   },
   hideForm : function(){
     $('#signupform').hide()
-    $('#coverButtons').show()
-
   },
 
   render : function() {
