@@ -1,5 +1,9 @@
 const React = require('react');
 const auth = require('../auth');
+const GoogleMap = require('./googlemap.js');
+
+
+
 
 const Create = React.createClass({
 
@@ -12,7 +16,9 @@ const Create = React.createClass({
       event_time: this.refs.time.value,
       description: this.refs.description.value,
       location: this.refs.location.value,
-      img_url: this.refs.img_url.value
+      img_url: this.refs.img_url.value,
+      lat: +(localStorage.lat),
+      lng: +(localStorage.lng)
     }
 
     $.ajax({
@@ -27,7 +33,6 @@ const Create = React.createClass({
       console.log(data);
     })
   },
-
   render : function() {
     return (
       <div>
@@ -61,7 +66,7 @@ const Create = React.createClass({
             <div>
               <label htmlFor="name">Location</label>
               <div>
-                <input id="location" ref="location" type="text" placeholder="Location" />
+                <input id="location" className="controls" ref="location" type="text" placeholder="Location" />
               </div>
             </div>
             <div>
@@ -78,6 +83,12 @@ const Create = React.createClass({
             </div>
           </fieldset>
         </form>
+
+
+        
+        <div style={ { display: 'none' } } >
+          <GoogleMap />
+        </div>
       </div>
     )
   }

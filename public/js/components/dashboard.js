@@ -1,5 +1,6 @@
 const React = require('react');
 const auth = require('../auth');
+const GoogleMap = require('./googlemap.js');
 
 const Dashboard = React.createClass({
   getInitialState : function() {
@@ -17,29 +18,6 @@ const Dashboard = React.createClass({
       this.setState({me: data.agent.email})
     })
   },
-  componentWillMount : function() {
-        // functions to clear googlemap scripts
-    $('script').each((index, value) => {
-      if($(value).hasClass('keep')) {
-      } else {
-        $(value).remove();
-      }
-    });
-
-    $('link').each((index, value) => {
-      if($(value).hasClass('keep')) {
-      } else {
-        $(value).remove();
-      }
-    });
-
-    $('style').each((index, value) => {
-      if($(value).hasClass('keep')) {
-      } else {
-        $(value).remove();
-      }
-    });
-  },
   render : function() {
     const token = auth.getToken()
     return (
@@ -51,17 +29,6 @@ const Dashboard = React.createClass({
   }
 })
 
-const GoogleMap = React.createClass({
-  componentDidMount : function() {
-    loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyDZwpThrbZbJVY1yt-oTlYePJ_s5I-GZIU&callback=initMap');
-  },
-  render : function() {
-    return (
-      <div id="map">
-      </div>
-    )
-  }
-});
 
 
 module.exports = Dashboard;
