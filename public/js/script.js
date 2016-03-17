@@ -72,8 +72,8 @@ const App = React.createClass({
 
                   <h3>Welcome!</h3>
                   <div className="row">
-                    <button className="btn waves-effect waves-light col s6 light-blue darken-4"><Link to="/login">Log in</Link></button>
-                    <button className="btn waves-effect waves-light col s6 light-blue darken-4"><Link to="/signup">Signup</Link></button>
+                    <Link to="/login"><button className="btn waves-effect waves-light col s6 light-blue darken-4">Log in</button></Link>
+                    <Link to="/signup"><button className="btn waves-effect waves-light col s6 light-blue darken-4">Signup</button></Link>
                   </div>
                 </form>
                 </aside>
@@ -159,7 +159,7 @@ const Login = React.createClass({
                   <input type="checkbox" defaultValue="remember-me" /> Remember me
                 </label>
               </div>
-              <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{display: 'inline', width: 150, marginTop: 0}}>Submit</button>
+              <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{display: 'inline', width: 150, marginTop: 0}}>Login</button>
             </form>
             </aside>
           </div>
