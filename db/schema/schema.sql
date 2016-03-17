@@ -1,9 +1,9 @@
-drop table if exists invitations;
-drop table if exists permissions
-drop table if exists events;
-drop table if exists circles;
-drop table if exists friends;
-drop table if exists users;
+drop table if exists invitations cascade;
+drop table if exists permissions cascade;
+drop table if exists events cascade;
+drop table if exists circles cascade;
+drop table if exists friends cascade;
+drop table if exists users cascade;
 
 create table users(
   user_id serial primary key,
