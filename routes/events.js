@@ -11,7 +11,7 @@ events.route('/')
   // All events created by current user and user's friends
   .post( db.newEvents, (req,res)=>res.json(res.event_id) )
 
-events.route('/myevents/:user_id')
+events.route('/myevents')
   .get( db.myEvents, (req,res)=>res.json(res.events) )
   // Show all events created/added by current user
 

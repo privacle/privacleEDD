@@ -25,8 +25,8 @@ function allEvents(req, res, next) {
 
 function newEvents(req, res, next) {
   db.one(`insert into events (name, owner)
-  values ($/name/, $/owner/)
-  returning event_id`,req.body)
+  values ($1, $2)
+  returning event_id`,[req.body.event_name, req.user.user_id])
     .then(function(data) {
       res.event_id = data;
       next();
@@ -38,7 +38,7 @@ function newEvents(req, res, next) {
 
 function myEvents(req, res, next) {
   db.any(`select * from events where owner like $1`,
-    [req.params.user_id])
+    [req.user.user_id])
   .then(function(data) {
     res.events = data;
     next();
