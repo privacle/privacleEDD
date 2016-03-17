@@ -42,13 +42,13 @@ const Login = React.createClass({
               <label htmlFor="inputPassword" className="sr-only">Password</label>
               <input ref="pass" name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" />
 
-              <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{display: 'inline', width: 150, marginTop: 0}}>Submit</button>
+              <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{display: 'inline', width: 150, marginTop: 0}}>Login</button>
             </form>
           </aside>
+          {this.state.error && (
+            <p>Bad login information</p>
+          )}
         </div>
-        {this.state.error && (
-        <p>Bad login information</p>
-        )}
       </div>
     )
   }

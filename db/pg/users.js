@@ -32,7 +32,9 @@ function createUser(req, res, next) {
               next()
             })
             .catch((err) => {
-              console.log('error signing up', err)
+              console.log('error signing up', err.code)
+              res.rows = err.code
+              next()
             })
       }
     }

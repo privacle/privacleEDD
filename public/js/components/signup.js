@@ -16,6 +16,9 @@ handleSubmit : function(event) {
     $.post('/users/', signupInfo)
       .done((data) => {
         console.log(data);
+        if(data) {
+          alert('Signup Error, Email Already Exists!')
+        }
       })
       .error((error) => {
         console.error(error);
@@ -41,6 +44,7 @@ handleSubmit : function(event) {
               <button type="submit" className="btn waves-effect waves-light light-blue darken-4">Submit</button>
             </form>
           </aside>
+          {}
         </div>
       </div>
     )
