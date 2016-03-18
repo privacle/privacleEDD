@@ -1,11 +1,29 @@
 var map;
 var destin = [];
+var user_position;
 function initMap() {
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
+
+  function success(pos) {
+    user_position = pos.coords;
+
+    };
+
+  function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+};
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
+    center: {lat: user_position.latitude, lng: user_position.longitude},
     zoom: 8,
     disableDefaultUI: true,
-    zoomControl: false, 
+    zoomControl: false,
     scrollwheel: false,
     draggable: false,
     disableDoubleClickZoom: true
@@ -18,7 +36,7 @@ function initMap() {
 
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
-    
+
     localStorage.lat = place.geometry.location.lat();
     localStorage.lng = place.geometry.location.lng();
   });
@@ -50,10 +68,10 @@ function setMarkers(map) {
 
     // add click event to zoom in on marker
     google.maps.event.addListener(marker, 'click', function() {
-      
-      window.location.href = this.url + ;  
-      
-      
+
+      window.location.href = this.url + ;
+
+
       //map.setCenter(this.getPosition());
       //map.setZoom(10);
       // setTimeout to zoom out to world
@@ -62,7 +80,7 @@ function setMarkers(map) {
       //map.setCenter(center);
     //}, 6000);
     });
-  }    
+  }
 }
 
 function toggleBounce() {
