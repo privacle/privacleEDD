@@ -24,10 +24,10 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(logger('dev'));
 
 
-app.use('/guests', guestRoutes)
-app.use('/users',expressJWT({secret:secret}),userRoutes)
-app.use('/events',expressJWT({secret:secret}),eventRoutes)
-app.use('/friends',expressJWT({secret:secret}),friendRoutes)
+app.use('/api/guests', guestRoutes)
+app.use('/api/users',expressJWT({secret:secret}),userRoutes)
+app.use('/api/events',expressJWT({secret:secret}),eventRoutes)
+app.use('/api/friends',expressJWT({secret:secret}),friendRoutes)
 
 app.get('*',(req,res)=>{
   res.sendFile(path.join(__dirname,'index.html'));
