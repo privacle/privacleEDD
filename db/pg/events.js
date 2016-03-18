@@ -81,7 +81,8 @@ function oneEventById(req, res, next) {
 }
 
 function oneEventByName(req, res, next) {
-  db.one(`select * from events where name = $/event_name/`,
+  req.params.event_name = '%' + req.params.event_name + '%'; 
+  db.any(`select * from events where name like $/event_name/`,
     req.params)
     .then(function(data) {
       res.event = data;
