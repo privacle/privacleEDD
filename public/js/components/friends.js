@@ -29,7 +29,6 @@ const Friends = React.createClass({
                   <p><i className="mdi-action-perm-phone-msg cyan-text text-darken-2" /> +1 (612) 222 8989</p>
                   <p><i className="mdi-communication-email cyan-text text-darken-2" /> mail@domain.com</p>
                   <p><i className="mdi-social-cake cyan-text text-darken-2" /> 18th June 1990</p>
-                  <p><i className="mdi-device-airplanemode-on cyan-text text-darken-2" /> BAR - AUS</p>
                 </div>
               </div>
             </li>
