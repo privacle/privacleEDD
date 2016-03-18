@@ -13,7 +13,7 @@ const Dashboard = React.createClass({
     $.ajax({
       url: '/api/users/me',
       beforeSend: function( xhr ) {
-        xhr.setRequestHeader("Authorization", auth.getToken() );
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
       }
     }).done((data) => {
       this.setState({me: data.agent.email})
