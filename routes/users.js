@@ -34,6 +34,7 @@ users.route('/login')
 // users.route('/logout')
 //   .delete( db.logout, (req,res)=>res.json(res.rows) )
 //
+
 users.route('/friends')
   .get( db.myFriends, (req,res)=>res.json(res.rows) ) //test
 

@@ -3,11 +3,36 @@ const auth = require('../auth');
 
 const Create = React.createClass({
 
+  handleSubmit : function(event) {
+    event.preventDefault();
+
+    let newEvent = {
+      name: this.refs.name.value,
+      event_date: this.refs.date.value,
+      event_time: this.refs.time.value,
+      description: this.refs.description.value,
+      location: this.refs.location.value,
+      img_url: this.refs.img_url.value
+    }
+
+    $.ajax({
+      url: '/api/events',
+      type: 'post',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      },
+      data: newEvent
+    })
+    .done((data) => {
+      console.log(data);
+    })
+  },
+
   render : function() {
     return (
       <div>
         <h1>Create event</h1>
-        <form className="form-horizontal">
+        <form className="form-horizontal" onSubmit={this.handleSubmit} >
           <fieldset style={{marginTop: 20}}>
             <div className="form-group">
               <label className="col-md-4 control-label" htmlFor="name">Event Name</label>

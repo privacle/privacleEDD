@@ -9,7 +9,7 @@ const Dashboard = React.createClass({
   },
   seeMe : function() {
     $.ajax({
-      url: 'users/me',
+      url: '/api/users/me',
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", auth.getToken() );
       }

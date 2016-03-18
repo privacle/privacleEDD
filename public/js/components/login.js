@@ -19,7 +19,6 @@ const Login = React.createClass({
     auth.login(email, pass, (loggedIn) => {
       if (!loggedIn)
         return this.setState({ error: true })
-
       const { location } = this.props
 
       if (location.state && location.state.nextPathname) {
@@ -32,23 +31,23 @@ const Login = React.createClass({
   render : function() {
     return (
       <div>
-        <div className="form">
+      <div id="loginform" style={{width: '30%', margin: 'auto', marginTop: '10px'}}>
           <aside className="card-panel">
             <form className="form-signin" onSubmit={this.handleSubmit}>
               <h2 className="form-signin-heading">Please Login</h2>
               <label htmlFor="inputEmail" className="sr-only">Email address</label>
-              <input ref="email" type="text" id="inputEmail" className="form-control"  placeholder="Email address" autofocus />
+              <input ref="email" type="email" id="inputEmail" className="form-control"  placeholder="Email address" autofocus />
 
               <label htmlFor="inputPassword" className="sr-only">Password</label>
-              <input ref="pass" name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" />
+              <input ref="pass" type="password" id="inputPassword" className="form-control" placeholder="Password" />
 
-              <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{display: 'inline', width: 150, marginTop: 0}}>Submit</button>
+              <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{display: 'inline', width: 150, marginTop: 0}}>Login</button>
             </form>
           </aside>
+          {this.state.error && (
+            <p>Password and email do not match</p>
+          )}
         </div>
-        {this.state.error && (
-        <p>Bad login information</p>
-        )}
       </div>
     )
   }
