@@ -81,7 +81,7 @@ function oneEventById(req, res, next) {
 }
 
 function oneEventByName(req, res, next) {
-  db.one(`select * from events where event_id = $/event_name/`,
+  db.one(`select * from events where name = $/event_name/`,
     req.params)
     .then(function(data) {
       res.event = data;
@@ -92,9 +92,21 @@ function oneEventByName(req, res, next) {
     })
 }
 
+function oneEventByOwner(req, res, next) {
+  db.one(`select * from events where owner = $/event_owner/`,
+    req.params)
+    .then(function(data) {
+      res.event = data;
+      next();
+    })
+    .catch(function(err) {
+      console.error('error with oneEventByName',err);
+    })
+}
 
 module.exports.allEvents = allEvents;
 module.exports.newEvents = newEvents;
 module.exports.myEvents = myEvents;
 module.exports.oneEventById = oneEventById;
 module.exports.oneEventByName = oneEventByName;
+module.exports.oneEventByOwner = oneEventByOwner;

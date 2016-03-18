@@ -24,4 +24,7 @@ events.route('/id/:event_id')
 events.route('/name/:event_name')
   .get( db.oneEventByName, (req,res)=>res.json(res.event) )
 
+events.route('/owner/:event_owner')
+  .get( db.oneEventByOwner, (req,res)=>res.json(res.event) )
+
 module.exports = events;
