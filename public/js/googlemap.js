@@ -51,7 +51,7 @@ function setMarkers(map) {
     // add click event to zoom in on marker
     google.maps.event.addListener(marker, 'click', function() {
       
-      window.location.href = this.url + ;  
+      window.location.href = this.url;
       
       
       //map.setCenter(this.getPosition());
