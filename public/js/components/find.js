@@ -29,10 +29,10 @@ const Find = React.createClass({
         })
         .done((data) => {
           console.log('event search name: ', data);
-
           data.forEach((el) => {
             this.state.events[el.event_id] = el;
             this.setState({ events: this.state.events });
+            console.log('state: ',this.state.events);
           });
         })
       } else {
@@ -85,7 +85,16 @@ const Find = React.createClass({
     this.refs.eventSearchForm.reset();
     this.refs.userSearchForm.reset();
   },
-
+  renderEvents : function(key) {
+    return (
+      <EventResult key={key} index={key} details={this.state.events[key]} />
+    )
+  },
+  renderUsers : function(key) {
+    return (
+      <UserResult key={key} index={key} details={this.state.users[key]} />
+    )
+  },
   hideSearchform : function(){
     $('#searchform').hide()
   },
@@ -111,25 +120,54 @@ const Find = React.createClass({
           </div>
         </div>
 
-        <DisplayResults />
+        <div>
+          <ul>
+
+            {
+              Object.keys(this.state.events).map(this.renderEvents)
+            }
+
+          </ul>
+        </div>
+
+        <div>
+          <ul>
+
+            {
+              Object.keys(this.state.users).map(this.renderUsers)
+            }        
+
+          </ul>
+        </div>
+
       </div>
     )
   }
 });
 
 
-const DisplayResults = React.createClass({
+const EventResult = React.createClass({
 
   render : function() {
     return (
-      <div>
-        <ul>
-          <li>test 123432432</li>
-          <li>test 3223432423</li>
-          <li>test 3243432</li>
-          <li>test 123414314</li>
-        </ul>
-      </div>
+      <li>
+        <div>
+          Event name: {this.props.details.name}
+        </div>
+      </li>
+    )
+  }
+});
+
+const UserResult = React.createClass({
+
+  render : function() {
+    return (
+      <li>
+        <div>
+          User email: {this.props.details.email}
+        </div>
+      </li>
     )
   }
 });
