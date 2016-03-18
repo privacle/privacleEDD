@@ -39,7 +39,7 @@ const Events = React.createClass({
         <div className="col s12 m6 l4 row">
           <ul>
             <li>
-            
+            { Object.keys(this.state.events).map(this.renderEvent) }
             </li>
           </ul>
         </div>
@@ -51,9 +51,7 @@ const Events = React.createClass({
 const Event = React.createClass({
   render : function() {
     return (
-      <li>
-        <div>
-        <div className="col s12 m12 l4">
+        <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 250, height: 'auto', overflow: 'hidden'}}>
           <div className="map-card">
             <div className="card">
               <div className="card-image waves-effect waves-block waves-light">
@@ -78,7 +76,6 @@ const Event = React.createClass({
             </div>
           </div>
         </div>
-      </li>
     )
   }
 });
