@@ -7,6 +7,8 @@ const Profile = React.createClass({
     return (
       <div>
         <h1>Profile</h1>
+        <div className="card-panel" style={{width: '80%', margin: 'auto'}}>
+        </div>
       </div>
     )
   }

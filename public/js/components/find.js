@@ -12,7 +12,7 @@ const Find = React.createClass({
 
   handleSubmit : function(event) {
     event.preventDefault();
-    
+
     let eventSearch   = this.refs.event.value;
     let eventSearchId = this.refs.event_id.value;
     let userSearch    = this.refs.user_email.value;
@@ -45,7 +45,7 @@ const Find = React.createClass({
         })
         .done((data) => {
           console.log('event search id: ', data);
-  
+
           this.state.events[data.event_id] = data;
           this.setState({ events: this.state.events });
         })
@@ -63,7 +63,7 @@ const Find = React.createClass({
           console.log('user search name: ', data);
 
           this.state.users[data.user_id] = data;
-          this.setState({ users: this.state.users });  
+          this.setState({ users: this.state.users });
         })
       } else {
         $.ajax({
@@ -96,14 +96,19 @@ const Find = React.createClass({
     )
   },
   hideSearchform : function(){
-    $('#searchform').hide()
+    $('#searchbyEvent').hide()
+    $('#searchbyUser').hide()
   },
 
+  showSearchform : function(){
+    $('#searchbyEvent').show()
+    $('#searchbyUser').show()
+  },
   render : function() {
     return (
       <div>
         <h1>Find stuff</h1>
-        <div id="searchform" className="card-panel" style={{width: '80%', margin: 'auto'}}>
+        <div className="card-panel" style={{width: '80%', margin: 'auto'}}>
           <div>
             <form onSubmit={this.handleSubmit} ref="eventSearchForm">
               <input type="text" ref="event" placeholder="Search by event name" />
@@ -117,6 +122,7 @@ const Find = React.createClass({
               <input type="text" ref="user_id" placeholder="Search by user ID" />
               <button type="submit" onClick={this.hideSearchform} className="btn waves-effect waves-light light-blue darken-4">Search</button>
             </form>
+            <button className="btn right waves-effect waves-light light-blue darken-4" onClick={this.showSearchform} style={{width: 96.6719}}>Back</button>
           </div>
         </div>
 
@@ -135,7 +141,7 @@ const Find = React.createClass({
 
             {
               Object.keys(this.state.users).map(this.renderUsers)
-            }        
+            }
 
           </ul>
         </div>
@@ -188,7 +194,7 @@ const UserResult = React.createClass({
 
 
 
-  
+
 
 
 
