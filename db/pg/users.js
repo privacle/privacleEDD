@@ -69,7 +69,7 @@ function allUsers(req, res, next) {
 }
 
 function oneUser(req, res, next) {
-  db.one(`select * from users where email like $/email/`, req.body.email)
+  db.one(`select * from users where email like $/email/`, req.params)
   .then(function(data) {
     res.user = data;
     next();
