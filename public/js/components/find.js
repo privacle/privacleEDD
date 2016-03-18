@@ -12,31 +12,33 @@ const Find = React.createClass({
   },
 
   hideSearchform : function(){
-    $('#searchform').hide()
+    $('#searchbyEvent').hide()
+    $('#searchbyUser').hide()
   },
 
   showSearchform : function(){
-    $('#searchform').show()
+    $('#searchbyEvent').show()
+    $('#searchbyUser').show()
   },
   render : function() {
     return (
       <div>
         <h1>Find stuff</h1>
-        <div id="searchform" className="card-panel" style={{width: '80%', margin: 'auto'}}>
+        <div className="card-panel" style={{width: '80%', margin: 'auto'}}>
           <div>
-            <form onSubmit={this.handleSubmit}>
+            <form id="searchbyEvent" onSubmit={this.handleSubmit}>
               <input type="text" ref="event" placeholder="Search by event" />
               <button type="submit" onClick={this.hideSearchform} className="btn waves-effect waves-light light-blue darken-4">Search</button>
             </form>
           </div>
           <div>
-            <form onSubmit={this.handleSubmit}>
+            <form id="searchbyUser" onSubmit={this.handleSubmit}>
               <input type="text" ref="user" placeholder="Search by user" />
               <button type="submit" onClick={this.hideSearchform} className="btn waves-effect waves-light light-blue darken-4">Search</button>
             </form>
+            <button className="btn right waves-effect waves-light light-blue darken-4" onClick={this.showSearchform} style={{width: 96.6719}}>Back</button>
           </div>
         </div>
-        <button className="btn waves-effect waves-light light-blue darken-4" data-reactid=".0.1.2" style={{marginLeft: 30, marginTop: 30}} onClick={this.showSearchform}>Back</button>
         <DisplayResults />
       </div>
     )
