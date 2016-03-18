@@ -12,11 +12,21 @@ function initMap() {
   });
 
   setMarkers(map);
+
+  var input = (document.getElementById('location'));
+  var autocomplete = new google.maps.places.Autocomplete(input);
+
+  autocomplete.addListener('place_changed', function() {
+    var place = autocomplete.getPlace();
+    
+    localStorage.lat = place.geometry.location.lat();
+    localStorage.lng = place.geometry.location.lng();
+  });
 }
 
 function setMarkers(map) {
 
-  destin.push([-34, 150]);
+  destin.push( [-34, 150] );
   // Adds markers to the map.
 
   // Shapes define the clickable region of the icon. The type defines an HTML
@@ -35,13 +45,13 @@ function setMarkers(map) {
       map: map,
       shape: shape,
       animation: google.maps.Animation.DROP,
-      url: 'https://developers.facebook.com/docs/reference/javascript/FB.getLoginStatus'
+      url: '/'
     });
 
     // add click event to zoom in on marker
     google.maps.event.addListener(marker, 'click', function() {
       
-      window.location.href = this.url;  
+      window.location.href = this.url + ;  
       
       
       //map.setCenter(this.getPosition());

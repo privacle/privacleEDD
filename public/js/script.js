@@ -60,7 +60,7 @@ const App = React.createClass({
       return (
         <div>
           <div className="masthead">
-          <h3 className="text-muted">Privacle</h3>
+          <h1 className="text-muted">Privacle</h1>
             <nav className="light-blue darken-4">
               <ul className="nav nav-justified light-blue accent-3">
                 <li><Link to="/dashboard">Dashboard</Link></li>
@@ -69,24 +69,48 @@ const App = React.createClass({
                 <li><Link to="/friends">Friends</Link></li>
                 <li><Link to="/events">Events</Link></li>
                 <li><Link to="/profile">Profile</Link></li>
-                <li><Link to="/logout">Logout</Link></li>
+                <li className="right"><Link to="/logout">Logout</Link></li>
               </ul>
             </nav>
           </div>
           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+          <footer style={{position: 'relative', bottom: '0px !important', width: '100%'}} className="page-footer light-blue darken-4">
+            <div className="container">
+              <div className="row">
+                <div className="col l6 s12">
+                  <h5 className="white-text">Made by EDD</h5>
+                  <p className="grey-text text-lighten-4">General Assembly NYC WDI Bowie Group Project</p>
+                </div>
+                <div className="col l4 offset-l2 s12">
+                  <h5 className="white-text">Links</h5>
+                  <ul>
+                    <li><a className="grey-text text-lighten-3" href="https://generalassemb.ly/new-york-city">General Assembly</a></li>
+                    <li><a className="grey-text text-lighten-3" href="https://github.com/privacle/privacleEDD">Privacle Github Page</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="footer-copyright">
+              <div className="container">
+                © 2016 Copyright Text
+                <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
+              </div>
+            </div>
+          </footer>
         </div>
       )
 
     } else {
-
       return (
         <div>
-          <nav className="light-blue darken-4" style={{textAlign: 'center', width: '80%', margin: 'auto'}}>
-            <a id="logo-container" href="/" className="brand-logo">Privacle</a>
-            <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li className="active" onClick={this.showButtons}><Link to="/">Home</Link></li>
-            </ul>
-          </nav>
+          <div className="nav-wrapper" id="coverCardpanel">
+            <nav className="light-blue darken-4" style={{width: '80%', margin: 'auto'}}>
+              <a href="/" className="brand-logo">Privacle</a>
+              <ul id="nav-mobile" className="right hide-on-med-and-down">
+                <li onClick={this.showButtons}><Link to="/">Home</Link></li>
+              </ul>
+            </nav>
+          </div>
           <div className="row" id="coverButtons">
             <section className="col s12" style={{width: '100%', textAlign: 'center', marginTop: 70, position: 'relative'}}>
               <section className="col s5" style={{marginLeft: '30%'}}>
@@ -103,7 +127,30 @@ const App = React.createClass({
             </section>
           </div>
           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
-        </div>
+        <footer style={{position: 'absolute', bottom: '0px !important', width: '100%'}} className="page-footer light-blue darken-4">
+          <div className="container">
+            <div className="row">
+              <div className="col l6 s12">
+                <h5 className="white-text">Made by EDD</h5>
+                <p className="grey-text text-lighten-4">General Assembly NYC WDI Bowie Group Project</p>
+              </div>
+              <div className="col l4 offset-l2 s12">
+                <h5 className="white-text">Links</h5>
+                <ul>
+                  <li><a className="grey-text text-lighten-3" href="https://generalassemb.ly/new-york-city">General Assembly</a></li>
+                  <li><a className="grey-text text-lighten-3" href="https://github.com/privacle/privacleEDD">Privacle Github Page</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="footer-copyright">
+            <div className="container">
+              © 2016 Copyright Text
+              <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+      </div>
       )
     }
   }
