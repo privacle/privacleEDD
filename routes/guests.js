@@ -4,7 +4,7 @@ const express    = require('express');
 const guests      = express.Router();
 const bodyParser = require('body-parser');
 const db         = require('./../db/pg/users');
-const secret      = "sweet sweet secret";
+const secret      = process.env.SECRET;
 const expressJWT  = require('express-jwt');
 const jwt         = require('jsonwebtoken');
 
