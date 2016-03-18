@@ -45,11 +45,9 @@ const Find = React.createClass({
         })
         .done((data) => {
           console.log('event search id: ', data);
-
-          data.forEach((el) => {
-            this.state.events[el.event_id] = el;
-            this.setState({ events: this.state.events });
-          });
+  
+          this.state.events[data.event_id] = data;
+          this.setState({ events: this.state.events });
         })
       }
     } else {
@@ -64,10 +62,8 @@ const Find = React.createClass({
         .done((data) => {
           console.log('user search name: ', data);
 
-          data.forEach((el) => {
-            this.state.users[el.user_id] = el;
-            this.setState({ users: this.state.users });
-          });
+          this.state.users[data.user_id] = data;
+          this.setState({ users: this.state.users });  
         })
       } else {
         $.ajax({
@@ -80,10 +76,8 @@ const Find = React.createClass({
         .done((data) => {
           console.log('user search id: ', data);
 
-          data.forEach((el) => {
-            this.state.users[el.user_id] = el;
-            this.setState({ users: this.state.users });
-          });
+          this.state.users[data.user_id] = data;
+          this.setState({ users: this.state.users });
         })
       }
     }
