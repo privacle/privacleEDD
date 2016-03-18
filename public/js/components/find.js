@@ -5,7 +5,7 @@ const Find = React.createClass({
 
   handleSubmit : function(event) {
     event.preventDefault();
-    
+
 
     var event = this.refs.event.value;
     var user = this.refs.user.value;
@@ -15,6 +15,9 @@ const Find = React.createClass({
     $('#searchform').hide()
   },
 
+  showSearchform : function(){
+    $('#searchform').show()
+  },
   render : function() {
     return (
       <div>
@@ -33,7 +36,7 @@ const Find = React.createClass({
             </form>
           </div>
         </div>
-
+        <button className="btn waves-effect waves-light light-blue darken-4" data-reactid=".0.1.2" style={{marginLeft: 30, marginTop: 30}}>Back</button>
         <DisplayResults />
       </div>
     )
