@@ -1,28 +1,28 @@
 var map;
 var destin = [];
+var user_position;
 function initMap() {
-  var user_position;
   var options = {
     enableHighAccuracy: true,
     timeout: 5000,
     maximumAge: 0
   };
-
+  
   function success(pos) {
     user_position = pos.coords;
+    console.log(user_position);
     renderMap();
-    };
+  };
 
   function error(err) {
-  console.warn('ERROR(' + err.code + '): ' + err.message);
-};
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+  };
 
-navigator.geolocation.getCurrentPosition(success, error, options);
+  navigator.geolocation.getCurrentPosition(success, error, options);
   function renderMap() {
-    console.log(user_position);
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: user_position.latitude, lng: user_position.longitude},
-      zoom: 8,
+      zoom: 15,
       disableDefaultUI: true,
       zoomControl: false,
       scrollwheel: false,
@@ -34,14 +34,11 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
     var input = (document.getElementById('location'));
     var autocomplete = new google.maps.places.Autocomplete(input);
-
     autocomplete.addListener('place_changed', function() {
       var place = autocomplete.getPlace();
-
       localStorage.lat = place.geometry.location.lat();
       localStorage.lng = place.geometry.location.lng();
     });
-
   }
 }
 
@@ -60,9 +57,9 @@ function setMarkers(map) {
 
 
   for (var i = 0; i < destin.length; i++) {
-    var loc = destin[i];
+    //var loc = destin[i];
     var marker = new google.maps.Marker({
-      position: {lat: loc[0], lng: loc[1]},
+      position: {lat: user_position.latitude, lng: user_position.longitude},
       map: map,
       shape: shape,
       animation: google.maps.Animation.DROP,
