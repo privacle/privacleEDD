@@ -60,7 +60,7 @@ const App = React.createClass({
       return (
         <div>
           <div className="masthead">
-          <h2 className="text-muted">Privacle</h2>
+          <h1 className="text-muted">Privacle</h1>
             <nav className="light-blue darken-4">
               <ul className="nav nav-justified light-blue accent-3">
                 <li><Link to="/dashboard">Dashboard</Link></li>
@@ -103,7 +103,7 @@ const App = React.createClass({
     } else {
       return (
         <div>
-          <div className="nav-wrapper">
+          <div className="nav-wrapper" id="coverCardpanel">
             <nav className="light-blue darken-4" style={{width: '80%', margin: 'auto'}}>
               <a href="/" className="brand-logo">Privacle</a>
               <ul id="nav-mobile" className="right hide-on-med-and-down">
