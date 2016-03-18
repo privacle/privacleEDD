@@ -1,27 +1,48 @@
 var map;
 var destin = [];
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8,
-    disableDefaultUI: true,
-    zoomControl: false, 
-    scrollwheel: false,
-    draggable: false,
-    disableDoubleClickZoom: true
-  });
+  var user_position;
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
 
-  setMarkers(map);
+  function success(pos) {
+    user_position = pos.coords;
+    renderMap();
+    };
 
-  var input = (document.getElementById('location'));
-  var autocomplete = new google.maps.places.Autocomplete(input);
+  function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+};
 
-  autocomplete.addListener('place_changed', function() {
-    var place = autocomplete.getPlace();
-    
-    localStorage.lat = place.geometry.location.lat();
-    localStorage.lng = place.geometry.location.lng();
-  });
+navigator.geolocation.getCurrentPosition(success, error, options);
+  function renderMap() {
+    console.log(user_position);
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: user_position.latitude, lng: user_position.longitude},
+      zoom: 8,
+      disableDefaultUI: true,
+      zoomControl: false,
+      scrollwheel: false,
+      draggable: false,
+      disableDoubleClickZoom: true
+    });
+
+    setMarkers(map);
+
+    var input = (document.getElementById('location'));
+    var autocomplete = new google.maps.places.Autocomplete(input);
+
+    autocomplete.addListener('place_changed', function() {
+      var place = autocomplete.getPlace();
+
+      localStorage.lat = place.geometry.location.lat();
+      localStorage.lng = place.geometry.location.lng();
+    });
+
+  }
 }
 
 function setMarkers(map) {
@@ -50,10 +71,9 @@ function setMarkers(map) {
 
     // add click event to zoom in on marker
     google.maps.event.addListener(marker, 'click', function() {
-      
       window.location.href = this.url;
-      
-      
+
+
       //map.setCenter(this.getPosition());
       //map.setZoom(10);
       // setTimeout to zoom out to world
@@ -62,7 +82,7 @@ function setMarkers(map) {
       //map.setCenter(center);
     //}, 6000);
     });
-  }    
+  }
 }
 
 function toggleBounce() {
