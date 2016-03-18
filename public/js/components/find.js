@@ -36,7 +36,7 @@ const Find = React.createClass({
             </form>
           </div>
         </div>
-        <button className="btn waves-effect waves-light light-blue darken-4" data-reactid=".0.1.2" style={{marginLeft: 30, marginTop: 30}}>Back</button>
+        <button className="btn waves-effect waves-light light-blue darken-4" data-reactid=".0.1.2" style={{marginLeft: 30, marginTop: 30}} onClick={this.showSearchform}>Back</button>
         <DisplayResults />
       </div>
     )
