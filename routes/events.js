@@ -15,11 +15,16 @@ events.route('/myevents')
   .get( db.myEvents, (req,res)=>res.json(res.events) )
   // Show all events created/added by current user
 
-events.route('/:event_id')
+events.route('/id/:event_id')
   // RUD a specific event created by current user
-  .get( db.oneEvent, (req,res)=>res.json(res.event) )
+  .get( db.oneEventById, (req,res)=>res.json(res.event) )
 //   .put( db.editEvent, (req,res)=>res.json(res.rows) )
 //   .delete( db.deleteEvent, (req,res)=>res.json(res.rows) )
 //
+events.route('/name/:event_name')
+  .get( db.oneEventByName, (req,res)=>res.json(res.event) )
+
+events.route('/owner/:event_owner')
+  .get( db.oneEventByOwner, (req,res)=>res.json(res.event) )
 
 module.exports = events;
