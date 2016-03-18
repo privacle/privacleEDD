@@ -68,6 +68,17 @@ function allUsers(req, res, next) {
   })
 }
 
+function oneUser(req, res, next) {
+  db.one(`select * from users where email like $/email/`, req.body.email)
+  .then(function(data) {
+    res.user = data;
+    next();
+  })
+  .catch(function(err) {
+    console.error('error with pg/users oneUser ', err);
+  })
+}
+
 function myFriends(req, res, next) {
   db.any(`select players.email from friends
        inner join players on friends.user_2 = users.user_id

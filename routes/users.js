@@ -39,6 +39,9 @@ users.route('/friends')
   .get( db.myFriends, (req,res)=>res.json(res.rows) ) //test
 
 users.route('/:user_id/friends')
-  .get( db.myCircle, (req,res)=>res.json(res.rows) ) //test
+  .get( db.oneUser, (req,res)=>res.json(res.user) ) //test
+
+// users.route('/:user_id/friends')
+//   .get( db.myCircle, (req,res)=>res.json(res.rows) ) //test
 
 module.exports = users;
