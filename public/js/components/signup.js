@@ -13,12 +13,12 @@ handleSubmit : function(event) {
       password: pass
     }
 
-    $.post('/guests/', signupInfo)
+    $.post('/api/guests/', signupInfo)
       .done((data) => {
         console.log(data);
         if(data) {
-          $('#coverButtons').hide()
-          $('#signupform').show()
+          // $('#coverButtons').hide()
+          // $('#signupform').show()
           alert('Signup Error, Email Already Exists!')
         }else {
         }
@@ -29,6 +29,7 @@ handleSubmit : function(event) {
   },
   hideForm : function(){
     $('#signupform').hide()
+    $('#coverButtons').show()
   },
 
   render : function() {

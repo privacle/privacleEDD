@@ -3,8 +3,12 @@ html, body {
   padding: 0;
 }
 
+#coverCardpanel{
+}
+
 html{
   font-family: 'Josefin Sans', sans-serif;
+  min-height: 555px;
 }
 #map {
   height: 500px;
@@ -12,4 +16,14 @@ html{
   border: 1px solid black;
 }
 
+@media only screen and (max-height: 590px) {
+  html {
+    font-size: 12px !important
+  }
+}
 
+@media only screen and (max-width: 999px) {
+  html {
+    font-size: 12px !important
+  }
+}

@@ -53,7 +53,7 @@ function loginRequest(email, pass, cb) {
     password: pass
   }
 
-  $.post('/guests/login', loginCreds)
+  $.post('/api/guests/login', loginCreds)
     .done((data) => {
       console.log(data);
       cb({

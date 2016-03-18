@@ -11,7 +11,7 @@ const Dashboard = React.createClass({
   // function below outdated : used as req header example
   seeMe : function() {
     $.ajax({
-      url: 'users/me',
+      url: '/api/users/me',
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", auth.getToken() );
       }

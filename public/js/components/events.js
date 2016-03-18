@@ -11,7 +11,7 @@ const Events = React.createClass({
   componentWillMount : function() {
     console.log('hered');
     $.ajax({
-      url: '/events/myevents',
+      url: '/api/events/myevents',
       type: 'GET',
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );

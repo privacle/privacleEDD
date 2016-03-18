@@ -22,7 +22,7 @@ const Create = React.createClass({
     }
 
     $.ajax({
-      url: '/events',
+      url: '/api/events',
       type: 'post',
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
