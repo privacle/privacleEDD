@@ -1,7 +1,7 @@
 var map;
 var destin = [];
-var user_position;
 function initMap() {
+  var user_position;
   var options = {
     enableHighAccuracy: true,
     timeout: 5000,
@@ -10,7 +10,7 @@ function initMap() {
 
   function success(pos) {
     user_position = pos.coords;
-
+    renderMap();
     };
 
   function error(err) {
@@ -18,28 +18,31 @@ function initMap() {
 };
 
 navigator.geolocation.getCurrentPosition(success, error, options);
+  function renderMap() {
+    console.log(user_position);
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: user_position.latitude, lng: user_position.longitude},
+      zoom: 8,
+      disableDefaultUI: true,
+      zoomControl: false,
+      scrollwheel: false,
+      draggable: false,
+      disableDoubleClickZoom: true
+    });
 
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: user_position.latitude, lng: user_position.longitude},
-    zoom: 8,
-    disableDefaultUI: true,
-    zoomControl: false,
-    scrollwheel: false,
-    draggable: false,
-    disableDoubleClickZoom: true
-  });
+    setMarkers(map);
 
-  setMarkers(map);
+    var input = (document.getElementById('location'));
+    var autocomplete = new google.maps.places.Autocomplete(input);
 
-  var input = (document.getElementById('location'));
-  var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.addListener('place_changed', function() {
+      var place = autocomplete.getPlace();
 
-  autocomplete.addListener('place_changed', function() {
-    var place = autocomplete.getPlace();
+      localStorage.lat = place.geometry.location.lat();
+      localStorage.lng = place.geometry.location.lng();
+    });
 
-    localStorage.lat = place.geometry.location.lat();
-    localStorage.lng = place.geometry.location.lng();
-  });
+  }
 }
 
 function setMarkers(map) {
@@ -68,17 +71,9 @@ function setMarkers(map) {
 
     // add click event to zoom in on marker
     google.maps.event.addListener(marker, 'click', function() {
-<<<<<<< HEAD
-
-      window.location.href = this.url + ;
-
-
-=======
-      
       window.location.href = this.url;
-      
-      
->>>>>>> dev
+
+
       //map.setCenter(this.getPosition());
       //map.setZoom(10);
       // setTimeout to zoom out to world
