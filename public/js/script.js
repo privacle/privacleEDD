@@ -60,7 +60,7 @@ const App = React.createClass({
       return (
         <div>
           <div className="masthead">
-          <h1 className="text-muted">Privacle</h1>
+          <Link to ="/" id="homepageLogo"><h1 className="text-muted">Privacle</h1></Link>
             <nav className="light-blue darken-4">
               <ul className="nav nav-justified light-blue accent-3">
                 <li><Link to="/dashboard">Dashboard</Link></li>

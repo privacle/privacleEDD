@@ -3,7 +3,7 @@ html, body {
   padding: 0;
 }
 
-#coverCardpanel{
+#coverCardpanel {
 }
 
 html{
@@ -26,4 +26,12 @@ html{
   html {
     font-size: 12px !important
   }
+}
+
+a {
+  color: #fff !important;
+}
+
+#homepageLogo {
+  color: black !important;
 }
