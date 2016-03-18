@@ -8,6 +8,7 @@ const Dashboard = React.createClass({
       me: ''
     }
   },
+  // function below outdated : used as req header example
   seeMe : function() {
     $.ajax({
       url: 'users/me',

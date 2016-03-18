@@ -45,13 +45,13 @@ function setMarkers(map) {
       map: map,
       shape: shape,
       animation: google.maps.Animation.DROP,
-      url: 'https://developers.facebook.com/docs/reference/javascript/FB.getLoginStatus'
+      url: '/'
     });
 
     // add click event to zoom in on marker
     google.maps.event.addListener(marker, 'click', function() {
       
-      window.location.href = this.url;  
+      window.location.href = this.url + ;  
       
       
       //map.setCenter(this.getPosition());
