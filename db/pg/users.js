@@ -89,7 +89,7 @@ function myFriends(req, res, next) {
     next();
   })
   .catch(function(err){
-    console.error('error with select * from events', err);
+    console.error('error with pg/users myFriends', err);
   })
 }
 
@@ -115,5 +115,6 @@ function searchUserByEmail(req, res, next) {
 module.exports.login = login;
 module.exports.createUser = createUser;
 module.exports.allUsers = allUsers;
+module.exports.oneUser = oneUser;
 module.exports.myFriends = myFriends;
 module.exports.myCircle = myCircle;

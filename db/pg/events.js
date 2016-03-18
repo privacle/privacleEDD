@@ -67,7 +67,7 @@ function myEvents(req, res, next) {
   })
 }
 
-function oneEvent(req, res, next) {
+function oneEventById(req, res, next) {
   req.params.event_id = parseInt(req.params.event_id);
   db.one(`select * from events where event_id = $/event_id/`,
     req.params)
@@ -76,11 +76,25 @@ function oneEvent(req, res, next) {
       next();
     })
     .catch(function(err) {
-      console.error('error with insert into events',err);
+      console.error('error with oneEventById',err);
     })
 }
+
+function oneEventByName(req, res, next) {
+  db.one(`select * from events where event_id = $/event_name/`,
+    req.params)
+    .then(function(data) {
+      res.event = data;
+      next();
+    })
+    .catch(function(err) {
+      console.error('error with oneEventByName',err);
+    })
+}
+
 
 module.exports.allEvents = allEvents;
 module.exports.newEvents = newEvents;
 module.exports.myEvents = myEvents;
-module.exports.oneEvent = oneEvent;
+module.exports.oneEventById = oneEventById;
+module.exports.oneEventByName = oneEventByName;
