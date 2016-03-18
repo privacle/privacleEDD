@@ -68,7 +68,7 @@ function allUsers(req, res, next) {
   })
 }
 
-function oneUser(req, res, next) {
+function oneUserByEmail(req, res, next) {
   db.one(`select * from users where email like $/email/`, req.params)
   .then(function(data) {
     res.user = data;
@@ -77,6 +77,19 @@ function oneUser(req, res, next) {
   .catch(function(err) {
     console.error('error with pg/users oneUser ', err);
   })
+}
+
+function oneUserById(req, res, next) {
+  req.params.user_id = +req.params.user_id;
+  db.one(`select * from users where user_id = $/user_id/`,
+    req.params)
+    .then(function(data) {
+      res.event = data;
+      next();
+    })
+    .catch(function(err) {
+      console.error('error with db/users oneUserById',err);
+    })
 }
 
 function myFriends(req, res, next) {
@@ -108,13 +121,11 @@ function myCircle(req, res, next) {
   })
 }
 
-function searchUserByEmail(req, res, next) {
-
-}
 
 module.exports.login = login;
 module.exports.createUser = createUser;
 module.exports.allUsers = allUsers;
-module.exports.oneUser = oneUser;
+module.exports.oneUserByEmail = oneUserByEmail;
+module.exports.oneUserById = oneUserById;
 module.exports.myFriends = myFriends;
 module.exports.myCircle = myCircle;

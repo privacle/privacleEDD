@@ -38,8 +38,11 @@ users.route('/login')
 users.route('/friends')
   .get( db.myFriends, (req,res)=>res.json(res.rows) ) //test
 
-users.route('/:email')
-  .get( db.oneUser, (req,res)=>res.json(res.user) ) //test
+users.route('/email/:email')
+  .get( db.oneUserByEmail, (req,res)=>res.json(res.user) ) //test
+
+users.route('/id/:user_id')
+  .get( db.oneUserById, (req,res)=>res.json(res.user) ) //test
 
 // users.route('/:user_id/friends')
 //   .get( db.myCircle, (req,res)=>res.json(res.rows) ) //test
