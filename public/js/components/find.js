@@ -110,14 +110,14 @@ const Find = React.createClass({
         <h1>Find stuff</h1>
         <div className="card-panel" style={{width: '80%', margin: 'auto'}}>
           <div>
-            <form onSubmit={this.handleSubmit} ref="eventSearchForm">
+            <form onSubmit={this.handleSubmit} ref="eventSearchForm" id="searchbyEvent">
               <input type="text" ref="event" placeholder="Search by event name" />
               <input type="text" ref="event_id" placeholder="Search by event ID" />
               <button type="submit" onClick={this.hideSearchform} className="btn waves-effect waves-light light-blue darken-4">Search</button>
             </form>
           </div>
           <div>
-            <form onSubmit={this.handleSubmit} ref="userSearchForm">
+            <form onSubmit={this.handleSubmit} ref="userSearchForm" id="searchbyUser">
               <input type="text" ref="user_email" placeholder="Search by user email" />
               <input type="text" ref="user_id" placeholder="Search by user ID" />
               <button type="submit" onClick={this.hideSearchform} className="btn waves-effect waves-light light-blue darken-4">Search</button>
@@ -157,8 +157,17 @@ const EventResult = React.createClass({
   render : function() {
     return (
       <li>
-        <div>
-          Event name: {this.props.details.name}
+        <div className="row">
+          <div className="col s12 m3" style={{marginLeft: 100, width: '20%'}}>
+            <div className="card" style={{marginLeft: '3rem'}}>
+              <div className="card-content">
+                <h5 className="grey-text text-darken-4" style={{fontSize: '1.4em'}}>Event Name : {this.props.details.name}</h5>
+              </div>
+              <div className="card-action">
+                <button className="btn right waves-effect waves-light light-blue darken-4" onClick={this.addFriend}>Add friend</button>
+              </div>
+            </div>
+          </div>
         </div>
       </li>
     )
@@ -176,12 +185,12 @@ const UserResult = React.createClass({
       <li>
         <div className="row">
           <div className="col s12 m3" style={{marginLeft: 100, width: '20%'}}>
-            <div className="card">
+            <div className="card" style={{marginLeft: '3rem'}}>
               <div className="card-content">
-                <h3>{this.props.details.email}</h3>
+                <h5 className="grey-text text-darken-4" style={{fontSize: '1.4em'}}>User Email: {this.props.details.email}</h5>
               </div>
               <div className="card-action">
-                <button onClick={this.addFriend}>Add friend</button>
+                <button className="btn right waves-effect waves-light light-blue darken-4" onClick={this.addFriend}>Add friend</button>
               </div>
             </div>
           </div>
