@@ -7,7 +7,7 @@ function initEventMap() {
     timeout: 5000,
     maximumAge: 0
   };
-  
+
   function success(pos) {
     user_position = pos.coords;
     console.log(user_position);
@@ -20,7 +20,7 @@ function initEventMap() {
 
   navigator.geolocation.getCurrentPosition(success, error, options);
   function renderMap() {
-    map = new google.maps.Map(document.getElementById('event-map'), {
+    map = new google.maps.Map(document.getElementById('map' + localStorage.map_id), {
       center: {lat: 0, lng: 50},
       zoom: 3,
       disableDefaultUI: true,

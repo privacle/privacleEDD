@@ -28,8 +28,8 @@ const EventResult = React.createClass({
               <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>
 
-              
-                <EventMap />
+
+                <EventMap map_id = {this.props.index}/>
 
               </div>
             </div>
@@ -43,12 +43,13 @@ const EventResult = React.createClass({
 
 const EventMap = React.createClass({
   componentDidMount : function() {
+    localStorage.map_id = this.props.map_id;
     loadJS("https://maps.googleapis.com/maps/api/js?key=AIzaSyDZwpThrbZbJVY1yt-oTlYePJ_s5I-GZIU&libraries=places&callback=initEventMap");
   },
   render : function() {
     return (
       <div>
-        <div id="event-map">
+        <div id= {'map' + this.props.map_id}>
         </div>
       </div>
     )
