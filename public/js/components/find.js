@@ -2,23 +2,30 @@ const React = require('react');
 const auth = require('../auth');
 
 const Find = React.createClass({
-
   getInitialState : function() {
     return {
       events: {},
       users: {}
     }
   },
-
   handleSubmit : function(event) {
     event.preventDefault();
 
+    // reset state for each new search result
+    this.state.events = {};
+    this.state.users = {};
+    this.setState({
+      events: this.state.events,
+      users: this.state.users
+    });
+    // grab values of search input fields
     let eventSearch   = this.refs.event.value;
     let eventSearchId = this.refs.event_id.value;
     let userSearch    = this.refs.user_email.value;
     let userSearchId  = this.refs.user_id.value;
-
+    // check search for event vs. user
     if(eventSearch || eventSearchId) {
+      // check search event by name vs. id
       if(eventSearch) {
         $.ajax({
           url: '/api/events/name/' + eventSearch,
@@ -32,7 +39,6 @@ const Find = React.createClass({
           data.forEach((el) => {
             this.state.events[el.event_id] = el;
             this.setState({ events: this.state.events });
-            console.log('state: ',this.state.events);
           });
         })
       } else {
@@ -51,6 +57,7 @@ const Find = React.createClass({
         })
       }
     } else {
+      // check search user by name vs. id
       if(userSearch) {
         $.ajax({
           url: '/api/users/email/' + userSearch,
@@ -96,28 +103,31 @@ const Find = React.createClass({
     )
   },
   hideSearchform : function(){
-    $('#searchbyEvent').hide()
-    $('#searchbyUser').hide()
+    $('#searchbyEvent').hide();
+    $('#searchbyUser').hide();
   },
 
   showSearchform : function(){
     $('#searchbyEvent').show()
     $('#searchbyUser').show()
+    // $('#eventsResults').empty()
+    // $('#usersResults').empty()
   },
+
   render : function() {
     return (
       <div>
         <h1>Find stuff</h1>
         <div className="card-panel" style={{width: '80%', margin: 'auto'}}>
           <div>
-            <form onSubmit={this.handleSubmit} ref="eventSearchForm">
+            <form onSubmit={this.handleSubmit} ref="eventSearchForm" id="searchbyEvent">
               <input type="text" ref="event" placeholder="Search by event name" />
               <input type="text" ref="event_id" placeholder="Search by event ID" />
               <button type="submit" onClick={this.hideSearchform} className="btn waves-effect waves-light light-blue darken-4">Search</button>
             </form>
           </div>
           <div>
-            <form onSubmit={this.handleSubmit} ref="userSearchForm">
+            <form onSubmit={this.handleSubmit} ref="userSearchForm" id="searchbyUser">
               <input type="text" ref="user_email" placeholder="Search by user email" />
               <input type="text" ref="user_id" placeholder="Search by user ID" />
               <button type="submit" onClick={this.hideSearchform} className="btn waves-effect waves-light light-blue darken-4">Search</button>
@@ -126,7 +136,7 @@ const Find = React.createClass({
           </div>
         </div>
 
-        <div>
+        <div id="eventsResults">
           <ul>
 
             {
@@ -136,7 +146,7 @@ const Find = React.createClass({
           </ul>
         </div>
 
-        <div>
+        <div id="usersResults">
           <ul>
 
             {
@@ -157,8 +167,32 @@ const EventResult = React.createClass({
   render : function() {
     return (
       <li>
-        <div>
-          Event name: {this.props.details.name}
+        <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 350, height: 'auto', overflow: 'hidden'}}>
+          <div className="map-card">
+            <div className="card" style={{height:'560px', width: "250px"}}>
+              <div className="card-image waves-effect waves-block waves-light">
+              <img src={this.props.details.img_url} alt className="circle responsive-img activator card-profile-image" />
+              </div>
+              <div className="card-content">
+                <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
+                <i className="mdi-maps-pin-drop" />
+                </a>
+                <h5 className="grey-text text-darken-4"><a href="#" className="grey-text text-darken-4">{this.props.details.name}</a>
+                </h5>
+                <p><i className="cyan-text text-darken-2" /> Date: {this.props.details.date}</p>
+                <p><i className="cyan-text text-darken-2" /> Time {this.props.details.time}</p>
+                <p><i className="cyan-text text-darken-2" /> Location: {this.props.details.location}</p>
+                <p><i className="cyan-text text-darken-2" /> Description: {this.props.details.description}</p>
+                <p><i className="cyan-text text-darken-2" /> Created by User: {this.props.details.owner}</p>
+                <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Add</button>
+              </div>
+              <div className="card-reveal">
+              <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>
+
+              google map component goes here
+              </div>
+            </div>
+          </div>
         </div>
       </li>
     )
@@ -168,22 +202,30 @@ const EventResult = React.createClass({
 const UserResult = React.createClass({
 
   addFriend : function(event) {
-
+    console.log('adding friend');
   },
 
   render : function() {
     return (
       <li>
-        <div className="row">
-          <div className="col s12 m3" style={{marginLeft: 100, width: '20%'}}>
-            <div className="card">
-              <div className="card-content">
-                <h3>{this.props.details.email}</h3>
-              </div>
-              <div className="card-action">
-                <button onClick={this.addFriend}>Add friend</button>
-              </div>
-            </div>
+        <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 250, height: 'auto', overflow: 'hidden'}}>
+          <div className="card-content">
+            <img src="http://barkpost.com/wp-content/uploads/2015/02/wilburs_world.jpg" alt className="circle responsive-img activator card-profile-image" />
+            <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
+            <i className="mdi-action-account-circle" />
+            </a>
+            <span className="card-title activator grey-text text-darken-4">{this.props.details.user_id}</span>
+            <p><i className="mdi-communication-email cyan-text text-darken-2" /> {this.props.details.email}</p>
+            <button onClick={this.addFriend} className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Add</button>
+          </div>
+
+          <div className="card-reveal" style={{display: 'none', transform: 'translateY(0px)'}}>
+            <span className="card-title grey-text text-darken-4">Test Fake Info<i className="mdi-navigation-close right" /></span>
+            <p>Here is some more information about this card.</p>
+            <p><i className="mdi-action-perm-identity cyan-text text-darken-2" /> Project Manager</p>
+            <p><i className="mdi-action-perm-phone-msg cyan-text text-darken-2" /> +1 (612) 222 8989</p>
+            <p><i className="mdi-communication-email cyan-text text-darken-2" /> mail@domain.com</p>
+            <p><i className="mdi-social-cake cyan-text text-darken-2" /> 18th June 1990</p>
           </div>
         </div>
       </li>
