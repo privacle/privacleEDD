@@ -41,15 +41,21 @@ const EventResult = React.createClass({
 });
 
 
+let mapStyles = {
+  height: '500px',
+  width: '100%',
+  border: '1px solid black'
+}
+
 const EventMap = React.createClass({
   componentDidMount : function() {
-    localStorage.map_id = this.props.map_id;
-    loadJS("https://maps.googleapis.com/maps/api/js?key=AIzaSyDZwpThrbZbJVY1yt-oTlYePJ_s5I-GZIU&libraries=places&callback=initEventMap");
+    // localStorage.map_id = this.props.map_id;
+    
   },
   render : function() {
     return (
       <div>
-        <div id= {'map' + this.props.map_id}>
+        <div className="allTheMaps" id= {'map' + this.props.map_id} style={mapStyles} >
         </div>
       </div>
     )

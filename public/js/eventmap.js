@@ -12,11 +12,13 @@ function initEventMap() {
     user_position = pos.coords;
     console.log(user_position);
     renderMap();
+    console.log(localStorage.map_id);
   };
 
   function error(err) {
     console.warn('ERROR(' + err.code + '): ' + err.message);
   };
+
 
   navigator.geolocation.getCurrentPosition(success, error, options);
   function renderMap() {

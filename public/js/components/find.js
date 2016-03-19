@@ -13,6 +13,8 @@ const Find = React.createClass({
   },
   handleSubmit : function(event) {
     event.preventDefault();
+    // Load google maps script
+    loadJS("https://maps.googleapis.com/maps/api/js?key=AIzaSyDZwpThrbZbJVY1yt-oTlYePJ_s5I-GZIU&libraries=places&callback=initEventMap");
 
     // reset state for each new search result
     this.state.events = {};
