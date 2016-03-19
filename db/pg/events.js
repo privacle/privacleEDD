@@ -24,8 +24,27 @@ function allEvents(req, res, next) {
 }
 
 function newEvents(req, res, next) {
-  db.one(`insert into events (name, owner)
-  values ($/name/, $/owner/)
+  req.body.user_id = req.user.user_id;
+  db.one(`insert into events
+    (name,
+      owner,
+      lat,
+      lng,
+      event_date,
+      event_time,
+      description,
+      location,
+      img_url)
+  values
+  ($/name/,
+    $/user_id/,
+    $/lat/,
+    $/lng/,
+    $/event_date/,
+    $/event_time/,
+    $/description/,
+    $/location/,
+    $/img_url/)
   returning event_id`,req.body)
     .then(function(data) {
       res.event_id = data;
@@ -37,8 +56,8 @@ function newEvents(req, res, next) {
 }
 
 function myEvents(req, res, next) {
-  db.any(`select * from events where owner like $1`,
-    [req.params.user_id])
+  db.any(`select * from events where owner = $1`,
+    [req.user.user_id])
   .then(function(data) {
     res.events = data;
     next();
@@ -48,7 +67,7 @@ function myEvents(req, res, next) {
   })
 }
 
-function oneEvent(req, res, next) {
+function oneEventById(req, res, next) {
   req.params.event_id = parseInt(req.params.event_id);
   db.one(`select * from events where event_id = $/event_id/`,
     req.params)
@@ -57,11 +76,38 @@ function oneEvent(req, res, next) {
       next();
     })
     .catch(function(err) {
-      console.error('error with insert into events',err);
+      console.error('error with oneEventById',err);
+    })
+}
+
+function oneEventByName(req, res, next) {
+  req.params.event_name = '%' + req.params.event_name + '%'; 
+  db.any(`select * from events where name like $/event_name/`,
+    req.params)
+    .then(function(data) {
+      res.event = data;
+      next();
+    })
+    .catch(function(err) {
+      console.error('error with oneEventByName',err);
+    })
+}
+
+function oneEventByOwner(req, res, next) {
+  db.one(`select * from events where owner = $/event_owner/`,
+    req.params)
+    .then(function(data) {
+      res.event = data;
+      next();
+    })
+    .catch(function(err) {
+      console.error('error with oneEventByName',err);
     })
 }
 
 module.exports.allEvents = allEvents;
 module.exports.newEvents = newEvents;
 module.exports.myEvents = myEvents;
-module.exports.oneEvent = oneEvent;
+module.exports.oneEventById = oneEventById;
+module.exports.oneEventByName = oneEventByName;
+module.exports.oneEventByOwner = oneEventByOwner;

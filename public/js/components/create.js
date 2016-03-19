@@ -1,58 +1,96 @@
 const React = require('react');
 const auth = require('../auth');
+const GoogleMap = require('./googlemap.js');
+
+
+
 
 const Create = React.createClass({
 
+  handleSubmit : function(event) {
+    event.preventDefault();
+
+    let newEvent = {
+      name: this.refs.name.value,
+      event_date: this.refs.date.value,
+      event_time: this.refs.time.value,
+      description: this.refs.description.value,
+      location: this.refs.location.value,
+      img_url: this.refs.img_url.value,
+      lat: +(localStorage.lat),
+      lng: +(localStorage.lng)
+    }
+
+    $.ajax({
+      url: '/api/events',
+      type: 'post',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      },
+      data: newEvent
+    })
+    .done((data) => {
+      console.log(data);
+    })
+    $('#createEventForm').hide()
+    $('#createEventPage').append('<h1>').text('Success!! Go to Events and checkout your new event!')
+  },
   render : function() {
     return (
-      <div>
+      <div id="createEventPage">
         <h1>Create event</h1>
-        <form className="form-horizontal">
+        <form id="createEventForm" className="card-panel" style={{width: '80%', margin: 'auto'}} onSubmit={this.handleSubmit} >
           <fieldset style={{marginTop: 20}}>
-            <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="name">Event Name</label>
-              <div className="col-md-6">
-                <input id="name" ref="name" type="text" placeholder="Event Name" className="form-control input-md" required />
+            <div>
+              <label htmlFor="name">Event Name</label>
+              <div>
+                <input id="name" ref="name" type="text" placeholder="Event Name" required />
               </div>
             </div>
-            <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="name">Image URL</label>
-              <div className="col-md-6">
-                <input id="img_url" ref="img_url" type="text" placeholder="Image URL" className="form-control input-md" />
+            <div >
+              <label htmlFor="name">Image URL</label>
+              <div>
+                <input id="img_url" ref="img_url" type="text" placeholder="Image URL" />
               </div>
             </div>
-            <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="name">Date</label>
-              <div className="col-md-6">
-                <input id="date" ref="date" type="date" placeholder="Date" className="form-control input-md" />
+            <div >
+              <label htmlFor="name">Date</label>
+              <div >
+                <input id="date" ref="date" type="date" placeholder="Date" />
               </div>
             </div>
-            <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="name">Time</label>
-              <div className="col-md-6">
-                <input id="time" ref="time" type="time" placeholder="Time" className="form-control input-md" />
+            <div>
+              <label htmlFor="name">Time</label>
+              <div>
+                <input id="time" ref="time" type="time" placeholder="Time" />
               </div>
             </div>
-            <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="name">Location</label>
-              <div className="col-md-6">
-                <input id="location" ref="location" type="text" placeholder="Location" className="form-control input-md" />
+            <div>
+              <label htmlFor="name">Location</label>
+              <div>
+                <input id="location" className="controls" ref="location" type="text" placeholder="Location" />
               </div>
             </div>
-            <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="name">Description</label>
-              <div className="col-md-6">
-                <input id="discription" ref="description" type="text" placeholder="Description" className="form-control input-md" />
+            <div>
+              <label htmlFor="name">Description</label>
+              <div>
+                <input id="discription" ref="description" type="text" placeholder="Description" />
               </div>
             </div>
             {/* Button */}
-            <div className="form-group">
-              <div className="col-md-4">
-                <button id="submit" type="submit" className="btn btn-lg" style={{marginTop: 50, backgroundImage: 'linear-gradient(to bottom,#a94442 0,#a94442 100%)', color: 'white'}}>Submit</button>
+            <div>
+              <div>
+                <button id="submit" type="submit" className="btn waves-effect waves-light light-blue darken-4">Submit</button>
               </div>
             </div>
           </fieldset>
         </form>
+
+
+
+        <div style={ { display: 'none' } } >
+          <GoogleMap />
+        </div>
       </div>
     )
   }

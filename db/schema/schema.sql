@@ -1,8 +1,9 @@
-drop table if exists rsvp;
-drop table if exists events;
-drop table if exists circles;
-drop table if exists friends;
-drop table if exists users;
+drop table if exists invitations cascade;
+drop table if exists permissions cascade;
+drop table if exists events cascade;
+drop table if exists circles cascade;
+drop table if exists friends cascade;
+drop table if exists users cascade;
 
 create table users(
   user_id serial primary key,
@@ -13,14 +14,26 @@ create table users(
 create table events(
   event_id serial primary key,
   name text,
-  owner text,
+  owner integer references users,
   lat numeric,
-  lng numeric
+  lng numeric,
+  event_date text,
+  event_time text,
+  description text,
+  location text,
+  img_url text
 );
 
-create table rsvp(
+create table permissions(
+  permission_id serial primary key,
+  event integer references events,
+  tag text
+);
+
+create table invitations(
   user_id integer references users,
   event_id integer references events,
+  accepted boolean not null default false,
   primary key (user_id, event_id)
 );
 

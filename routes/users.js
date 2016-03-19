@@ -14,10 +14,13 @@ users.use(function(error, request, response, next) {
   }
 });
 
-
+function test(req, res, next) {
+  console.log(req.user);
+  next()
+}
 
 users.route('/')
-  .get( db.allUsers, (req,res)=>res.json(res.rows) ) //test
+  .get( test, db.allUsers, (req,res)=>res.json(res.users) ) //test
   // Only admin can get all users from the database
   .post( db.createUser, (req,res)=>res.json(res.rows) )
   // Create a new user
@@ -31,10 +34,17 @@ users.route('/login')
 // users.route('/logout')
 //   .delete( db.logout, (req,res)=>res.json(res.rows) )
 //
-users.route('/:user_id/friends')
+
+users.route('/friends')
   .get( db.myFriends, (req,res)=>res.json(res.rows) ) //test
 
-users.route('/:user_id/friends')
-  .get( db.myCircle, (req,res)=>res.json(res.rows) ) //test
+users.route('/email/:email')
+  .get( db.oneUserByEmail, (req,res)=>res.json(res.user) ) //test
+
+users.route('/id/:user_id')
+  .get( db.oneUserById, (req,res)=>res.json(res.user) ) //test
+
+// users.route('/:user_id/friends')
+//   .get( db.myCircle, (req,res)=>res.json(res.rows) ) //test
 
 module.exports = users;
