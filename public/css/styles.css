@@ -10,10 +10,18 @@ html{
   font-family: 'Josefin Sans', sans-serif;
   min-height: 555px;
 }
+
 #map {
   height: 500px;
   width: 100%;
   border: 1px solid black;
+}
+
+#event-map {
+  height: 500px;
+  width: 100%;
+  border: 1px solid black;
+  overflow: hidden;
 }
 
 @media only screen and (max-height: 590px) {
