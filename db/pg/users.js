@@ -106,18 +106,17 @@ function myFriends(req, res, next) {
   })
 }
 
-function myCircle(req, res, next) {
-  db.any(`select players.email from friends
-       inner join players on friends.user_2 = users.user_id
-       where links.p1 = $/user_id/
-       and `,
-      [req.user.user_id])
+function myCircles(req, res, next) {
+  db.any(`select distinct on (tables.tag) tables.tag from friends
+    left join circles on circles.friendship = friends.friend_id
+    where users.user_id = $/user_id/`,
+      req.user)
   .then(function(data) {
     res.events = data;
     next();
   })
   .catch(function(err){
-    console.error('error with select * from events', err);
+    console.error('error with db/users myCircle', err);
   })
 }
 
@@ -128,4 +127,4 @@ module.exports.allUsers = allUsers;
 module.exports.oneUserByEmail = oneUserByEmail;
 module.exports.oneUserById = oneUserById;
 module.exports.myFriends = myFriends;
-module.exports.myCircle = myCircle;
+module.exports.myCircles = myCircles;
