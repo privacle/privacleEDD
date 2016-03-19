@@ -2,23 +2,30 @@ const React = require('react');
 const auth = require('../auth');
 
 const Find = React.createClass({
-
   getInitialState : function() {
     return {
       events: {},
       users: {}
     }
   },
-
   handleSubmit : function(event) {
     event.preventDefault();
 
+    // reset state for each new search result
+    this.state.events = {};
+    this.state.users = {};
+    this.setState({
+      events: this.state.events,
+      users: this.state.users
+    });
+    // grab values of search input fields
     let eventSearch   = this.refs.event.value;
     let eventSearchId = this.refs.event_id.value;
     let userSearch    = this.refs.user_email.value;
     let userSearchId  = this.refs.user_id.value;
-
+    // check search for event vs. user
     if(eventSearch || eventSearchId) {
+      // check search event by name vs. id
       if(eventSearch) {
         $.ajax({
           url: '/api/events/name/' + eventSearch,
@@ -32,7 +39,6 @@ const Find = React.createClass({
           data.forEach((el) => {
             this.state.events[el.event_id] = el;
             this.setState({ events: this.state.events });
-            console.log('state: ',this.state.events);
           });
         })
       } else {
@@ -51,6 +57,7 @@ const Find = React.createClass({
         })
       }
     } else {
+      // check search user by name vs. id
       if(userSearch) {
         $.ajax({
           url: '/api/users/email/' + userSearch,
@@ -96,13 +103,13 @@ const Find = React.createClass({
     )
   },
   hideSearchform : function(){
-    $('#searchbyEvent').hide()
-    $('#searchbyUser').hide()
+    $('#searchbyEvent').hide();
+    $('#searchbyUser').hide();
   },
 
   showSearchform : function(){
-    $('#searchbyEvent').show()
-    $('#searchbyUser').show()
+    $('#searchbyEvent').show();
+    $('#searchbyUser').show();
   },
   render : function() {
     return (
@@ -168,7 +175,7 @@ const EventResult = React.createClass({
 const UserResult = React.createClass({
 
   addFriend : function(event) {
-
+    console.log('adding friend');
   },
 
   render : function() {
