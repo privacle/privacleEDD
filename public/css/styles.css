@@ -17,13 +17,6 @@ html{
   border: 1px solid black;
 }
 
-/*#event-map {
-  height: 500px;
-  width: 100%;
-  border: 1px solid black;
-  overflow: hidden;
-}
-*/
 @media only screen and (max-height: 590px) {
   html {
     font-size: 12px !important
@@ -43,3 +36,4 @@ a {
 #homepageLogo {
   color: black !important;
 }
+

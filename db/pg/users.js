@@ -93,11 +93,13 @@ function oneUserById(req, res, next) {
 }
 
 function myFriends(req, res, next) {
-  db.any(`select players.email from friends
-       inner join players on friends.user_2 = users.user_id
-       where links.p1 = $/user_id/`,
-      [req.user.user_id])
+  console.log('made it to here');
+  db.any(`select users.email, users.user_id from friends
+       inner join users on friends.user_2 = users.user_id
+       where friends.user_1 = $/user_id/`,
+      req.user)
   .then(function(data) {
+    console.log(data);
     res.events = data;
     next();
   })

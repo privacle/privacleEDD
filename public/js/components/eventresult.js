@@ -13,7 +13,7 @@ const EventResult = React.createClass({
               <img src={this.props.details.img_url} alt className="circle responsive-img activator card-profile-image" />
               </div>
               <div className="card-content">
-                <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
+                <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right" onClick={this.dumpMap}>
                 <i className="mdi-maps-pin-drop" />
                 </a>
                 <h5 className="grey-text text-darken-4"><a href="#" className="grey-text text-darken-4">{this.props.details.name}</a>
@@ -23,13 +23,14 @@ const EventResult = React.createClass({
                 <p><i className="cyan-text text-darken-2" /> Location: {this.props.details.location}</p>
                 <p><i className="cyan-text text-darken-2" /> Description: {this.props.details.description}</p>
                 <p><i className="cyan-text text-darken-2" /> Created by User: {this.props.details.owner}</p>
+                <input type="hidden" id={'coords' + this.props.details.event_id} value={this.props.details.lat + ':' + this.props.details.lng} />
+                <EventMap map_id = {this.props.index}/>
                 <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Add</button>
               </div>
               <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>
 
-
-                <EventMap map_id = {this.props.index}/>
+                
 
               </div>
             </div>
@@ -42,15 +43,17 @@ const EventResult = React.createClass({
 
 
 let mapStyles = {
-  height: '500px',
+  height: '200px',
   width: '100%',
-  border: '1px solid black'
+  border: '1px solid black',
+  overflow: 'auto',
+  display: 'block'
 }
 
 const EventMap = React.createClass({
   componentDidMount : function() {
     // localStorage.map_id = this.props.map_id;
-    
+    loadJS("https://maps.googleapis.com/maps/api/js?key=AIzaSyDZwpThrbZbJVY1yt-oTlYePJ_s5I-GZIU&libraries=places&callback=initEventMap");
   },
   render : function() {
     return (

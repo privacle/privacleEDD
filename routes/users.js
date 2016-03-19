@@ -36,7 +36,7 @@ users.route('/login')
 //
 
 users.route('/friends')
-  .get( db.myFriends, (req,res)=>res.json(res.rows) ) //test
+  .get( db.myFriends, (req,res)=>res.json(res.events) ) //test
 
 users.route('/email/:email')
   .get( db.oneUserByEmail, (req,res)=>res.json(res.user) ) //test
