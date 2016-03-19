@@ -8,7 +8,10 @@ drop table if exists users cascade;
 create table users(
   user_id serial primary key,
   password_hash text,
-  email text unique
+  email text unique,
+  user_name text,
+  bio text,
+  photo text
 );
 
 create table events(
@@ -34,6 +37,7 @@ create table invitations(
   user_id integer references users,
   event_id integer references events,
   accepted boolean not null default false,
+  saved boolean not null default false,
   primary key (user_id, event_id)
 );
 

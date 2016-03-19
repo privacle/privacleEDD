@@ -10,6 +10,7 @@ html{
   font-family: 'Josefin Sans', sans-serif;
   min-height: 555px;
 }
+
 #map {
   height: 500px;
   width: 100%;
@@ -35,3 +36,4 @@ a {
 #homepageLogo {
   color: black !important;
 }
+

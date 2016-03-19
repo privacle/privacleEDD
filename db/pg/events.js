@@ -81,7 +81,7 @@ function oneEventById(req, res, next) {
 }
 
 function oneEventByName(req, res, next) {
-  req.params.event_name = '%' + req.params.event_name + '%'; 
+  req.params.event_name = '%' + req.params.event_name + '%';
   db.any(`select * from events where name like $/event_name/`,
     req.params)
     .then(function(data) {
@@ -103,6 +103,10 @@ function oneEventByOwner(req, res, next) {
     .catch(function(err) {
       console.error('error with oneEventByName',err);
     })
+}
+
+function deleteMyEvent(req, res, next) {
+  db.none(`delete * from `)
 }
 
 module.exports.allEvents = allEvents;
