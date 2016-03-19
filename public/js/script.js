@@ -67,7 +67,7 @@ const App = React.createClass({
                 <li><Link to="/create">Create</Link></li>
                 <li><Link to="/find">Find</Link></li>
                 <li><Link to="/friends">Friends</Link></li>
-                <li><Link to="/events">Events</Link></li>
+                <li><Link to="/events">My Events</Link></li>
                 <li><Link to="/profile">Profile</Link></li>
                 <li className="right"><Link to="/logout">Logout</Link></li>
               </ul>
