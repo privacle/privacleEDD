@@ -157,21 +157,44 @@ const App = React.createClass({
 })
 
 
+function deleteScripts() {
+    // functions to clear googlemap scripts
+    console.log('executing deleteScripts');
+  $('script').each((index, value) => {
+    if($(value).hasClass('keep')) {
+    } else {
+      $(value).remove();
+    }
+  });
 
+  $('link').each((index, value) => {
+    if($(value).hasClass('keep')) {
+    } else {
+      $(value).remove();
+    }
+  });
+
+  $('style').each((index, value) => {
+    if($(value).hasClass('keep')) {
+    } else {
+      $(value).remove();
+    }
+  });
+}
 
 
 ReactDOM.render((
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <Route path="login" component={Login} />
-      <Route path="signup" component={Signup} />
-      <Route path="logout" component={Logout} />
-      <Route path="dashboard" component={Dashboard} />
-      <Route path="create" component={Create} />
-      <Route path="find" component={Find} />
-      <Route path="friends" component={Friends} />
-      <Route path="events" component={Events} />
-      <Route path="profile" component={Profile} />
+  <Router history={browserHistory} >
+    <Route path="/" component={App} >
+      <Route path="login" component={Login} onEnter={deleteScripts} />
+      <Route path="signup" component={Signup} onEnter={deleteScripts} />
+      <Route path="logout" component={Logout} onEnter={deleteScripts} />
+      <Route path="dashboard" component={Dashboard} onEnter={deleteScripts} />
+      <Route path="create" component={Create} onEnter={deleteScripts} />
+      <Route path="find" component={Find} onEnter={deleteScripts} />
+      <Route path="friends" component={Friends} onEnter={deleteScripts} />
+      <Route path="events" component={Events} onEnter={deleteScripts} />
+      <Route path="profile" component={Profile} onEnter={deleteScripts} />
     </Route>
     <Route path="*" component={NotFound} />
   </Router>
