@@ -103,7 +103,10 @@ const Find = React.createClass({
   showSearchform : function(){
     $('#searchbyEvent').show()
     $('#searchbyUser').show()
+    $('#eventsResults').hide()
+    $('#usersResults').hide()
   },
+
   render : function() {
     return (
       <div>
@@ -126,7 +129,7 @@ const Find = React.createClass({
           </div>
         </div>
 
-        <div>
+        <div id="eventsResults">
           <ul>
 
             {
@@ -136,7 +139,7 @@ const Find = React.createClass({
           </ul>
         </div>
 
-        <div>
+        <div id="usersResults">
           <ul>
 
             {
@@ -157,14 +160,29 @@ const EventResult = React.createClass({
   render : function() {
     return (
       <li>
-        <div className="row">
-          <div className="col s12 m3" style={{marginLeft: 100, width: '20%'}}>
-            <div className="card" style={{marginLeft: '3rem'}}>
-              <div className="card-content">
-                <h5 className="grey-text text-darken-4" style={{fontSize: '1.4em'}}>Event Name : {this.props.details.name}</h5>
+        <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 350, height: 'auto', overflow: 'hidden'}}>
+          <div className="map-card">
+            <div className="card" style={{height:'560px', width: "250px"}}>
+              <div className="card-image waves-effect waves-block waves-light">
+              <img src={this.props.details.img_url} alt className="circle responsive-img activator card-profile-image" />
               </div>
-              <div className="card-action">
-                <button className="btn right waves-effect waves-light light-blue darken-4" onClick={this.addFriend}>Add friend</button>
+              <div className="card-content">
+                <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
+                <i className="mdi-maps-pin-drop" />
+                </a>
+                <h5 className="grey-text text-darken-4"><a href="#" className="grey-text text-darken-4">{this.props.details.name}</a>
+                </h5>
+                <p><i className="cyan-text text-darken-2" /> Date: {this.props.details.date}</p>
+                <p><i className="cyan-text text-darken-2" /> Time {this.props.details.time}</p>
+                <p><i className="cyan-text text-darken-2" /> Location: {this.props.details.location}</p>
+                <p><i className="cyan-text text-darken-2" /> Description: {this.props.details.description}</p>
+                <p><i className="cyan-text text-darken-2" /> Created by User: {this.props.details.owner}</p>
+                <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Add</button>
+              </div>
+              <div className="card-reveal">
+              <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>
+
+              google map component goes here
               </div>
             </div>
           </div>
@@ -183,18 +201,6 @@ const UserResult = React.createClass({
   render : function() {
     return (
       <li>
-        <div className="row">
-          <div className="col s12 m3" style={{marginLeft: 100, width: '20%'}}>
-            <div className="card" style={{marginLeft: '3rem'}}>
-              <div className="card-content">
-                <h5 className="grey-text text-darken-4" style={{fontSize: '1.4em'}}>User Email: {this.props.details.email}</h5>
-              </div>
-              <div className="card-action">
-                <button className="btn right waves-effect waves-light light-blue darken-4" onClick={this.addFriend}>Add friend</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </li>
     )
   }

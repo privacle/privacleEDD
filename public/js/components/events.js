@@ -68,7 +68,7 @@ const Event = React.createClass({
                 <p><i className="cyan-text text-darken-2" /> Location: {this.props.details.location}</p>
                 <p><i className="cyan-text text-darken-2" /> Description: {this.props.details.description}</p>
                 <p><i className="cyan-text text-darken-2" /> Created by User: {this.props.details.owner}</p>
-                <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Add</button>
+                <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Delete</button>
               </div>
               <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>
