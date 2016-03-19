@@ -11,6 +11,9 @@ const Find = React.createClass({
       users: {}
     }
   },
+  eventWillMount : function() {
+    localStorage.onlyRunOnce = 'notRun';
+  },
   handleSubmit : function(event) {
     event.preventDefault();
 
@@ -111,6 +114,7 @@ const Find = React.createClass({
   },
 
   showSearchform : function(){
+    localStorage.onlyRunOnce = 'notRun';
     $('#searchbyEvent').show()
     $('#searchbyUser').show()
     // $('#eventsResults').empty()
