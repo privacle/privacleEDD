@@ -34,6 +34,7 @@ create table invitations(
   user_id integer references users,
   event_id integer references events,
   accepted boolean not null default false,
+  saved boolean not null default false,
   primary key (user_id, event_id)
 );
 
