@@ -8,7 +8,10 @@ drop table if exists users cascade;
 create table users(
   user_id serial primary key,
   password_hash text,
-  email text unique
+  email text unique,
+  user_name text,
+  bio text,
+  photo text
 );
 
 create table events(
