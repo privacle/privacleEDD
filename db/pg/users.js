@@ -107,7 +107,7 @@ function myFriends(req, res, next) {
 }
 
 function myCircles(req, res, next) {
-  db.any(`select distinct on (tables.tag) tables.tag from friends
+  db.any(`select distinct on (circles.tag) circles.tag from friends
     left join circles on circles.friendship = friends.friend_id
     where users.user_id = $/user_id/`,
       req.user)
@@ -120,6 +120,20 @@ function myCircles(req, res, next) {
   })
 }
 
+function aCircle(req, res, next) {
+  db.any(`select user_2 from circles
+    left join circles on circles.friendship = friends.friend_id
+    where users.user_id = $1
+    and circles.tag like $2`,
+      [req.user.user_id, req.body.circle])
+  .then(function(data) {
+    res.circle = data;
+    next();
+  })
+  .catch(function(err){
+    console.error('error with db/users aCircle', err);
+  })
+}
 
 module.exports.login = login;
 module.exports.createUser = createUser;
@@ -128,3 +142,4 @@ module.exports.oneUserByEmail = oneUserByEmail;
 module.exports.oneUserById = oneUserById;
 module.exports.myFriends = myFriends;
 module.exports.myCircles = myCircles;
+module.exports.aCircle = aCircle;
