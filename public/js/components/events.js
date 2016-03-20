@@ -8,6 +8,23 @@ const Events = React.createClass({
       events: {}
     }
   },
+  deleteEvent : function(key) {
+    let that = this;
+
+    $.ajax({
+      url: '/api/events/id/' + key,
+      type: 'DELETE',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      },
+      data: {event_id: key}
+    })
+    .done(() => {
+      console.log('deleted event');
+      delete this.state.events[key];
+      that.setState({ events: that.state.events });
+    })
+  },
   componentWillMount : function() {
     console.log('hered');
     $.ajax({
@@ -23,18 +40,16 @@ const Events = React.createClass({
         this.setState({ events: this.state.events });
       })
     });
-
-
   },
   renderEvent : function(key) {
     return (
-      <Event key={key} index={key} details={this.state.events[key]} />
+      <Event key={key} index={key} details={this.state.events[key]} deleteEvent={this.deleteEvent} />
     )
   },
 
   render : function() {
     return (
-      <div>
+      <div id="myEventPage">
         <h1>My Events</h1>
         <div className="col s12 m6 l4 row">
           <ul>
@@ -49,6 +64,12 @@ const Events = React.createClass({
 });
 
 const Event = React.createClass({
+
+  handleClick : function(event) {
+    console.log('clicked delete btn');
+
+    this.props.deleteEvent(this.props.index);
+  },
   render : function() {
     return (
       <li>
@@ -69,7 +90,7 @@ const Event = React.createClass({
                 <p><i className="cyan-text text-darken-2" /> Location: {this.props.details.location}</p>
                 <p><i className="cyan-text text-darken-2" /> Description: {this.props.details.description}</p>
                 <p><i className="cyan-text text-darken-2" /> Created by User: {this.props.details.owner}</p>
-                <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Delete</button>
+                <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}} onClick={this.handleClick} >Delete</button>
               </div>
               <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>

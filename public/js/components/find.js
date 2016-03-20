@@ -81,6 +81,7 @@ const Find = React.createClass({
           this.setState({ users: this.state.users });
         })
       } else {
+        if(!userSearchId) return;
         $.ajax({
           url: '/api/users/id/' + userSearchId,
           type: 'GET',
