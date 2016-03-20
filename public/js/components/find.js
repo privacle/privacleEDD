@@ -11,11 +11,13 @@ const Find = React.createClass({
       users: {}
     }
   },
-  eventWillMount : function() {
+  componentWillMount : function() {
     localStorage.onlyRunOnce = 'notRun';
   },
   handleSubmit : function(event) {
     event.preventDefault();
+    // Load google maps script
+    // loadJS("https://maps.googleapis.com/maps/api/js?key=AIzaSyDZwpThrbZbJVY1yt-oTlYePJ_s5I-GZIU&libraries=places&callback=initEventMap");
 
     // reset state for each new search result
     this.state.events = {};
@@ -79,6 +81,7 @@ const Find = React.createClass({
           this.setState({ users: this.state.users });
         })
       } else {
+        if(!userSearchId) return;
         $.ajax({
           url: '/api/users/id/' + userSearchId,
           type: 'GET',
@@ -128,7 +131,9 @@ const Find = React.createClass({
       users: this.state.users
     });
   },
-
+  componentDidMount : function() {
+    // loadJS("https://maps.googleapis.com/maps/api/js?key=AIzaSyDZwpThrbZbJVY1yt-oTlYePJ_s5I-GZIU&libraries=places&callback=initEventMap");
+  },
   render : function() {
     return (
       <div>

@@ -1,9 +1,22 @@
 const React = require('react');
+const auth = require('../auth');
 
 const UserResult = React.createClass({
 
   addFriend : function(event) {
     console.log('adding friend');
+
+    $.ajax({
+      url: '/api/friends',
+      type: 'POST',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      },
+      data: {friend_id: this.props.details.user_id}
+    })
+    .done(() => {
+      console.log('friend added');
+    })
   },
 
   render : function() {

@@ -1,8 +1,8 @@
-function onlyRunOnce() {
+function onlyRunOnce(value) {
   var map;
   var destin = [];
   var user_position;
-  function initEventMap() {
+  
     var options = {
       enableHighAccuracy: true,
       timeout: 5000,
@@ -11,8 +11,9 @@ function onlyRunOnce() {
 
     function success(pos) {
       user_position = pos.coords;
-      console.log(user_position);
+      console.log('inside the success callback');
       renderMap();
+      
     };
 
     function error(err) {
@@ -20,10 +21,15 @@ function onlyRunOnce() {
     };
 
     navigator.geolocation.getCurrentPosition(success, error, options);
+
+    var coordinate;
     function renderMap() {
-      map = new google.maps.Map(document.getElementById('map' + localStorage.map_id), {
-        center: {lat: 0, lng: 50},
-        zoom: 3,
+      var mapIndex = value.substring(3,value.length);
+      mapIndex = '#coords' + mapIndex;
+      coordinate = $(mapIndex).val().split(':');
+      map = new google.maps.Map(document.getElementById(value), {
+        center: {lat: +(coordinate[0]), lng: +(coordinate[1])},
+        zoom: 13,
         disableDefaultUI: true,
         zoomControl: false,
         scrollwheel: false,
@@ -31,7 +37,10 @@ function onlyRunOnce() {
         disableDoubleClickZoom: true
       });
 
-      //setMarkers(map);
+
+      
+
+      setMarkers(map);
 
       var input = (document.getElementById('location'));
       var autocomplete = new google.maps.places.Autocomplete(input);
@@ -41,7 +50,7 @@ function onlyRunOnce() {
         localStorage.lng = place.geometry.location.lng();
       });
     }
-  }
+  
 
   function setMarkers(map) {
 
@@ -60,7 +69,7 @@ function onlyRunOnce() {
     for (var i = 0; i < destin.length; i++) {
       //var loc = destin[i];
       var marker = new google.maps.Marker({
-        position: {lat: user_position.latitude, lng: user_position.longitude},
+        position: {lat: +(coordinate[0]), lng: +(coordinate[1])},
         map: map,
         shape: shape,
         animation: google.maps.Animation.DROP,
@@ -92,7 +101,20 @@ function onlyRunOnce() {
   }
 }
 
-if (!(localStorage.onlyRunOnce === 'ran') {
-  onlyRunOnce();
-  localStorage.onlyRunOnce = 'ran';
+
+function initEventMap() {
+  console.log('initEventMap executed');
+
+  $('.allTheMaps').each((index, value) => {
+    // console.log(index, value);
+    if(!$(value).hasClass('rendered')) {
+      console.log('rendered: ', value);
+      $(value).addClass('rendered')
+      onlyRunOnce($(value).attr('id'));
+    }
+  });
+
+  if (!(localStorage.onlyRunOnce === 'ran')) {
+    localStorage.onlyRunOnce = 'ran';
+  }  
 }

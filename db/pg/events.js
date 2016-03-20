@@ -106,17 +106,16 @@ function oneEventByOwner(req, res, next) {
 }
 
 function deleteMyEvent(req, res, next) {
-
-  db.none(`delete * from events where event_id = $/event_id/`,
+  console.log(req.body);
+  db.none(`delete from events where event_id = $/event_id/`,
     req.body)
     .then(function() {
       console.log('Deleted one event');
       next();
     })
-}
-
-function saveEvent(req, res, next) {
-  db.none(`update events set saved = true where`)
+    .catch(function(err) {
+      console.error('error with deleting', err);
+    })
 }
 
 function mySavedEvents(req, res, next) {
@@ -130,10 +129,15 @@ function mySavedEvents(req, res, next) {
   })
 }
 
+function saveEvent(req, res, next) {
+  db.none(`update events set saved = true where`)
+}
+
 module.exports.allEvents = allEvents;
 module.exports.newEvents = newEvents;
 module.exports.myEvents = myEvents;
 module.exports.oneEventById = oneEventById;
 module.exports.oneEventByName = oneEventByName;
 module.exports.oneEventByOwner = oneEventByOwner;
+module.exports.deleteMyEvent = deleteMyEvent;
 module.exports.mySavedEvents = mySavedEvents;
