@@ -8,7 +8,7 @@ const Friends = React.createClass({
     }
   },
   componentWillMount : function() {
-    
+
     $.ajax({
       url: '/api/users/friends',
       type: 'GET',
