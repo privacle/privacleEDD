@@ -24,6 +24,9 @@ users.route('/')
   // Only admin can get all users from the database
   .post( db.createUser, (req,res)=>res.json(res.rows) )
   // Create a new user
+  .put( db.updateUser, (req, res) => {
+    res.json({status: 'updated user'});
+  })
 
 users.route('/login')
   .post( db.login, (req,res)=> {

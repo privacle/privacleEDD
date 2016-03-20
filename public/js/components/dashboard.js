@@ -8,22 +8,32 @@ const Dashboard = React.createClass({
       me: ''
     }
   },
-  // function below outdated : used as req header example
-  seeMe : function() {
+  componentWillMount : function() {
+
     $.ajax({
-      url: '/api/users/me',
+      url: '/api/events',
+      type: 'GET',
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
       }
-    }).done((data) => {
-      this.setState({me: data.agent.email})
     })
+    .done((data) => {
+      let markers = [];
+      data.forEach((el) => {
+        markers.push( [el.lat, el.lng] );
+      });
+      markers = JSON.stringify(markers);
+      localStorage.markers = markers;
+    });
+  },
+  componentDidMount : function() {
+
   },
   render : function() {
     const token = auth.getToken()
     return (
       <div>
-        <h1>Dashboard</h1>
+        <h1>Events Map</h1>
         <GoogleMap />
       </div>
     )

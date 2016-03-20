@@ -2,13 +2,14 @@
 const pgp = require('pg-promise')({
     // Initialization Options
 });
+
 const cn = {
     host: process.env.HOST, // server name or IP address;
     port: 5432,
     database: process.env.DB_NAME,
     user: process.env.DB_USER,
     password: process.env.DB_PASS
-};
+}
 
 const db = pgp(cn);
 
@@ -106,7 +107,31 @@ function oneEventByOwner(req, res, next) {
 }
 
 function deleteMyEvent(req, res, next) {
-  db.none(`delete * from `)
+  console.log(req.body);
+  db.none(`delete from events where event_id = $/event_id/`,
+    req.body)
+    .then(function() {
+      console.log('Deleted one event');
+      next();
+    })
+    .catch(function(err) {
+      console.error('error with deleting', err);
+    })
+}
+
+function mySavedEvents(req, res, next) {
+  db.any(`select * from events where saved`)
+  .then(function(data) {
+    res.events = data;
+    next();
+  })
+  .catch(function(err) {
+    console.error('pg/events mySavedEvents', err);
+  })
+}
+
+function saveEvent(req, res, next) {
+  db.none(`update events set saved = true where`)
 }
 
 module.exports.allEvents = allEvents;
@@ -115,3 +140,5 @@ module.exports.myEvents = myEvents;
 module.exports.oneEventById = oneEventById;
 module.exports.oneEventByName = oneEventByName;
 module.exports.oneEventByOwner = oneEventByOwner;
+module.exports.deleteMyEvent = deleteMyEvent;
+module.exports.mySavedEvents = mySavedEvents;

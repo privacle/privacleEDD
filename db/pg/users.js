@@ -1,12 +1,13 @@
 'use strict';
 const pgp = require('pg-promise')({});
+
 const cn = {
     host: process.env.HOST, // server name or IP address;
     port: 5432,
     database: process.env.DB_NAME,
     user: process.env.DB_USER,
     password: process.env.DB_PASS
-};
+}
 
 const bcrypt = require('bcrypt');
 const salt = bcrypt.genSaltSync(10);
@@ -81,6 +82,7 @@ function oneUserByEmail(req, res, next) {
 
 function oneUserById(req, res, next) {
   var user = +req.params.user_id;
+  console.log('wierd shit: ',user);
   db.one(`select * from users where user_id = $1`,
     [user])
     .then(function(data) {
@@ -109,7 +111,7 @@ function myFriends(req, res, next) {
 }
 
 function myCircles(req, res, next) {
-  db.any(`select distinct on (tables.tag) tables.tag from friends
+  db.any(`select distinct on (circles.tag) circles.tag from friends
     left join circles on circles.friendship = friends.friend_id
     where users.user_id = $/user_id/`,
       req.user)
@@ -122,6 +124,39 @@ function myCircles(req, res, next) {
   })
 }
 
+function aCircle(req, res, next) {
+  db.any(`select user_2 from circles
+    left join circles on circles.friendship = friends.friend_id
+    where users.user_id = $1
+    and circles.tag like $2`,
+      [req.user.user_id, req.body.circle])
+  .then(function(data) {
+    res.circle = data;
+    next();
+  })
+  .catch(function(err){
+    console.error('error with db/users aCircle', err);
+  })
+}
+
+function updateUser(req, res, next) {
+  req.body.user_id = req.user.user_id;
+
+  db.none(`update users set 
+  first_name = $/first_name/, 
+  last_name = $/last_name/,
+  bio = $/bio/,
+  photo = $/profile_pic/
+  where user_id = $/user_id/`,
+  req.body)
+  .then(() => {
+    console.log('updated profile');
+    next();
+  })
+  .catch((err) => {
+    console.log('error updating profile: ', err);
+  })
+}
 
 module.exports.login = login;
 module.exports.createUser = createUser;
@@ -130,3 +165,5 @@ module.exports.oneUserByEmail = oneUserByEmail;
 module.exports.oneUserById = oneUserById;
 module.exports.myFriends = myFriends;
 module.exports.myCircles = myCircles;
+module.exports.aCircle = aCircle;
+module.exports.updateUser = updateUser;

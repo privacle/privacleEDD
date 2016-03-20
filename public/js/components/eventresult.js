@@ -8,9 +8,9 @@ const EventResult = React.createClass({
       <li>
         <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 350, height: 'auto', overflow: 'hidden'}}>
           <div className="map-card">
-            <div className="card" style={{height:'560px', width: "250px"}}>
+            <div className="card" style={{height:'750px', width: "350px"}}>
               <div className="card-image waves-effect waves-block waves-light">
-              <img src={this.props.details.img_url} alt className="circle responsive-img activator card-profile-image" />
+              <img src={this.props.details.img_url} alt className="circle responsive-img activator card-profile-image" style={{width:"750px", height:"350px"}} />
               </div>
               <div className="card-content">
                 <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right" onClick={this.dumpMap}>
@@ -24,13 +24,13 @@ const EventResult = React.createClass({
                 <p><i className="cyan-text text-darken-2" /> Description: {this.props.details.description}</p>
                 <p><i className="cyan-text text-darken-2" /> Created by User: {this.props.details.owner}</p>
                 <input type="hidden" id={'coords' + this.props.details.event_id} value={this.props.details.lat + ':' + this.props.details.lng} />
-                <EventMap map_id = {this.props.index}/>
                 <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Add</button>
+                <EventMap map_id = {this.props.index}/>
               </div>
               <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>
 
-                
+
 
               </div>
             </div>

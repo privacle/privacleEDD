@@ -4,6 +4,9 @@ const auth = require('../auth');
 const UserResult = React.createClass({
 
   addFriend : function(event) {
+    $('#searchbyEvent').show()
+    $('#searchbyUser').show()
+    $('#usersResults').empty()
     console.log('adding friend');
 
     $.ajax({
@@ -17,14 +20,16 @@ const UserResult = React.createClass({
     .done(() => {
       console.log('friend added');
     })
+
+
   },
 
   render : function() {
     return (
       <li>
-        <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 250, height: 'auto', overflow: 'hidden'}}>
+        <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 250, height: '30em', overflow: 'hidden'}}>
           <div className="card-content">
-            <img src="http://barkpost.com/wp-content/uploads/2015/02/wilburs_world.jpg" alt className="circle responsive-img activator card-profile-image" />
+            <img src={this.props.details.photo} alt className="circle responsive-img activator card-profile-image" />
             <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
             <i className="mdi-action-account-circle" />
             </a>

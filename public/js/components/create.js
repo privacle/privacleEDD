@@ -33,14 +33,13 @@ const Create = React.createClass({
       console.log(data);
     })
     $('#createEventForm').hide()
-    $('#createEventPage').append('<h1>').text('Success!! Go to Events and checkout your new event!')
+    $('#createEventPage').append('<div>').addClass('card-panel').attr('style','font-size: 4em;').text('Congruatulations!! You just create an events! Go to My Events and checkout!')
   },
   render : function() {
     return (
       <div id="createEventPage">
         <h1>Create event</h1>
         <form id="createEventForm" className="card-panel" style={{width: '80%', margin: 'auto'}} onSubmit={this.handleSubmit} >
-          <fieldset style={{marginTop: 20}}>
             <div>
               <label htmlFor="name">Event Name</label>
               <div>
@@ -83,7 +82,6 @@ const Create = React.createClass({
                 <button id="submit" type="submit" className="btn waves-effect waves-light light-blue darken-4">Submit</button>
               </div>
             </div>
-          </fieldset>
         </form>
 
 

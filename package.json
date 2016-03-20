@@ -39,6 +39,7 @@
     "pg-promise": "^3.3.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-dropzone": "^3.3.2",
     "react-router": "^2.0.1",
     "watchify": "^3.7.0"
   }

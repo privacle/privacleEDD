@@ -9,7 +9,8 @@ create table users(
   user_id serial primary key,
   password_hash text,
   email text unique,
-  user_name text,
+  first_name text,
+  last_name text,
   bio text,
   photo text
 );
@@ -24,7 +25,8 @@ create table events(
   event_time text,
   description text,
   location text,
-  img_url text
+  img_url text,
+  saved boolean not null default false
 );
 
 create table permissions(
