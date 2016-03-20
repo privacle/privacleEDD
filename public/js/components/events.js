@@ -9,7 +9,22 @@ const Events = React.createClass({
     }
   },
   deleteEvent : function(key) {
+    let that = this;
 
+    $.ajax({
+      url: '/api/events/id/' + key,
+      type: 'DELETE',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      },
+      data: {event_id: key}
+    })
+    .done(() => {
+      console.log('deleted event');
+      delete this.state.events[key];
+      that.setState({ events: that.state.events });
+      console.log('state resetting');
+    })
   },
   componentWillMount : function() {
     console.log('hered');
@@ -26,8 +41,6 @@ const Events = React.createClass({
         this.setState({ events: this.state.events });
       })
     });
-
-
   },
   renderEvent : function(key) {
     return (
@@ -37,7 +50,7 @@ const Events = React.createClass({
 
   render : function() {
     return (
-      <div>
+      <div id="myEventPage">
         <h1>My Events</h1>
         <div className="col s12 m6 l4 row">
           <ul>
@@ -54,8 +67,9 @@ const Events = React.createClass({
 const Event = React.createClass({
 
   handleClick : function(event) {
+    console.log('clicked delete btn');
 
-
+    this.props.deleteEvent(this.props.index);
   },
   render : function() {
     return (

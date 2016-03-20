@@ -19,7 +19,7 @@ events.route('/id/:event_id')
   // RUD a specific event created by current user
   .get( db.oneEventById, (req,res)=>res.json(res.event) )
 //   .put( db.editEvent, (req,res)=>res.json(res.rows) )
-  // .delete( db.deleteEvent, (req,res)=>res.json(res.rows) )
+  .delete( db.deleteMyEvent, (req,res)=>res.json(req.method) )
 //
 events.route('/name/:event_name')
   .get( db.oneEventByName, (req,res)=>res.json(res.event) )
