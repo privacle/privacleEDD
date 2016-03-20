@@ -23,8 +23,28 @@ function allMyInvitations(req, res, next) {
   })
 }
 
-function sendInvitation(req, res, next) {
-  db.none(`insert into invitations where`)
+function sendInvitation() {
+  db.none(`insert into invitations
+    (user_id, event_id)
+    values ($/user_id/, $/event_id/)`,
+  req.body)
+  .then(function() {
+
+  })
+  .catch(function(err) {
+    console.error('db/invitations sendInvitation', err);
+  })
+}
+
+function sendAllInvitations(req, res, next) {
+  if (res.circle.length > 0) {
+    var obj = res.circle.pop;
+    var invatee = {};
+    for (var el in obj) {
+      
+    }
+    sendInvitation()
+  }
 }
 
 module.exports.allMyInvitations = allMyInvitations;
