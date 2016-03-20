@@ -106,7 +106,28 @@ function oneEventByOwner(req, res, next) {
 }
 
 function deleteMyEvent(req, res, next) {
-  db.none(`delete * from `)
+
+  db.none(`delete * from events where event_id = $/event_id/`,
+    req.body)
+    .then(function() {
+      console.log('Deleted one event');
+      next();
+    })
+}
+
+function saveEvent(req, res, next) {
+  db.none(`update events set saved = true where`)
+}
+
+function mySavedEvents(req, res, next) {
+  db.any(`select * from events where saved`)
+  .then(function(data) {
+    res.events = data;
+    next();
+  })
+  .catch(function(err) {
+    console.error('pg/events mySavedEvents', err);
+  })
 }
 
 module.exports.allEvents = allEvents;
@@ -115,3 +136,4 @@ module.exports.myEvents = myEvents;
 module.exports.oneEventById = oneEventById;
 module.exports.oneEventByName = oneEventByName;
 module.exports.oneEventByOwner = oneEventByOwner;
+module.exports.mySavedEvents = mySavedEvents;
