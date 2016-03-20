@@ -15,6 +15,7 @@ const Friends = require('./components/friends.js');
 const Events = require('./components/events.js');
 const Profile = require('./components/profile.js');
 const NotFound = require('./components/404.js');
+const Circles = require('./components/circles.js');
 
 const browserHistory = require('react-router').browserHistory;
 const Router = require('react-router').Router;
@@ -69,6 +70,7 @@ const App = React.createClass({
                 <li><Link to="/friends">Friends</Link></li>
                 <li><Link to="/events">My Events</Link></li>
                 <li><Link to="/profile">Profile</Link></li>
+                <li><Link to="/circles">Circles</Link></li>
                 <li><Link to="/logout">Logout</Link></li>
               </ul>
             </nav>
@@ -195,6 +197,7 @@ ReactDOM.render((
       <Route path="friends" component={Friends} onEnter={deleteScripts} />
       <Route path="events" component={Events} onEnter={deleteScripts} />
       <Route path="profile" component={Profile} onEnter={deleteScripts} />
+      <Route path="circles" component={Circles} onEnter={deleteScripts} />
     </Route>
     <Route path="*" component={NotFound} onEnter={deleteScripts} />
   </Router>
