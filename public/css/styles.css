@@ -12,8 +12,9 @@ html{
 }
 
 #map {
+  left: 750px;
   height: 500px;
-  width: 100%;
+  width: 40%;
   border: 1px solid black;
 }
 
@@ -36,4 +37,3 @@ a {
 #homepageLogo {
   color: black !important;
 }
-

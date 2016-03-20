@@ -53,11 +53,18 @@ const Events = React.createClass({
         <h1>My Events</h1>
         <div className="col s12 m6 l4 row">
           <ul>
-            
+
             { Object.keys(this.state.events).map(this.renderEvent) }
-            
+
           </ul>
         </div>
+
+        <h1>My Saved Events</h1>
+        <ul>
+
+          <p>" Object.keys(this.state.events).map(this.renderEvent) "</p>
+
+        </ul>
       </div>
     )
   }

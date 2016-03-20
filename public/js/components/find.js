@@ -156,7 +156,7 @@ const Find = React.createClass({
           </div>
         </div>
 
-        <div id="eventsResults" className="row" style={{paddingLeft:"7em"}}>
+        <div id="eventsResults" className="row" style={{paddingLeft:"10em"}}>
           <ul>
               {
                 Object.keys(this.state.events).map(this.renderEvents)
