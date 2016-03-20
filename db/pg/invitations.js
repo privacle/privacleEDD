@@ -23,6 +23,17 @@ function allMyInvitations(req, res, next) {
   })
 }
 
+function allMyInvitationsWhere(req, res, next) {
+  db.any(`select * from invitations where user_id = $1 and $2`,
+    [req.user.user_id, req.body.field])
+    .then(function(data) {
+      res.invitations = data;
+    })
+    .catch(function(err) {
+      console.error('db/invitations allMyInvitationsWhere', err);
+    })
+}
+
 function sendInvitation(invatee) {
   db.none(`insert into invitations
     (user_id, event_id)
@@ -51,4 +62,5 @@ function sendAllInvitations(req, res, next) {
 }
 
 module.exports.allMyInvitations = allMyInvitations;
+module.exports.allMyInvitationsWhere = allMyInvitationsWhere;
 module.exports.sendAllInvitations = sendAllInvitations;
