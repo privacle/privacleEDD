@@ -47,4 +47,9 @@ users.route('/id/:user_id')
 // users.route('/:user_id/friends')
 //   .get( db.myCircle, (req,res)=>res.json(res.rows) ) //test
 
+users.post('/dp', (req, res) => {
+  console.log(req.body);
+  res.send(req.body);
+})
+
 module.exports = users;

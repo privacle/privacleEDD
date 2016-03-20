@@ -29,6 +29,7 @@ function initMap() {
       disableDoubleClickZoom: true
     });
 
+    setMyLocation(map);
     setMarkers(map);
 
     var input = (document.getElementById('location'));
@@ -41,16 +42,15 @@ function initMap() {
   }
 }
 
+function setMyLocation(map) {
+  var marker = new google.maps.Marker({
+    position: {lat: user_position.latitude, lng: user_position.longitude},
+    map: map,
+    icon: 'https://lh4.googleusercontent.com/Ucqe1j7Ule377j-8wHVHAdnCIg_IlvQR3k87eAH99NNr5LRm7VUHNlS-80XTkweJ4hT6NQ=s190'
+  });
+}
+
 function setMarkers(map) {
-
-  var markers = JSON.parse(localStorage.markers);
-  
-  
-
-  
-
-  
-  // Adds markers to the map.
 
   // Shapes define the clickable region of the icon. The type defines an HTML
   // <area> element 'poly' which traces out a polygon as a series of X,Y points.
@@ -60,13 +60,15 @@ function setMarkers(map) {
     type: 'poly'
   };
 
-
+  // Adds markers to the map.
+  var markers = JSON.parse(localStorage.markers);  
   for (var i = 0; i < markers.length; i++) {
     var loc = markers[i];
     var marker = new google.maps.Marker({
       position: {lat: +(loc[0]), lng: +(loc[1])},
       map: map,
       shape: shape,
+      icon: 'https://lh4.googleusercontent.com/zbMrEjptiY26wg6vvGm5VLP8uAnR4jua_O7HkjF5-zK8K6z3GBtoOuNdxfQkM4OM_NIVNA=s190',
       animation: google.maps.Animation.DROP,
       url: '/'
     });
@@ -74,7 +76,6 @@ function setMarkers(map) {
     // add click event to zoom in on marker
     google.maps.event.addListener(marker, 'click', function() {
       window.location.href = this.url;
-
 
       //map.setCenter(this.getPosition());
       //map.setZoom(10);

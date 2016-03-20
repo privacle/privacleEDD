@@ -37,3 +37,7 @@ a {
   color: black !important;
 }
 
+.dzPreview {
+  width: 150px;
+  height: 150px;
+}
