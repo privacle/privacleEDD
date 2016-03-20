@@ -33,7 +33,7 @@ const Create = React.createClass({
       console.log(data);
     })
     $('#createEventForm').hide()
-    $('#createEventPage').append('<h1>').text('Success!! Go to Events and checkout your new event!')
+    $('#createEventPage').append('<div>').addClass('card-panel').attr('style','font-size: 4em;').text('Success!! Go to Events and checkout your new event!')
   },
   render : function() {
     return (
