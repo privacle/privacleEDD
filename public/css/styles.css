@@ -44,12 +44,13 @@ a {
   height: 150px;
 }
 
-/*#welcome {
+#welcome {
   animation-name: welcome;
   animation-duration: 4s;
+  background: url('../img/background.png')
 }
 
-@keyframes welcome {
+/*@keyframes welcome {
     from {background-color: red;}
     to {background-color: yellow;}
 }*/
