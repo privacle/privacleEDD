@@ -66,14 +66,14 @@ const Friends = React.createClass({
 
 const Friend = React.createClass({
 
-  handleClick : function(event) {
-
-    console.log('clicked on unfriend btn');
-    this.props.deleteFriend(this.props.index)
+  getInitialState : function() {
+    return {
+      droplist: []
+    }
   },
-  render : function() {
 
-    let dropList;
+  componentWillMount : function() {
+    
     $.ajax({
       url: 'api/friends/circles',
       beforeSend: function( xhr ) {
@@ -82,9 +82,22 @@ const Friend = React.createClass({
     })
     .done((data) => {
       data.forEach((el) => {
-        dropList.push(<option>{el.tag}</option>);
-      })  
+        this.state.droplist.push(el.tag);
+        this.setState({ droplist: this.state.droplist });
+      })
     });
+  },
+  renderOptions : function(key) {
+    return (
+      <DropOption key={key} index={key} details={this.state.droplist[key]} />
+    )
+  },
+  handleClick : function(event) {
+
+    console.log('clicked on unfriend btn');
+    this.props.deleteFriend(this.props.index)
+  },
+  render : function() {
 
     return (
       <li>
@@ -99,16 +112,42 @@ const Friend = React.createClass({
 
           <div className="card-reveal" style={{display: 'none', transform: 'translateY(0px)'}}>
             <span className="card-title grey-text text-darken-4">User ID: {this.props.details.user_id}<i className="mdi-navigation-close right" /></span>
-            <select>
+            <span><h5>Add to circle</h5></span>
+            <ul>
               {
-                dropList
+                Object.keys(this.state.droplist).map(this.renderOptions) 
               }
-            </select>
+            </ul>
             <p>Here is some more information about this card.</p>
             <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 200, position:"absolute", display:"block"}} onClick={this.handleClick} >Unfriend</button>
           </div>
         </div>
       </li>
+    )
+  }
+});
+
+
+
+
+const DropOption = React.createClass({
+
+  handleClick : function() {
+
+    $.ajax({
+      url: '',
+      type: 'POST',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      }
+    })
+    .done(() => {
+      
+    })
+  },
+  render : function() {
+    return (
+      <li><div onClick={this.handleClick} >{this.props.details}</div></li>
     )
   }
 });

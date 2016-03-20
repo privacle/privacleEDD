@@ -51,6 +51,21 @@ function deleteFriendFromCircle(req, res, next) {
   db.none(`delete from circles where `)
 }
 
+function myCircles(req, res, next) {
+  db.any(`select distinct on (circles.tag) circles.tag from friends
+    left join circles on circles.friendship = friends.friend_id
+    where friends.user_1 = $/user_id/`,
+      req.user)
+  .then(function(data) {
+    res.circles = data;
+    next();
+  })
+  .catch(function(err){
+    console.error('error with db/friends myCircle', err);
+  })
+}
+
 module.exports.newFriend = newFriend;
 module.exports.deleteFriend = deleteFriend;
 module.exports.addFriendToCircle = addFriendToCircle;
+module.exports.myCircles = myCircles;
