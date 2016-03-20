@@ -72,6 +72,20 @@ const Friend = React.createClass({
     this.props.deleteFriend(this.props.index)
   },
   render : function() {
+
+    let dropList;
+    $.ajax({
+      url: 'api/friends/circles',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      }
+    })
+    .done((data) => {
+      data.forEach((el) => {
+        dropList.push(<option>{el.tag}</option>);
+      })  
+    });
+
     return (
       <li>
         <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 300, height: 480, overflow: 'hidden'}}>
@@ -85,6 +99,11 @@ const Friend = React.createClass({
 
           <div className="card-reveal" style={{display: 'none', transform: 'translateY(0px)'}}>
             <span className="card-title grey-text text-darken-4">User ID: {this.props.details.user_id}<i className="mdi-navigation-close right" /></span>
+            <select>
+              {
+                dropList
+              }
+            </select>
             <p>Here is some more information about this card.</p>
             <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 200, position:"absolute", display:"block"}} onClick={this.handleClick} >Unfriend</button>
           </div>
