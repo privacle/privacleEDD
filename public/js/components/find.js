@@ -157,21 +157,17 @@ const Find = React.createClass({
 
         <div id="eventsResults" className="row" style={{paddingLeft:"7em"}}>
           <ul>
-            <li>
               {
                 Object.keys(this.state.events).map(this.renderEvents)
               }
-            </li>
           </ul>
         </div>
 
         <div id="usersResults" className="row" style={{paddingLeft:"35em"}}>
           <ul>
-            <li>
               {
                 Object.keys(this.state.users).map(this.renderUsers)
               }
-            </li>
           </ul>
         </div>
 
