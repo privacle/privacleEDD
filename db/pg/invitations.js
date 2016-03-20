@@ -12,7 +12,7 @@ const cn = {
 
 const db = pgp(cn);
 
-function allInvitations(req, res, next) {
+function allMyInvitations(req, res, next) {
   db.any(`select * from invitations where user_id = $/user_id`, req.user)
   .then(function(data) {
     res.invitations = data;
@@ -22,3 +22,9 @@ function allInvitations(req, res, next) {
     console.error('error with pg/invitations allInvitations', err);
   })
 }
+
+function sendInvitation(req, res, next) {
+  db.none(`insert into invitations where`)
+}
+
+module.exports.allMyInvitations = allMyInvitations;
