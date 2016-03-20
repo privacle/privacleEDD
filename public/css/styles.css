@@ -37,3 +37,13 @@ a {
 #homepageLogo {
   color: black !important;
 }
+
+#welcome {
+  animation-name: welcome;
+  animation-duration: 4s;
+}
+
+@keyframes welcome {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}

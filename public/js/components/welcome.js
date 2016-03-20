@@ -4,7 +4,7 @@ const auth = require('../auth');
 const Welcome = React.createClass({
   render: function(){
     return (
-      <div>
+      <div id="welcome">
         <h1>Welcome page!</h1>
       </div>
     )
