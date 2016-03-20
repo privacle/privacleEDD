@@ -24,7 +24,8 @@ create table events(
   event_time text,
   description text,
   location text,
-  img_url text
+  img_url text,
+  saved boolean not null default false
 );
 
 create table permissions(
