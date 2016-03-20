@@ -9,7 +9,7 @@ const Dashboard = React.createClass({
     }
   },
   componentWillMount : function() {
-    
+
     $.ajax({
       url: '/api/events',
       type: 'GET',
@@ -20,7 +20,7 @@ const Dashboard = React.createClass({
     .done((data) => {
       let markers = [];
       data.forEach((el) => {
-        markers.push( [el.lat, el.lng] );  
+        markers.push( [el.lat, el.lng] );
       });
       markers = JSON.stringify(markers);
       localStorage.markers = markers;
@@ -33,7 +33,7 @@ const Dashboard = React.createClass({
     const token = auth.getToken()
     return (
       <div>
-        <h1>Dashboard</h1>
+        <h1>Events Map</h1>
         <GoogleMap />
       </div>
     )

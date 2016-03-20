@@ -12,8 +12,9 @@ html{
 }
 
 #map {
+  left: 700px;
   height: 500px;
-  width: 100%;
+  width: 40%;
   border: 1px solid black;
 }
 
@@ -37,7 +38,18 @@ a {
   color: black !important;
 }
 
+
 .dzPreview {
   width: 150px;
   height: 150px;
 }
+
+/*#welcome {
+  animation-name: welcome;
+  animation-duration: 4s;
+}
+
+@keyframes welcome {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}*/

@@ -156,23 +156,19 @@ const Find = React.createClass({
           </div>
         </div>
 
-        <div id="eventsResults">
+        <div id="eventsResults" className="row" style={{paddingLeft:"10em"}}>
           <ul>
-
-            {
-              Object.keys(this.state.events).map(this.renderEvents)
-            }
-
+              {
+                Object.keys(this.state.events).map(this.renderEvents)
+              }
           </ul>
         </div>
 
-        <div id="usersResults">
+        <div id="usersResults" className="row" style={{paddingLeft:"35em"}}>
           <ul>
-
-            {
-              Object.keys(this.state.users).map(this.renderUsers)
-            }
-
+              {
+                Object.keys(this.state.users).map(this.renderUsers)
+              }
           </ul>
         </div>
 
@@ -180,8 +176,6 @@ const Find = React.createClass({
     )
   }
 });
-
-
 
 
 

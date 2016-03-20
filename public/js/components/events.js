@@ -53,11 +53,18 @@ const Events = React.createClass({
         <h1>My Events</h1>
         <div className="col s12 m6 l4 row">
           <ul>
-            
+
             { Object.keys(this.state.events).map(this.renderEvent) }
-            
+
           </ul>
         </div>
+
+        <h1>My Saved Events</h1>
+        <ul>
+
+          <p>" Object.keys(this.state.events).map(this.renderEvent) "</p>
+
+        </ul>
       </div>
     )
   }
@@ -77,7 +84,7 @@ const Event = React.createClass({
           <div className="map-card">
             <div className="card" style={{height:'560px', width: "250px"}}>
               <div className="card-image waves-effect waves-block waves-light">
-              <img src={this.props.details.img_url} alt className="circle responsive-img activator card-profile-image" />
+              <img src={this.props.details.img_url} alt="event image" className="circle responsive-img activator card-profile-image" />
               </div>
               <div className="card-content">
                 <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
