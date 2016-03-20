@@ -86,6 +86,7 @@ function oneUserByEmail(req, res, next) {
 
 function oneUserById(req, res, next) {
   var user = +req.params.user_id;
+  console.log('wierd shit: ',user);
   db.one(`select * from users where user_id = $1`,
     [user])
     .then(function(data) {

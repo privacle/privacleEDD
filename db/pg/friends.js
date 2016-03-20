@@ -27,7 +27,15 @@ function newFriend(req, res, next) {
 }
 
 function deleteFriend(req, res, next) {
-  db.none(`delete from friends`)
+  db.none(`delete from friends where user_1 = $1 and user_2 = $2`,
+    [req.user.user_id, req.body.friend_id])
+    .then(function() {
+      next();
+    })
+    .catch(function(err) {
+      console.error('error with pg/friends deleteFriend', err);
+    })
 }
 
 module.exports.newFriend = newFriend;
+module.exports.deleteFriend = deleteFriend;

@@ -1,5 +1,4 @@
 var map;
-var destin = [];
 var user_position;
 function initMap() {
   var options = {
@@ -22,7 +21,7 @@ function initMap() {
   function renderMap() {
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: user_position.latitude, lng: user_position.longitude},
-      zoom: 15,
+      zoom: 14,
       disableDefaultUI: true,
       zoomControl: false,
       scrollwheel: false,
@@ -44,7 +43,13 @@ function initMap() {
 
 function setMarkers(map) {
 
-  destin.push( [-34, 150] );
+  var markers = JSON.parse(localStorage.markers);
+  
+  
+
+  
+
+  
   // Adds markers to the map.
 
   // Shapes define the clickable region of the icon. The type defines an HTML
@@ -56,10 +61,10 @@ function setMarkers(map) {
   };
 
 
-  for (var i = 0; i < destin.length; i++) {
-    //var loc = destin[i];
+  for (var i = 0; i < markers.length; i++) {
+    var loc = markers[i];
     var marker = new google.maps.Marker({
-      position: {lat: user_position.latitude, lng: user_position.longitude},
+      position: {lat: +(loc[0]), lng: +(loc[1])},
       map: map,
       shape: shape,
       animation: google.maps.Animation.DROP,

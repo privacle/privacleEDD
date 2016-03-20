@@ -7,6 +7,22 @@ const Friends = React.createClass({
       friends: {}
     }
   },
+  deleteFriend : function(key) {
+
+    $.ajax({
+      url: '/api/friends',
+      type: 'DELETE',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      },
+      data: { friend_id: key }
+    })
+    .done(() => {
+      console.log('deleted friend sucessfully');
+      delete this.state.friends[key];
+      this.setState({ friends: this.state.friends });
+    })
+  },
   componentWillMount : function() {
 
     $.ajax({
@@ -29,7 +45,7 @@ const Friends = React.createClass({
   },
   renderFriend : function(key) {
     return (
-      <Friend key={key} index={key} details={this.state.friends[key]} />
+      <Friend key={key} index={key} details={this.state.friends[key]} deleteFriend={this.deleteFriend} />
     )
   },
   render : function() {
@@ -50,6 +66,11 @@ const Friends = React.createClass({
 
 const Friend = React.createClass({
 
+  handleClick : function(event) {
+
+    console.log('clicked on unfriend btn');
+    this.props.deleteFriend(this.props.index)
+  },
   render : function() {
     return (
       <li>
@@ -60,6 +81,7 @@ const Friend = React.createClass({
             <i className="mdi-action-account-circle" />
             </a>
             <span className="card-title activator grey-text text-darken-4">{this.props.details.email}</span>
+            <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}} onClick={this.handleClick} >Unfriend</button>
           </div>
 
           <div className="card-reveal" style={{display: 'none', transform: 'translateY(0px)'}}>

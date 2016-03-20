@@ -185,7 +185,7 @@ function deleteScripts() {
 
 ReactDOM.render((
   <Router history={browserHistory} >
-    <Route path="/" component={App} >
+    <Route path="/" component={App} onEnter={deleteScripts} >
       <Route path="login" component={Login} onEnter={deleteScripts} />
       <Route path="signup" component={Signup} onEnter={deleteScripts} />
       <Route path="logout" component={Logout} onEnter={deleteScripts} />
@@ -196,6 +196,6 @@ ReactDOM.render((
       <Route path="events" component={Events} onEnter={deleteScripts} />
       <Route path="profile" component={Profile} onEnter={deleteScripts} />
     </Route>
-    <Route path="*" component={NotFound} />
+    <Route path="*" component={NotFound} onEnter={deleteScripts} />
   </Router>
 ), document.getElementById('container'))
