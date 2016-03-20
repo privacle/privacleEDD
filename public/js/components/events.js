@@ -8,6 +8,9 @@ const Events = React.createClass({
       events: {}
     }
   },
+  deleteEvent : function(key) {
+
+  },
   componentWillMount : function() {
     console.log('hered');
     $.ajax({
@@ -28,7 +31,7 @@ const Events = React.createClass({
   },
   renderEvent : function(key) {
     return (
-      <Event key={key} index={key} details={this.state.events[key]} />
+      <Event key={key} index={key} details={this.state.events[key]} deleteEvent={this.deleteEvent} />
     )
   },
 
@@ -49,6 +52,11 @@ const Events = React.createClass({
 });
 
 const Event = React.createClass({
+
+  handleClick : function(event) {
+
+
+  },
   render : function() {
     return (
       <li>
@@ -69,7 +77,7 @@ const Event = React.createClass({
                 <p><i className="cyan-text text-darken-2" /> Location: {this.props.details.location}</p>
                 <p><i className="cyan-text text-darken-2" /> Description: {this.props.details.description}</p>
                 <p><i className="cyan-text text-darken-2" /> Created by User: {this.props.details.owner}</p>
-                <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Delete</button>
+                <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}} onClick={this.handleClick} >Delete</button>
               </div>
               <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>

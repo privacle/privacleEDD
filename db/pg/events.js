@@ -106,7 +106,13 @@ function oneEventByOwner(req, res, next) {
 }
 
 function deleteMyEvent(req, res, next) {
-  db.none(`delete * from `)
+  
+  db.none(`delete * from events where event_id = $/event_id/`,
+    req.body)
+    .then(function() {
+      console.log('Deleted one event');
+      next();
+    })
 }
 
 module.exports.allEvents = allEvents;
