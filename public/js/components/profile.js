@@ -27,7 +27,7 @@ const Profile = React.createClass({
 
     $.ajax({
       url: '/api/users',
-      type: 'POST',
+      type: 'PUT',
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
       },

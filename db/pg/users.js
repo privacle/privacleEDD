@@ -139,6 +139,25 @@ function aCircle(req, res, next) {
   })
 }
 
+function updateUser(req, res, next) {
+  req.body.user_id = req.user.user_id;
+
+  db.none(`update users set 
+  first_name = $/first_name/, 
+  last_name = $/last_name/,
+  bio = $/bio/,
+  photo = $/profile_pic/
+  where user_id = $/user_id/`,
+  req.body)
+  .then(() => {
+    console.log('updated profile');
+    next();
+  })
+  .catch((err) => {
+    console.log('error updating profile: ', err);
+  })
+}
+
 module.exports.login = login;
 module.exports.createUser = createUser;
 module.exports.allUsers = allUsers;
@@ -147,3 +166,4 @@ module.exports.oneUserById = oneUserById;
 module.exports.myFriends = myFriends;
 module.exports.myCircles = myCircles;
 module.exports.aCircle = aCircle;
+module.exports.updateUser = updateUser;
