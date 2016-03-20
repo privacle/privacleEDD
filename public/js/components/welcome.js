@@ -5,7 +5,7 @@ const Welcome = React.createClass({
   render: function(){
     return (
       <div id="welcome">
-        <h1>Welcome page!</h1>
+        <img src="../../img/background.png" alt="background-img" />
       </div>
     )
   }

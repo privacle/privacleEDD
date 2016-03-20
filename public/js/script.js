@@ -77,7 +77,6 @@ const App = React.createClass({
           </nav>
           {this.props.children || <Welcome />}
           </div>
-          {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
           <footer style={{position: 'relative', bottom: '0px !important', width: '100%'}} className="page-footer light-blue darken-4">
             <div className="container">
               <div className="row">
