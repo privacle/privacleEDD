@@ -34,5 +34,23 @@ function deleteFriend(req, res, next) {
     })
 }
 
+function addFriendToCircle(req, res, next) {
+  db.none(`insert into circles (friendship, tag)
+  values ((select friend_id from friends where
+      user_1 = $1  and user_2 = $2), $3)`,
+  [req.user.user_id, req.body.friend, req.body.circle])
+  .then(function() {
+    next()
+  })
+  .catch(function(err) {
+    console.error('pg/friends addFriendToCircle', err);
+  })
+}
+
+function deleteFriendFromCircle(req, res, next) {
+  db.none(`delete from circles where `)
+}
+
 module.exports.newFriend = newFriend;
 module.exports.deleteFriend = deleteFriend;
+module.exports.addFriendToCircle = addFriendToCircle;
