@@ -23,7 +23,6 @@ const Events = React.createClass({
       console.log('deleted event');
       delete this.state.events[key];
       that.setState({ events: that.state.events });
-      console.log('state resetting');
     })
   },
   componentWillMount : function() {
