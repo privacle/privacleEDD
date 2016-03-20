@@ -4,6 +4,9 @@ const auth = require('../auth');
 const UserResult = React.createClass({
 
   addFriend : function(event) {
+    $('#searchbyEvent').show()
+    $('#searchbyUser').show()
+    $('#usersResults').empty()
     console.log('adding friend');
 
     $.ajax({
@@ -17,6 +20,8 @@ const UserResult = React.createClass({
     .done(() => {
       console.log('friend added');
     })
+
+
   },
 
   render : function() {
