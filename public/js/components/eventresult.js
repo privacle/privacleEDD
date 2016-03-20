@@ -27,8 +27,8 @@ const EventResult = React.createClass({
                 <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Add</button>
               </div>
               <div className="card-reveal">
-              <EventMap map_id = {this.props.index}/>
               <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>
+              <EventMap map_id = {this.props.index}/>
 
 
 
