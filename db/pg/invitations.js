@@ -47,7 +47,7 @@ function sendInvitation(invatee) {
   })
 }
 
-function sendAllInvitations(req, res, next) {
+function sendAllInvitations(req, res, cb2, next) {
   if (res.circle.length > 0) {
     var obj = res.circle.pop;
     var invatee;
@@ -55,13 +55,13 @@ function sendAllInvitations(req, res, next) {
       invatee = obj[el];
     }
     sendInvitation(invatee);
-    sendAllInvitations(req, res, next);
+    sendAllInvitations(req, res, cb2);
   } else {
-    next();
+    cb2(req, res, next);
   }
 }
 
-function aCircleForInvitations(req, res, next) {
+function aCircleForInvitations(req, res, cb1, cb2, next) {
   console.log(req.user.user_id);
   console.log(req.params.circle_name);
 
@@ -73,10 +73,10 @@ function aCircleForInvitations(req, res, next) {
       [req.user.user_id, req.params.circle_name])
   .then(function(data) {
     res.circle = data;
-    next(req, res, next);
+    cb(req, res, cb2, next);
   })
   .catch(function(err){
-    console.error('error with db/users aCircle', err);
+    console.error('error with db/users aCircleForInvitations', err);
   })
 }
 
