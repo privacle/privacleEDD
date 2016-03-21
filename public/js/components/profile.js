@@ -17,7 +17,6 @@ const Profile = React.createClass({
     let ln  = this.refs.lastName.value;
     let bio = this.refs.bio.value;
     let dp  = this.state.files[0].preview;
-    // let file = this.state.files[0];
 
     let profile = {
       first_name : fn,
@@ -39,18 +38,19 @@ const Profile = React.createClass({
     });
 
   },
-  // onDrop: function(files){
-  //   var req = request.post('/upload');
-  //   files.forEach((file)=> {
-  //       req.attach(file.name, file);
-  //   });
-  //   req.end(callback);
-  // },
-  onDrop: function (files) {
+  onDrop: function(files){
     this.setState({
       files: files
     });
-    // hide dropzone on upload
+
+    var req = request.post('/upload');
+    files.forEach((file)=> {
+        req.attach(file.name, file);
+    });
+    req.end(function(err, res){
+      console.log('did it post?');
+    });
+
     $('#dropZone').hide();
   },
   render : function() {
@@ -70,9 +70,10 @@ const Profile = React.createClass({
               <div>Try dropping your image here, or click to select image to upload.</div>
             </Dropzone>
             {this.state.files.length > 0 ? <div>
-                <h5>Profile picture uploaded</h5>
-                <div>{this.state.files.map((file) => <img className="dzPreview" src={file.preview} /> )}</div>
-                </div> : null}
+              <h5>Profile picture uploaded</h5>
+              <div>{this.state.files.map((file) => <img className="dzPreview" src={file.preview} /> )}</div>
+              </div> : null}
+
 
             <button type="submit" className="btn waves-effect waves-light light-blue darken-4">Submit</button>
           </form>
@@ -81,5 +82,7 @@ const Profile = React.createClass({
     )
   }
 });
+
+
 
 module.exports = Profile;
