@@ -1,11 +1,13 @@
 const React = require('react');
 const auth = require('../auth');
+const GoogleMap = require('./googlemap.js');
 
 const Events = React.createClass({
 
   getInitialState : function() {
     return {
-      events: {}
+      events: {},
+      invites: {}
     }
   },
   deleteEvent : function(key) {
@@ -40,13 +42,32 @@ const Events = React.createClass({
         this.setState({ events: this.state.events });
       })
     });
+
+    $.ajax({
+      url: '/api/events/myinvitations',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      }
+    })
+    .done((data) => {
+      console.log('invitations data: ',data);
+      data.forEach((el) => {
+        this.state.invites[el.event_id] = el;
+        this.setState({ invites: this.state.invites });
+      })
+    })
+
   },
   renderEvent : function(key) {
     return (
       <Event key={key} index={key} details={this.state.events[key]} deleteEvent={this.deleteEvent} />
     )
   },
-
+  renderInvites : function(key) {
+    return (
+      <Event key={key} index={key} details={this.state.invites[key]} deleteEvent={this.deleteEvent} />
+    )
+  },
   render : function() {
     return (
       <div id="myEventPage">
@@ -59,12 +80,12 @@ const Events = React.createClass({
           </ul>
         </div>
 
-        <h1>My Saved Events</h1>
-        <ul>
-
-          <p>" Object.keys(this.state.events).map(this.renderEvent) "</p>
-
-        </ul>
+        <h1>My invitations</h1>
+          <ul>
+            {
+              Object.keys(this.state.invites).map(this.renderInvites)
+            }
+          </ul>
       </div>
     )
   }
@@ -82,9 +103,9 @@ const Event = React.createClass({
       <li>
         <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 350, height: 'auto', overflow: 'hidden'}}>
           <div className="map-card">
-            <div className="card" style={{height:'560px', width: "250px"}}>
+            <div className="card" style={{height:'600px', width: "300px"}}>
               <div className="card-image waves-effect waves-block waves-light">
-              <img src={this.props.details.img_url} alt="event image" className="circle responsive-img activator card-profile-image" />
+              <img src={"../uploads/" + this.props.details.img_url} alt="event image" className="circle responsive-img activator card-profile-image" style={{height: '250px'}} />
               </div>
               <div className="card-content">
                 <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
@@ -101,8 +122,6 @@ const Event = React.createClass({
               </div>
               <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>
-
-              google map component goes here
               </div>
             </div>
           </div>
@@ -111,5 +130,8 @@ const Event = React.createClass({
     )
   }
 });
+
+
+
 
 module.exports = Events;

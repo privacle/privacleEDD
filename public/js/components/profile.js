@@ -1,6 +1,7 @@
 const React = require('react');
 const auth = require('../auth');
 const Dropzone = require('react-dropzone');
+const request = require('superagent');
 
 const Profile = React.createClass({
 
@@ -15,14 +16,11 @@ const Profile = React.createClass({
     let fn  = this.refs.firstName.value;
     let ln  = this.refs.lastName.value;
     let bio = this.refs.bio.value;
-    let dp  = this.state.files[0].preview;
-    // let file = this.state.files[0];
 
     let profile = {
       first_name : fn,
       last_name : ln,
-      bio : bio,
-      profile_pic: dp
+      bio : bio
     }
 
     $.ajax({
@@ -37,36 +35,27 @@ const Profile = React.createClass({
       console.log('profile updated');
     });
 
-
-    // FormData needed to send files over AJAX
-
-    // var formData = new FormData();
-    // formData.append('image', file);
-    // console.log(formData);
-    // $.ajax({
-    //   url: '/api/users/dp',
-    //   type: 'POST',
-    //   beforeSend: function( xhr ) {
-    //     xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
-    //   },
-    //   processData: false,
-    //   contentType: false,
-    //   data: formData
-    // })
-    // .done(() => {
-    //   console.log('picture uploaded sucessfully');
-    // })
+    $('#profilePage').hide();
   },
-  onDrop: function (files) {
+  onDrop: function(files){
     this.setState({
       files: files
     });
-    // hide dropzone on upload
+
+    var req = request.post('/api/users/upload');
+    files.forEach((file)=> {
+        req.set('Authorization', 'Bearer ' + auth.getToken() );
+        req.attach(file.name, file);
+    });
+    req.end(function(err, res){
+      console.log('did it post?');
+    });
+
     $('#dropZone').hide();
   },
   render : function() {
     return (
-      <div>
+      <div id="profilePage">
         <h1>Profile</h1>
         <div className="card-panel" style={{width: '80%', margin: 'auto'}}>
           <form ref="profileForm" onSubmit={this.handleSubmit}>
@@ -77,20 +66,25 @@ const Profile = React.createClass({
             <label htmlFor="bio" className="sr-only">About you</label>
             <input ref="bio"  type="text" id="bio" placeholder="Tell us something about you" />
         
-            <Dropzone onDrop={this.onDrop} id="dropZone">
-              <div>Try dropping your image here, or click to select image to upload.</div>
-            </Dropzone>
+            
+              <Dropzone onDrop={this.onDrop} id="dropZone">
+                <div>Try dropping your image here, or click to select image to upload.</div>
+              </Dropzone>
+            
             {this.state.files.length > 0 ? <div>
-                <h5>Profile picture uploaded</h5>
-                <div>{this.state.files.map((file) => <img className="dzPreview" src={file.preview} /> )}</div>
-                </div> : null}
+              <h5>Profile picture uploaded</h5>
+              <div>{this.state.files.map((file) => <img className="dzPreview" src={file.preview} /> )}</div>
+              </div> : null}
 
-            <button type="submit" className="btn waves-effect waves-light light-blue darken-4">Submit</button>
+
+            <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{margin: '10px'}}>Submit</button>
           </form>
         </div>
       </div>
     )
   }
 });
+
+
 
 module.exports = Profile;

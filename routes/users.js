@@ -7,6 +7,14 @@ const db         = require('./../db/pg/users');
 const secret      = "sweet sweet secret";
 const expressJWT  = require('express-jwt');
 const jwt         = require('jsonwebtoken');
+const multer  = require('multer');
+const upload = multer({ dest: 'public/uploads/' });
+
+
+// profile picture upload handler
+users.post('/upload', upload.any(), db.insertPhoto, (req, res) => {
+  res.send(req.files);
+});
 
 users.use(function(error, request, response, next) {
   if(error.name === 'UnauthorizredError') {
@@ -47,7 +55,7 @@ users.route('/email/:email')
 users.route('/id/:user_id')
   .get( db.oneUserById, (req,res)=>res.json(res.user) ) //test
 
-// users.route('/:user_id/friends')
-//   .get( db.myCircle, (req,res)=>res.json(res.rows) ) //test
+users.route('/circle/:circle_name')
+  .get( db.aCircle, (req,res)=>res.json(res.circle) ) //test
 
 module.exports = users;

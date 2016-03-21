@@ -4,9 +4,10 @@ const auth = require('../auth');
 const UserResult = React.createClass({
 
   addFriend : function(event) {
-    $('#searchbyEvent').show()
-    $('#searchbyUser').show()
+    let email = this.props.details.email;
     $('#usersResults').empty()
+    $('#findBox').hide();
+    $('#findPage').append('<h1>').addClass('card-panel').text('You have added ' + email)
     console.log('adding friend');
 
     $.ajax({
@@ -27,24 +28,25 @@ const UserResult = React.createClass({
   render : function() {
     return (
       <li>
-        <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 250, height: '30em', overflow: 'hidden'}}>
+        <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 250, height: '100%', overflow: 'hidden'}}>
           <div className="card-content">
-            <img src={this.props.details.photo} alt className="circle responsive-img activator card-profile-image" />
+            <img src={"../uploads/" + this.props.details.photo} alt className="circle responsive-img activator card-profile-image" />
             <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
             <i className="mdi-action-account-circle" />
             </a>
-            <span className="card-title activator grey-text text-darken-4">{this.props.details.user_id}</span>
-            <p><i className="mdi-communication-email cyan-text text-darken-2" /> {this.props.details.email}</p>
-            <button onClick={this.addFriend} className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Add</button>
+            <span className="card-title activator grey-text text-darken-4">{this.props.details.first_name} {this.props.details.last_name}</span>
+            <p><i className="cyan-text text-darken-2" />User ID: {this.props.details.user_id}</p>
+            <p><i className="mdi-communication-email cyan-text text-darken-2" />Email: {this.props.details.email}</p>
+            <p><i className="mdi-action-perm-identity cyan-text text-darken-2" />Bio: {this.props.details.bio}</p><br/>
+            <button onClick={this.addFriend} className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, margin: '10px'}}>Add</button>
           </div>
 
           <div className="card-reveal" style={{display: 'none', transform: 'translateY(0px)'}}>
-            <span className="card-title grey-text text-darken-4">Test Fake Info<i className="mdi-navigation-close right" /></span>
-            <p>Here is some more information about this card.</p>
-            <p><i className="mdi-action-perm-identity cyan-text text-darken-2" /> Project Manager</p>
-            <p><i className="mdi-action-perm-phone-msg cyan-text text-darken-2" /> +1 (612) 222 8989</p>
-            <p><i className="mdi-communication-email cyan-text text-darken-2" /> mail@domain.com</p>
-            <p><i className="mdi-social-cake cyan-text text-darken-2" /> 18th June 1990</p>
+            <span className="card-title grey-text text-darken-4">{this.props.details.first_name} {this.props.details.last_name}<i className="mdi-navigation-close right" /></span>
+            <label>Email</label>
+            <p>{this.props.details.email}</p>
+            <label>Bio</label>
+            <p>{this.props.details.bio}</p>
           </div>
         </div>
       </li>

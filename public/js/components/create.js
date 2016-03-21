@@ -1,26 +1,43 @@
 const React = require('react');
 const auth = require('../auth');
 const GoogleMap = require('./googlemap.js');
+const Dropzone = require('react-dropzone');
+const request = require('superagent');
 
 
 
 
 const Create = React.createClass({
 
+  getInitialState : function() {
+    return {
+      circles: [],
+      files: []
+    }
+  },
   handleSubmit : function(event) {
     event.preventDefault();
 
+    // select circles to be added to
+    let arrCircles = [];
+    $('.clicked').each((index,value) => {
+      arrCircles.push($(value).text());
+    })
+
+    arrCircles = JSON.stringify(arrCircles);
+    // event object to DB
     let newEvent = {
       name: this.refs.name.value,
       event_date: this.refs.date.value,
       event_time: this.refs.time.value,
       description: this.refs.description.value,
       location: this.refs.location.value,
-      img_url: this.refs.img_url.value,
       lat: +(localStorage.lat),
-      lng: +(localStorage.lng)
+      lng: +(localStorage.lng),
+      circles: arrCircles
     }
 
+    // posting new event to DB
     $.ajax({
       url: '/api/events',
       type: 'post',
@@ -30,10 +47,49 @@ const Create = React.createClass({
       data: newEvent
     })
     .done((data) => {
-      console.log(data);
+      console.log(data.event_id);
+
+      var req = request.post('/api/events/upload');
+      this.state.files.forEach((file)=> {
+          console.log('look here: ', file);
+          req.set('Authorization', 'Bearer ' + auth.getToken() );
+          req.attach(file.name, file);
+          req.field('event_id', data.event_id);
+      });
+      req.end(function(err, res){
+        console.log('did it post?');
+      });
     })
+
+
+
     $('#createEventForm').hide()
     $('#createEventPage').append('<div>').addClass('card-panel').attr('style','font-size: 4em;').text('Congruatulations!! You just create an events! Go to My Events and checkout!')
+  },
+  componentWillMount : function() {
+
+    $.ajax({
+      url: '/api/friends/circles',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      }
+    })
+    .done((data) => {
+      this.state.circles = data;
+      this.setState({ circles: this.state.circles });
+    })
+  },
+  renderCircleBtns : function(key) {
+    return (
+      <CircleBtn key={key} index={key} details={this.state.circles[key]} />
+    )
+  },
+  onDrop: function(files){
+    this.setState({
+      files: files
+    });
+
+    $('#eventDropZone').hide();
   },
   render : function() {
     return (
@@ -47,10 +103,13 @@ const Create = React.createClass({
               </div>
             </div>
             <div >
-              <label htmlFor="name">Image URL</label>
-              <div>
-                <input id="img_url" ref="img_url" type="text" placeholder="Image URL" />
-              </div>
+            <Dropzone onDrop={this.onDrop} id="eventDropZone">
+              <div>Try dropping your image here, or click to select image to upload.</div>
+            </Dropzone>
+            {this.state.files.length > 0 ? <div>
+              <h5>Picture uploaded</h5>
+              <div>{this.state.files.map((file) => <img className="eventPreview" src={file.preview} /> )}</div>
+              </div> : null}
             </div>
             <div >
               <label htmlFor="name">Date</label>
@@ -76,7 +135,18 @@ const Create = React.createClass({
                 <input id="discription" ref="description" type="text" placeholder="Description" />
               </div>
             </div>
-            {/* Button */}
+
+            <div className="input-field col s12 m6">
+              <div className="select-wrapper">
+                <label>Circles</label>
+                <select className="browser-default">
+                  {
+                    Object.keys(this.state.circles).map(this.renderCircleBtns)
+                  }
+                </select>
+              </div>
+            </div>
+
             <div>
               <div>
                 <button id="submit" type="submit" className="btn waves-effect waves-light light-blue darken-4">Submit</button>
@@ -84,12 +154,25 @@ const Create = React.createClass({
             </div>
         </form>
 
-
-
         <div style={ { display: 'none' } } >
           <GoogleMap />
         </div>
       </div>
+    )
+  }
+});
+
+const CircleBtn = React.createClass({
+
+  handleClick : function(event) {
+    $(event.target).addClass('clicked');
+
+  },
+  render : function() {
+    return (
+      <option>
+          {this.props.details.tag}
+      </option>
     )
   }
 });

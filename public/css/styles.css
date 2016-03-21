@@ -12,7 +12,8 @@ html{
 }
 
 #map {
-  left: 700px;
+  top: -460px;
+  left: 10px;
   height: 500px;
   width: 40%;
   border: 1px solid black;
@@ -44,13 +45,22 @@ a {
   height: 150px;
 }
 
+.eventPreview {
+  height: 200px;
+  margin: 0 auto;
+}
+
 #welcome {
   animation-name: welcome;
   animation-duration: 4s;
-  background: url('../img/background.png')
+  background-repeat: no-repeat;
 }
 
 /*@keyframes welcome {
     from {background-color: red;}
     to {background-color: yellow;}
 }*/
+
+#messages { list-style-type: none; margin: 0; padding: 0; }
+#messages li { padding: 5px 10px; }
+#messages li:nth-child(odd) { background: #eee; }

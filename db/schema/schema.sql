@@ -45,8 +45,8 @@ create table invitations(
 
 create table friends(
   friend_id serial primary key,
-  user_1 integer references users,
-  user_2 integer references users
+  user_1 integer references users on delete cascade,
+  user_2 integer references users on delete cascade
 );
 
 create table circles(

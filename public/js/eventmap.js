@@ -72,6 +72,7 @@ function onlyRunOnce(value) {
         position: {lat: +(coordinate[0]), lng: +(coordinate[1])},
         map: map,
         shape: shape,
+        icon: 'https://lh5.googleusercontent.com/CRykG5JwwAj-EP7gHgk5zY7t6YRX-mFiw5F98JW74VDo_fNyPM-RsIChEWO8qBZZ3NZEqg=s190',
         animation: google.maps.Animation.DROP,
         url: '/'
       });

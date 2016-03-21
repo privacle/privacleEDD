@@ -136,42 +136,44 @@ const Find = React.createClass({
   },
   render : function() {
     return (
-      <div>
-        <h1>Find stuff</h1>
-        <div className="card-panel" style={{width: '80%', margin: 'auto'}}>
-          <div>
-            <form onSubmit={this.handleSubmit} ref="eventSearchForm" id="searchbyEvent">
-              <input type="text" ref="event" placeholder="Search by event name" />
-              <input type="text" ref="event_id" placeholder="Search by event ID" />
-              <button type="submit" onClick={this.hideSearchform} className="btn waves-effect waves-light light-blue darken-4">Search</button>
-            </form>
+      <div id="findPage">
+        <div id="findBox">
+          <h1>Find stuff</h1>
+          <div className="card-panel" style={{width: '80%', margin: 'auto'}}>
+            <div>
+              <form onSubmit={this.handleSubmit} ref="eventSearchForm" id="searchbyEvent">
+                <input type="text" ref="event" placeholder="Search by event name" />
+                <input type="text" ref="event_id" placeholder="Search by event ID" />
+                <button type="submit" onClick={this.hideSearchform} className="btn waves-effect waves-light light-blue darken-4">Search</button>
+              </form>
+            </div>
+            <div>
+              <form onSubmit={this.handleSubmit} ref="userSearchForm" id="searchbyUser">
+                <input type="text" ref="user_email" placeholder="Search by user email" />
+                <input type="text" ref="user_id" placeholder="Search by user ID" />
+                <button type="submit" onClick={this.hideSearchform} className="btn waves-effect waves-light light-blue darken-4">Search</button>
+              </form>
+              <button className="btn right waves-effect waves-light light-blue darken-4" onClick={this.showSearchform} style={{width: 96.6719}}>New Search</button>
+            </div>
           </div>
-          <div>
-            <form onSubmit={this.handleSubmit} ref="userSearchForm" id="searchbyUser">
-              <input type="text" ref="user_email" placeholder="Search by user email" />
-              <input type="text" ref="user_id" placeholder="Search by user ID" />
-              <button type="submit" onClick={this.hideSearchform} className="btn waves-effect waves-light light-blue darken-4">Search</button>
-            </form>
-            <button className="btn right waves-effect waves-light light-blue darken-4" onClick={this.showSearchform} style={{width: 96.6719}}>New Search</button>
+
+          <div id="eventsResults" className="row" style={{paddingLeft:"10em"}}>
+            <ul>
+                {
+                  Object.keys(this.state.events).map(this.renderEvents)
+                }
+            </ul>
           </div>
-        </div>
 
-        <div id="eventsResults" className="row" style={{paddingLeft:"10em"}}>
-          <ul>
-              {
-                Object.keys(this.state.events).map(this.renderEvents)
-              }
-          </ul>
-        </div>
+          <div id="usersResults" className="row" style={{paddingLeft:"35em"}}>
+            <ul>
+                {
+                  Object.keys(this.state.users).map(this.renderUsers)
+                }
+            </ul>
+          </div>
 
-        <div id="usersResults" className="row" style={{paddingLeft:"35em"}}>
-          <ul>
-              {
-                Object.keys(this.state.users).map(this.renderUsers)
-              }
-          </ul>
         </div>
-
       </div>
     )
   }
