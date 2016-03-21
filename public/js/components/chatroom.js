@@ -8,7 +8,7 @@ const Chatroom = React.createClass({
 
   render : function(){
     return(
-      <div className="card-panel" style={{width:"40%"}}>
+      <div className="card-panel" id="chatroom" style={{position: 'relative', width: '45%', left: '51em', top: 50, height: 500}}>
         <ul id="messages" />
         <form id="chatroomForm" onSubmit={this.handleSubmit}>
           <input id="m" autoComplete="off" />

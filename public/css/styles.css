@@ -12,7 +12,8 @@ html{
 }
 
 #map {
-  left: 700px;
+  top: -460px;
+  left: 10px;
   height: 500px;
   width: 40%;
   border: 1px solid black;
