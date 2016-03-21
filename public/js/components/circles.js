@@ -111,7 +111,7 @@ const CircleFriend = React.createClass({
     return (
       <li>
         <div>
-          <h4>{this.state.details.email}</h4>
+          <h4>{this.props.details.email}</h4>
         </div>
       </li>
     )
