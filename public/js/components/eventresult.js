@@ -24,7 +24,6 @@ const EventResult = React.createClass({
                 <p><i className="cyan-text text-darken-2" /> Description: {this.props.details.description}</p>
                 <p><i className="cyan-text text-darken-2" /> Created by User: {this.props.details.owner}</p>
                 <input type="hidden" id={'coords' + this.props.details.event_id} value={this.props.details.lat + ':' + this.props.details.lng} />
-                <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}}>Add</button>
                 <EventMap map_id = {this.props.index}/>
               </div>
               <div className="card-reveal">

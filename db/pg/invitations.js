@@ -13,7 +13,10 @@ const cn = {
 const db = pgp(cn);
 
 function allMyInvitations(req, res, next) {
-  db.any(`select * from invitations where user_id = $/user_id`, req.user)
+  db.any(`select * from invitations
+    inner join events 
+    on events.event_id = invitations.event_id 
+    where user_id = $/user_id/`, req.user)
   .then(function(data) {
     res.invitations = data;
     next();

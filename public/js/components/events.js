@@ -6,7 +6,8 @@ const Events = React.createClass({
 
   getInitialState : function() {
     return {
-      events: {}
+      events: {},
+      invites: {}
     }
   },
   deleteEvent : function(key) {
@@ -41,13 +42,32 @@ const Events = React.createClass({
         this.setState({ events: this.state.events });
       })
     });
+
+    $.ajax({
+      url: '/api/events/myinvitations',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
+      }
+    })
+    .done((data) => {
+      console.log('invitations data: ',data);
+      data.forEach((el) => {
+        this.state.invites[el.event_id] = el;
+        this.setState({ invites: this.state.invites });
+      })
+    })
+
   },
   renderEvent : function(key) {
     return (
       <Event key={key} index={key} details={this.state.events[key]} deleteEvent={this.deleteEvent} />
     )
   },
-
+  renderInvites : function(key) {
+    return (
+      <Event key={key} index={key} details={this.state.invites[key]} deleteEvent={this.deleteEvent} />
+    )
+  },
   render : function() {
     return (
       <div id="myEventPage">
@@ -60,12 +80,12 @@ const Events = React.createClass({
           </ul>
         </div>
 
-        <h1>My Saved Events</h1>
-        <ul>
-
-          <p>" Object.keys(this.state.events).map(this.renderEvent) "</p>
-
-        </ul>
+        <h1>My invitations</h1>
+          <ul>
+            {
+              Object.keys(this.state.invites).map(this.renderInvites)
+            }
+          </ul>
       </div>
     )
   }
