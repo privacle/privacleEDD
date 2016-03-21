@@ -76,10 +76,11 @@ function aCircleForInvitations(req, res, next) {
     next(req, res, next);
   })
   .catch(function(err){
-    console.error('error with db/users aCircle', err);
+    console.error('error with db/invitations aCircleForInvitations', err);
   })
 }
 
 module.exports.allMyInvitations = allMyInvitations;
 module.exports.allMyInvitationsWhere = allMyInvitationsWhere;
 module.exports.sendAllInvitations = sendAllInvitations;
+module.exports.aCircleForInvitations = aCircleForInvitations;

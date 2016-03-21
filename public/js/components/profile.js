@@ -1,6 +1,7 @@
 const React = require('react');
 const auth = require('../auth');
 const Dropzone = require('react-dropzone');
+const request = require('superagent');
 
 const Profile = React.createClass({
 
