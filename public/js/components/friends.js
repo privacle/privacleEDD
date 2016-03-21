@@ -100,7 +100,7 @@ const Friend = React.createClass({
       <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 350, height: 'auto', overflow: 'hidden'}}>
         <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 300, height: 480, overflow: 'hidden'}}>
           <div className="card-content">
-            <img src={"../uploads/" + this.props.details.photo} alt className="circle responsive-img activator card-profile-image" />
+            <img src={"../uploads/" + this.props.details.photo} alt className="circle responsive-img activator card-profile-image" style={{width:"100%", height: "260px"}} />
             <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
             <i className="mdi-action-account-circle" />
             </a>
@@ -116,7 +116,7 @@ const Friend = React.createClass({
             <span><h5>Add to circle</h5></span>
             <ul>
               {
-                Object.keys(this.state.droplist).map(this.renderOptions) 
+                Object.keys(this.state.droplist).map(this.renderOptions)
               }
             </ul>
             <p>Here is some more information about this card.</p>
@@ -131,7 +131,7 @@ const Friend = React.createClass({
 
 
 
-            
+
 
 
 
