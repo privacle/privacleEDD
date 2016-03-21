@@ -87,7 +87,7 @@ const Circle = React.createClass({
                   </div>
                   <div className="card-reveal">
                   <span className="card-title grey-text text-darken-4">{this.props.details.tag}<i className="mdi-navigation-close right" /></span>
-                  <h2>Firends in this circle</h2>
+                  <h4>Friends in this circle</h4>
 
                   <ul>
                     {
@@ -111,7 +111,7 @@ const CircleFriend = React.createClass({
     return (
       <li>
         <div>
-          <h4>{this.props.details.email}</h4>
+          <p>{this.props.details.email}</p>
         </div>
       </li>
     )
