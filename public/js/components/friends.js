@@ -103,7 +103,11 @@ const Friend = React.createClass({
             <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
             <i className="mdi-action-account-circle" />
             </a>
-            <span className="card-title grey-text text-darken-4">User Email: {this.props.details.email}</span>
+            <span className="card-title grey-text text-darken-4">{this.props.details.first_name} {this.props.details.last_name}</span><br/>
+            <label>Email</label>
+            <p>{this.props.details.email}</p>
+            <label>Bio</label>
+            <p>{this.props.details.bio}</p>
           </div>
 
           <div className="card-reveal" style={{display: 'none', transform: 'translateY(0px)'}}>
