@@ -129,7 +129,7 @@ function aCircle(req, res, next) {
     left join circles on circles.friendship = friends.friend_id
     where users.user_id = $1
     and circles.tag like $2`,
-      [req.user.user_id, req.body.circle])
+      [req.user.user_id, req.params.circle_id])
   .then(function(data) {
     res.circle = data;
     next();
@@ -142,8 +142,8 @@ function aCircle(req, res, next) {
 function updateUser(req, res, next) {
   req.body.user_id = req.user.user_id;
 
-  db.none(`update users set 
-  first_name = $/first_name/, 
+  db.none(`update users set
+  first_name = $/first_name/,
   last_name = $/last_name/,
   bio = $/bio/,
   photo = $/profile_pic/
