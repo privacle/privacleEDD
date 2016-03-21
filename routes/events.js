@@ -19,6 +19,10 @@ events.route('/myevents')
   .get( db.myEvents, (req,res)=>res.json(res.events) )
   // Show all events created/added by current user
 
+events.route('/myinvitations')
+  .get( invitations.myinvitations, (req,res)=>res.json(res.invitations) )
+  // Show all invitations sent to current user
+
 events.route('/id/:event_id')
   // RUD a specific event created by current user
   .get( db.oneEventById, (req,res)=>res.json(res.event) )
