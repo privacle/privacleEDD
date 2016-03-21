@@ -113,13 +113,12 @@ const Create = React.createClass({
             <div className="input-field col s12 m6">
               <div className="select-wrapper">
                 <span className="caret">▼</span>
-                <input type="text" className="select-dropdown" readOnly="true" data-activates="circles" defaultValue="Choose a circle" />
                 <label htmlFor="name">Circles</label>
-                <ul id="circles" className="dropdown-content select-dropdown" style={{width: 412, position: 'absolute', top: 0, left: 0, opacity: 1, display: 'none'}}>
+                <select id="circles" style={{width: 412, position: 'absolute', top: 0, left: 0, opacity: 1}}>
                   {
                     Object.keys(this.state.circles).map(this.renderCircleBtns)
                   }
-                </ul>
+                </select>
               </div>
             </div>
 
@@ -146,11 +145,9 @@ const CircleBtn = React.createClass({
   },
   render : function() {
     return (
-      <li value={this.props.details.tag}>
-        <span>
+      <option value={this.props.details.tag}>
           {this.props.details.tag}
-        </span>
-      </li>
+      </option>
     )
   }
 });
