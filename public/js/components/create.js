@@ -18,9 +18,10 @@ const Create = React.createClass({
     // select circles to be added to
     let arrCircles = [];
     $('.clicked').each((index,value) => {
-      arrCircles.push($(value).text())
+      arrCircles.push($(value).text());
     })    
 
+    arrCircles = JSON.stringify(arrCircles);
     // event object to DB
     let newEvent = {
       name: this.refs.name.value,
@@ -31,7 +32,7 @@ const Create = React.createClass({
       img_url: this.refs.img_url.value,
       lat: +(localStorage.lat),
       lng: +(localStorage.lng),
-      circles: arrCircles 
+      circles: arrCircles,
     }
 
     // posting new event to DB

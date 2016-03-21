@@ -10,7 +10,9 @@ const users       = require('./../db/pg/users');
 events.route('/')
   .get( db.allEvents, (req,res)=>res.json(res.events) )
   // All events created by current user and user's friends
-  .post( db.newEvents, testCircles, (req,res)=>res.json(res.event_id) )
+  .post( db.newEvents, testCircles, (req,res)=> {
+    res.json(res.event_id)
+  })
 
 events.route('/myevents')
   .get( db.myEvents, (req,res)=>res.json(res.events) )
@@ -29,6 +31,8 @@ events.route('/owner/:event_owner')
   .get( db.oneEventByOwner, (req,res)=>res.json(res.event) )
 
 function testCircles(req, res, next) {
+  req.body.circles = JSON.parse(req.body.circles);
+  console.log(req.body.circles.length);
   if (req.body.circles.length > 0) {
     req.params.circle_id = req.body.circles.pop();
     users.aCircle(req, res, invitations.sendAllInvitations);
