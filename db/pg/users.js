@@ -129,7 +129,7 @@ function aCircle(req, res, next) {
     left join circles on circles.friendship = friends.friend_id
     where users.user_id = $1
     and circles.tag like $2`,
-      [req.user.user_id, req.params.circle_id])
+      [req.user.user_id, req.params.circle_name])
   .then(function(data) {
     res.circle = data;
     next();
