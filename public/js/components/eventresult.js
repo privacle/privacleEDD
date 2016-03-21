@@ -6,7 +6,7 @@ const EventResult = React.createClass({
   render : function() {
     return (
       <li>
-        <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 350, height: 'auto', overflow: 'hidden'}}>
+        <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 365, height: 'auto', overflow: 'hidden'}}>
           <div className="map-card">
             <div className="card" style={{height:'750px', width: "350px"}}>
               <div className="card-image waves-effect waves-block waves-light">
