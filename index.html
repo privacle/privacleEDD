@@ -33,6 +33,9 @@
     socket.on('chat message', function(msg){
       $('#messages').append($('<li>').text(msg));
     });
+    $(document).ready(function() {
+      $('select').material_select();
+    });
     </script>
 </body>
 </html>

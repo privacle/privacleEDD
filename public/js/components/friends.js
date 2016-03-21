@@ -112,17 +112,18 @@ const Friend = React.createClass({
           </div>
 
           <div className="card-reveal" style={{display: 'none', transform: 'translateY(0px)'}}>
-            <span className="card-title grey-text text-darken-4">User ID: {this.props.details.user_id}<i className="mdi-navigation-close right" /></span>
+            <span className="card-title grey-text text-darken-4">{this.props.details.first_name} {this.props.details.last_name}<i className="mdi-navigation-close right" /></span>
             <span><h5>Add to existing circle or create one</h5></span><br/>
-            <span><h5>should be a drop down list</h5></span>
             <ul>
               {
                 Object.keys(this.state.droplist).map(this.renderOptions)
               }
             </ul>
+            <form>
             <input />
             <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 200, position:"absolute", display:"block"}}>Add to circle</button>
-            <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 200, position:"absolute", display:"block", top:"30em"}} onClick={this.handleClick} >Unfriend</button>
+            </form>
+            <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 200, position:"absolute", display:"block", marginTop:"60px"}} onClick={this.handleClick} >Unfriend</button>
           </div>
         </div>
         </div>
@@ -140,7 +141,7 @@ const Friend = React.createClass({
 const DropOption = React.createClass({
 
   handleClick : function() {
-
+    event.preventDefault();
     let circleObj = {
       friend: this.props.friend_id,
       circle: this.props.details
@@ -160,7 +161,9 @@ const DropOption = React.createClass({
   },
   render : function() {
     return (
-      <li onClick={this.handleClick}>{this.props.details}</li>
+      <div>
+        <li className="btn" onClick={this.handleClick}>{this.props.details}</li><br/>
+      </div>
     )
   }
 });
