@@ -33,9 +33,9 @@ function testCircles(req, res, next) {
   if (req.body.circles.length > 1) {
     req.params.circle_name = req.body.circles.pop();
     console.log(req.params.circle_name);
-    invitations.aCircleForInvitations(req, res, invitations.sendAllInvitations);
+    invitations.aCircleForInvitations(req, res, invitations.sendAllInvitations, testCircles);
     console.log('made it through once');
-    testCircles(req, res, next);
+    //testCircles(req, res, next);
   } else {
     next()
   }

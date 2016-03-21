@@ -38,26 +38,14 @@ const Profile = React.createClass({
       console.log('profile updated');
     });
 
-
-    // FormData needed to send files over AJAX
-
-    // var formData = new FormData();
-    // formData.append('image', file);
-    // console.log(formData);
-    // $.ajax({
-    //   url: '/api/users/dp',
-    //   type: 'POST',
-    //   beforeSend: function( xhr ) {
-    //     xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
-    //   },
-    //   processData: false,
-    //   contentType: false,
-    //   data: formData
-    // })
-    // .done(() => {
-    //   console.log('picture uploaded sucessfully');
-    // })
   },
+  // onDrop: function(files){
+  //   var req = request.post('/upload');
+  //   files.forEach((file)=> {
+  //       req.attach(file.name, file);
+  //   });
+  //   req.end(callback);
+  // },
   onDrop: function (files) {
     this.setState({
       files: files
