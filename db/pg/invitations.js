@@ -35,7 +35,6 @@ function allMyInvitationsWhere(req, res, next) {
 }
 
 function sendInvitation(invatee) {
-  console.log('Invite: ', invatee);
   db.none(`insert into invitations
     (user_id, event_id)
     values ($1, $2)`,
@@ -60,6 +59,25 @@ function sendAllInvitations(req, res, next) {
   } else {
     next();
   }
+}
+
+function aCircleForInvitations(req, res, next) {
+  console.log(req.user.user_id);
+  console.log(req.params.circle_name);
+
+  db.any(`select * from circles
+    left join friends on circles.friendship = friends.friend_id
+    inner join users on users.user_id = friends.user_2
+    where friends.user_1 = $1
+    and circles.tag like $2`,
+      [req.user.user_id, req.params.circle_name])
+  .then(function(data) {
+    res.circle = data;
+    next(req, res, next);
+  })
+  .catch(function(err){
+    console.error('error with db/users aCircle', err);
+  })
 }
 
 module.exports.allMyInvitations = allMyInvitations;

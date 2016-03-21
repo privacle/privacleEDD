@@ -30,10 +30,10 @@ events.route('/owner/:event_owner')
 
 function testCircles(req, res, next) {
   console.log(req.body.circles);
-  if (req.body.circles.length > 0) {
+  if (req.body.circles.length > 1) {
     req.params.circle_name = req.body.circles.pop();
     console.log(req.params.circle_name);
-    users.aCircle(req, res, invitations.sendAllInvitations);
+    invitations.aCircleForInvitations(req, res, invitations.sendAllInvitations);
     console.log('made it through once');
     testCircles(req, res, next);
   } else {
