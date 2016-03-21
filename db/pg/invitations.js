@@ -47,7 +47,7 @@ function sendInvitation(invatee) {
   })
 }
 
-function sendAllInvitations(req, res, cb2, next) {
+function sendAllInvitations(req, res) {
   if (res.circle.length > 0) {
     var obj = res.circle.pop;
     var invatee;
@@ -55,13 +55,13 @@ function sendAllInvitations(req, res, cb2, next) {
       invatee = obj[el];
     }
     sendInvitation(invatee);
-    sendAllInvitations(req, res, cb2);
+    sendAllInvitations(req, res);
   } else {
     cb2(req, res, next);
   }
 }
 
-function aCircleForInvitations(req, res, cb1, cb2, next) {
+function aCircleForInvitations(req, res, cb1) {
   console.log(req.user.user_id);
   console.log(req.params.circle_name);
 
@@ -73,7 +73,7 @@ function aCircleForInvitations(req, res, cb1, cb2, next) {
       [req.user.user_id, req.params.circle_name])
   .then(function(data) {
     res.circle = data;
-    cb1(req, res, cb2, next);
+    cb1(req, res, next);
   })
   .catch(function(err){
     console.error('error with db/invitations aCircleForInvitations', err);
