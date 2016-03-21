@@ -34,11 +34,12 @@ function allMyInvitationsWhere(req, res, next) {
     })
 }
 
-function sendInvitation(invatee) {
+function sendInvitation(invatee, res) {
+  console.log('sendInvitation', invatee, res.event_id);
   db.none(`insert into invitations
     (user_id, event_id)
     values ($1, $2)`,
-  [invatee, req.body.event_id])
+  [invatee, res.event_id.event_id])
   .then(function() {
 
   })
@@ -47,23 +48,21 @@ function sendInvitation(invatee) {
   })
 }
 
-function sendAllInvitations(req, res, cb2, next) {
+function sendAllInvitations(req, res, testCircles, next) {
+  console.log('sendAllInvitations',req.user.user_id, res.circle.length);
   if (res.circle.length > 0) {
-    var obj = res.circle.pop;
-    var invatee;
-    for (var el in obj) {
-      invatee = obj[el];
-    }
-    sendInvitation(invatee);
-    sendAllInvitations(req, res, cb2);
+    var obj = res.circle.pop();
+    var invatee = obj.user_2;
+    console.log(obj,invatee, 'new');
+    sendInvitation(invatee, res);
+    sendAllInvitations(req, res, testCircles, next);
   } else {
-    cb2(req, res, next);
+    testCircles(req, res, next);
   }
 }
 
-function aCircleForInvitations(req, res, cb1, cb2, next) {
-  console.log(req.user.user_id);
-  console.log(req.params.circle_name);
+function aCircleForInvitations(req, res, cb1, testCircles, next) {
+  console.log('aCircleForInvitations',req.user.user_id,req.params.circle_name);
 
   db.any(`select * from circles
     left join friends on circles.friendship = friends.friend_id
@@ -72,8 +71,9 @@ function aCircleForInvitations(req, res, cb1, cb2, next) {
     and circles.tag like $2`,
       [req.user.user_id, req.params.circle_name])
   .then(function(data) {
+    console.log(req.user.user_id);
     res.circle = data;
-    cb1(req, res, cb2, next);
+    cb1(req, res, testCircles, next);
   })
   .catch(function(err){
     console.error('error with db/invitations aCircleForInvitations', err);
