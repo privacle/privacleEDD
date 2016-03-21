@@ -96,7 +96,7 @@ function oneUserById(req, res, next) {
 
 function myFriends(req, res, next) {
   console.log('made it to here');
-  db.any(`select users.email, users.user_id from friends
+  db.any(`select users.email, users.user_id, users.first_name, users.last_name, users.bio, users.photo from friends
        inner join users on friends.user_2 = users.user_id
        where friends.user_1 = $/user_id/`,
       req.user)
@@ -147,19 +147,34 @@ function updateUser(req, res, next) {
   req.body.user_id = req.user.user_id;
 
   db.none(`update users set
-  first_name = $/first_name/,
-  last_name = $/last_name/,
-  bio = $/bio/,
-  photo = $/profile_pic/
-  where user_id = $/user_id/`,
-  req.body)
+    first_name = $/first_name/,
+    last_name = $/last_name/,
+    bio = $/bio/
+    where user_id = $/user_id/`,
+      req.body)
   .then(() => {
     console.log('updated profile');
     next();
   })
   .catch((err) => {
-    console.log('error updating profile: ', err);
+    console.error('error updating profile: ', err);
   })
+}
+
+function insertPhoto(req, res, next) {
+  req.body.user_id = req.user.user_id;
+  req.body.filename = req.files[0].filename;
+
+  db.none(`update users set
+    photo = $/filename/
+    where user_id = $/user_id/`,
+      req.body)
+    .then(() => {
+      console.log('inserted profile picture');
+    })
+    .catch((err) => {
+      console.error('error inserting pic filename: ', err);
+    })
 }
 
 module.exports.login = login;
@@ -171,3 +186,4 @@ module.exports.myFriends = myFriends;
 module.exports.myCircles = myCircles;
 module.exports.aCircle = aCircle;
 module.exports.updateUser = updateUser;
+module.exports.insertPhoto = insertPhoto;

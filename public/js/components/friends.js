@@ -33,11 +33,9 @@ const Friends = React.createClass({
       }
     })
     .done((data) => {
-      console.log('hered');
       data.forEach((el) => {
         this.state.friends[el.user_id] = el;
         this.setState({ friends: this.state.friends });
-        console.log('state: ', this.state.friends);
       })
     });
 
@@ -93,8 +91,6 @@ const Friend = React.createClass({
     )
   },
   handleClick : function(event) {
-
-    console.log('clicked on unfriend btn');
     this.props.deleteFriend(this.props.index)
   },
   render : function() {
@@ -103,7 +99,7 @@ const Friend = React.createClass({
       <li>
         <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 300, height: 480, overflow: 'hidden'}}>
           <div className="card-content">
-            <img src="http://g-ecx.images-amazon.com/images/G/01/img15/pet-products/small-tiles/23695_pets_vertical_store_dogs_small_tile_8._CB312176604_.jpg" alt className="circle responsive-img activator card-profile-image" />
+            <img src={"../uploads/" + this.props.details.photo} alt className="circle responsive-img activator card-profile-image" />
             <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
             <i className="mdi-action-account-circle" />
             </a>

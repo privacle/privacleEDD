@@ -16,13 +16,11 @@ const Profile = React.createClass({
     let fn  = this.refs.firstName.value;
     let ln  = this.refs.lastName.value;
     let bio = this.refs.bio.value;
-    let dp  = this.state.files[0].preview;
 
     let profile = {
       first_name : fn,
       last_name : ln,
-      bio : bio,
-      profile_pic: dp
+      bio : bio
     }
 
     $.ajax({
@@ -37,14 +35,16 @@ const Profile = React.createClass({
       console.log('profile updated');
     });
 
+    $('#profilePage').hide();
   },
   onDrop: function(files){
     this.setState({
       files: files
     });
 
-    var req = request.post('/upload');
+    var req = request.post('/api/users/upload');
     files.forEach((file)=> {
+        req.set('Authorization', 'Bearer ' + auth.getToken() );
         req.attach(file.name, file);
     });
     req.end(function(err, res){
@@ -55,7 +55,7 @@ const Profile = React.createClass({
   },
   render : function() {
     return (
-      <div>
+      <div id="profilePage">
         <h1>Profile</h1>
         <div className="card-panel" style={{width: '80%', margin: 'auto'}}>
           <form ref="profileForm" onSubmit={this.handleSubmit}>

@@ -7,6 +7,14 @@ const db         = require('./../db/pg/users');
 const secret      = "sweet sweet secret";
 const expressJWT  = require('express-jwt');
 const jwt         = require('jsonwebtoken');
+const multer  = require('multer');
+const upload = multer({ dest: 'public/uploads/' })
+
+
+// profile picture upload handler
+users.post('/upload', upload.any(), db.insertPhoto, (req, res) => {
+  res.send(req.files);
+});
 
 users.use(function(error, request, response, next) {
   if(error.name === 'UnauthorizredError') {
