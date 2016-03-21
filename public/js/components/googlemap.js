@@ -1,6 +1,5 @@
 const React = require('react');
 const auth = require('../auth');
-const Chatroom = require('./chatroom.js')
 
 const GoogleMap = React.createClass({
   componentDidMount : function() {
@@ -12,9 +11,6 @@ const GoogleMap = React.createClass({
   render : function() {
     return (
       <div>
-        <div>
-          <Chatroom />
-        </div>
         <div id="map">
         </div>
       </div>

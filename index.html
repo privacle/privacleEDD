@@ -4,20 +4,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script src="/socket.io/socket.io.js"></script>
   <script   src="https://code.jquery.com/jquery-2.2.1.min.js"   integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous" class="keep"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css" class="keep" >
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js" class="keep"></script>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans|Raleway:500|Josefin+Sans' rel='stylesheet' class="keep" type='text/css'>
   <link rel="stylesheet" href="css/styles.css" class="keep">
-  <script>
-    const socket = io();
-    $('#chatroomForm').submit(function(){
-      socket.emit('chat message', $('#m').val());
-      $('#m').val('');
-      return false;
-    });
-  </script>
   <title>Privacle</title>
 </head>
 <body>
@@ -31,5 +22,14 @@
   <script src="js/eventmap.js" class="keep"></script>
   <script src="js/bundle.js" class="keep"></script>
 
+  <script src="/socket.io/socket.io.js" class="keep"></script>
+  <script class="keep">
+    const socket = io();
+    $('#chatroomForm').submit(function(){
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+  </script>
 </body>
 </html>
