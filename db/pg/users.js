@@ -127,6 +127,7 @@ function myCircles(req, res, next) {
 function aCircle(req, res, next) {
   db.any(`select * from circles
     left join friends on circles.friendship = friends.friend_id
+    inner join users on users.user_id = friends.user_2
     where friends.user_1 = $1
     and circles.tag like $2`,
       [req.user.user_id, req.params.circle_name])
