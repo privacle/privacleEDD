@@ -6,7 +6,7 @@ function initMap() {
     timeout: 5000,
     maximumAge: 0
   };
-  
+
   function success(pos) {
     user_position = pos.coords;
     console.log(user_position);
@@ -61,14 +61,14 @@ function setMarkers(map) {
   };
 
   // Adds markers to the map.
-  var markers = JSON.parse(localStorage.markers);  
+  var markers = JSON.parse(localStorage.markers);
   for (var i = 0; i < markers.length; i++) {
     var loc = markers[i];
     var marker = new google.maps.Marker({
       position: {lat: +(loc[0]), lng: +(loc[1])},
       map: map,
       shape: shape,
-      icon: 'https://lh4.googleusercontent.com/zbMrEjptiY26wg6vvGm5VLP8uAnR4jua_O7HkjF5-zK8K6z3GBtoOuNdxfQkM4OM_NIVNA=s190',
+      icon: 'https://lh5.googleusercontent.com/CRykG5JwwAj-EP7gHgk5zY7t6YRX-mFiw5F98JW74VDo_fNyPM-RsIChEWO8qBZZ3NZEqg=s190',
       animation: google.maps.Animation.DROP,
       url: '/'
     });

@@ -100,7 +100,7 @@ const Friend = React.createClass({
       <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 350, height: 'auto', overflow: 'hidden'}}>
         <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 300, height: 480, overflow: 'hidden'}}>
           <div className="card-content">
-            <img src={"../uploads/" + this.props.details.photo} alt className="circle responsive-img activator card-profile-image" />
+            <img src={"../uploads/" + this.props.details.photo} alt className="circle responsive-img activator card-profile-image" style={{width:"100%", height: "260px"}} />
             <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
             <i className="mdi-action-account-circle" />
             </a>
@@ -113,14 +113,16 @@ const Friend = React.createClass({
 
           <div className="card-reveal" style={{display: 'none', transform: 'translateY(0px)'}}>
             <span className="card-title grey-text text-darken-4">User ID: {this.props.details.user_id}<i className="mdi-navigation-close right" /></span>
-            <span><h5>Add to circle</h5></span>
+            <span><h5>Add to existing circle or create one</h5></span><br/>
+            <span><h5>should be a drop down list</h5></span>
             <ul>
               {
-                Object.keys(this.state.droplist).map(this.renderOptions) 
+                Object.keys(this.state.droplist).map(this.renderOptions)
               }
             </ul>
-            <p>Here is some more information about this card.</p>
-            <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 200, position:"absolute", display:"block"}} onClick={this.handleClick} >Unfriend</button>
+            <input />
+            <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 200, position:"absolute", display:"block"}}>Add to circle</button>
+            <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 200, position:"absolute", display:"block", top:"30em"}} onClick={this.handleClick} >Unfriend</button>
           </div>
         </div>
         </div>
@@ -131,7 +133,7 @@ const Friend = React.createClass({
 
 
 
-            
+
 
 
 
@@ -158,7 +160,7 @@ const DropOption = React.createClass({
   },
   render : function() {
     return (
-      <button onClick={this.handleClick} className="btn right waves-effect waves-light light-blue darken-4">{this.props.details}</button>
+      <li onClick={this.handleClick}>{this.props.details}</li>
     )
   }
 });

@@ -1,5 +1,6 @@
 const React = require('react');
 const auth = require('../auth');
+const GoogleMap = require('./googlemap.js');
 
 const Events = React.createClass({
 
@@ -101,8 +102,6 @@ const Event = React.createClass({
               </div>
               <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>
-
-              google map component goes here
               </div>
             </div>
           </div>
@@ -111,5 +110,8 @@ const Event = React.createClass({
     )
   }
 });
+
+
+
 
 module.exports = Events;
