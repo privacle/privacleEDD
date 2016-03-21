@@ -112,9 +112,8 @@ const Create = React.createClass({
 
             <div className="input-field col s12 m6">
               <div className="select-wrapper">
-                <span className="caret">▼</span>
-                <label htmlFor="name">Circles</label>
-                <select id="circles" style={{width: 412, position: 'absolute', top: 0, left: 0, opacity: 1}}>
+                <label>Circles</label>
+                <select className="browser-default">
                   {
                     Object.keys(this.state.circles).map(this.renderCircleBtns)
                   }
@@ -145,7 +144,7 @@ const CircleBtn = React.createClass({
   },
   render : function() {
     return (
-      <option value={this.props.details.tag}>
+      <option>
           {this.props.details.tag}
       </option>
     )
