@@ -10,7 +10,7 @@ const users       = require('./../db/pg/users');
 events.route('/')
   .get( db.allEvents, (req,res)=>res.json(res.events) )
   // All events created by current user and user's friends
-  .post( db.newEvents, testCircles, (req,res)=>res.json(res.event_id) )
+  .post( db.newEvents, parseCircles, (req,res)=>res.json(res.event_id) )
 
 events.route('/myevents')
   .get( db.myEvents, (req,res)=>res.json(res.events) )
@@ -38,6 +38,10 @@ function testCircles(req, res, next) {
   }
 }
 
+function parseCircles(req, res, next) {
+  req.body.circles = JSON.parse(req.body.circles);
+  testCircles(req, res, next);
+}
 
 
 module.exports = events;
