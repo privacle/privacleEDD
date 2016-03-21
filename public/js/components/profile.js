@@ -66,16 +66,18 @@ const Profile = React.createClass({
             <label htmlFor="bio" className="sr-only">About you</label>
             <input ref="bio"  type="text" id="bio" placeholder="Tell us something about you" />
         
-            <Dropzone onDrop={this.onDrop} id="dropZone">
-              <div>Try dropping your image here, or click to select image to upload.</div>
-            </Dropzone>
+            
+              <Dropzone onDrop={this.onDrop} id="dropZone">
+                <div>Try dropping your image here, or click to select image to upload.</div>
+              </Dropzone>
+            
             {this.state.files.length > 0 ? <div>
               <h5>Profile picture uploaded</h5>
               <div>{this.state.files.map((file) => <img className="dzPreview" src={file.preview} /> )}</div>
               </div> : null}
 
 
-            <button type="submit" className="btn waves-effect waves-light light-blue darken-4">Submit</button>
+            <button type="submit" className="btn waves-effect waves-light light-blue darken-4" style={{margin: '10px'}}>Submit</button>
           </form>
         </div>
       </div>

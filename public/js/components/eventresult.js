@@ -8,7 +8,7 @@ const EventResult = React.createClass({
       <li>
         <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 365, height: 'auto', overflow: 'hidden'}}>
           <div className="map-card">
-            <div className="card" style={{height:'750px', width: "350px"}}>
+            <div className="card" style={{height:'800px', width: "350px"}}>
               <div className="card-image waves-effect waves-block waves-light">
               <img src={"../uploads/" + this.props.details.img_url} alt className="circle responsive-img activator card-profile-image" style={{width:"750px", height:"350px"}} />
               </div>
@@ -44,7 +44,6 @@ const EventResult = React.createClass({
 let mapStyles = {
   height: '200px',
   width: '100%',
-  border: '1px solid black',
   overflow: 'auto',
   display: 'block'
 }
