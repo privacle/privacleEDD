@@ -1,5 +1,6 @@
 const React = require('react');
 const auth = require('../auth');
+const GoogleMap = require('./googlemap.js');
 
 const Events = React.createClass({
 
@@ -101,8 +102,7 @@ const Event = React.createClass({
               </div>
               <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">{this.props.details.name}<i className="mdi-navigation-close right" /></span>
-
-              google map component goes here
+              <EventMap map_id = {this.props.index}/>
               </div>
             </div>
           </div>
@@ -111,5 +111,29 @@ const Event = React.createClass({
     )
   }
 });
+
+let mapStyles = {
+  height: '200px',
+  width: '100%',
+  border: '1px solid black',
+  overflow: 'auto',
+  display: 'block'
+}
+
+const EventMap = React.createClass({
+  componentDidMount : function() {
+    // localStorage.map_id = this.props.map_id;
+    loadJS("https://maps.googleapis.com/maps/api/js?key=AIzaSyDZwpThrbZbJVY1yt-oTlYePJ_s5I-GZIU&libraries=places&callback=initEventMap");
+  },
+  render : function() {
+    return (
+      <div>
+        <div className="allTheMaps" id= {'map' + this.props.map_id} style={mapStyles} >
+        </div>
+      </div>
+    )
+  }
+});
+
 
 module.exports = Events;

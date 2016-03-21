@@ -81,19 +81,18 @@ const Circle = React.createClass({
                     <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
                     <i className="mdi-maps-pin-drop" />
                     </a>
-                    <h5 className="grey-text text-darken-4"><a href="#" className="grey-text text-darken-4">{this.props.details.tag}</a>
+                    <h5 className="grey-text text-darken-4"><a href="#" className="grey-text text-darken-4">Circle: {this.props.details.tag}</a>
                     </h5>
-                    <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}} >Delete</button>
-                  </div>
-                  <div className="card-reveal">
-                  <span className="card-title grey-text text-darken-4">{this.props.details.tag}<i className="mdi-navigation-close right" /></span>
-                  <h4>Friends in this circle</h4>
-
-                  <ul>
+                    <h5>Friends in this circle</h5>
+                    <ul>
                     {
                       Object.keys(this.state.friends).map(this.renderFriends)
                     }
-                  </ul>
+                    </ul>
+                  </div>
+                  <div className="card-reveal">
+                  <span className="card-title grey-text text-darken-4">Circle: {this.props.details.tag}<i className="mdi-navigation-close right" /></span>
+                  <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}} >Delete</button>
 
                   </div>
                 </div>
@@ -111,7 +110,7 @@ const CircleFriend = React.createClass({
     return (
       <li>
         <div>
-          <p>{this.props.details.email}</p>
+          <p>{this.props.details.first_name || this.props.details.email}</p>
         </div>
       </li>
     )

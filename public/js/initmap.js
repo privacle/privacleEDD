@@ -6,7 +6,7 @@ function initMap() {
     timeout: 5000,
     maximumAge: 0
   };
-  
+
   function success(pos) {
     user_position = pos.coords;
     console.log(user_position);
@@ -61,7 +61,7 @@ function setMarkers(map) {
   };
 
   // Adds markers to the map.
-  var markers = JSON.parse(localStorage.markers);  
+  var markers = JSON.parse(localStorage.markers);
   for (var i = 0; i < markers.length; i++) {
     var loc = markers[i];
     var marker = new google.maps.Marker({
