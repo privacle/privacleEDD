@@ -45,6 +45,11 @@ a {
   height: 150px;
 }
 
+.eventPreview {
+  height: 200px;
+  margin: 0 auto;
+}
+
 #welcome {
   animation-name: welcome;
   animation-duration: 4s;

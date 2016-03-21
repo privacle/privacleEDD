@@ -1,6 +1,8 @@
 const React = require('react');
 const auth = require('../auth');
 const GoogleMap = require('./googlemap.js');
+const Dropzone = require('react-dropzone');
+const request = require('superagent');
 
 
 
@@ -9,7 +11,8 @@ const Create = React.createClass({
 
   getInitialState : function() {
     return {
-      circles: []
+      circles: [],
+      files: []
     }
   },
   handleSubmit : function(event) {
@@ -29,7 +32,6 @@ const Create = React.createClass({
       event_time: this.refs.time.value,
       description: this.refs.description.value,
       location: this.refs.location.value,
-      img_url: this.refs.img_url.value,
       lat: +(localStorage.lat),
       lng: +(localStorage.lng),
       circles: arrCircles
@@ -45,8 +47,22 @@ const Create = React.createClass({
       data: newEvent
     })
     .done((data) => {
-      console.log(data);
+      console.log(data.event_id);
+
+      var req = request.post('/api/events/upload');
+      this.state.files.forEach((file)=> {
+          console.log('look here: ', file);
+          req.set('Authorization', 'Bearer ' + auth.getToken() );
+          req.attach(file.name, file);
+          req.field('event_id', data.event_id);
+      });
+      req.end(function(err, res){
+        console.log('did it post?');
+      });
     })
+
+
+
     $('#createEventForm').hide()
     $('#createEventPage').append('<div>').addClass('card-panel').attr('style','font-size: 4em;').text('Congruatulations!! You just create an events! Go to My Events and checkout!')
   },
@@ -68,6 +84,13 @@ const Create = React.createClass({
       <CircleBtn key={key} index={key} details={this.state.circles[key]} />
     )
   },
+  onDrop: function(files){
+    this.setState({
+      files: files
+    });
+
+    $('#eventDropZone').hide();
+  },
   render : function() {
     return (
       <div id="createEventPage">
@@ -80,10 +103,13 @@ const Create = React.createClass({
               </div>
             </div>
             <div >
-              <label htmlFor="name">Image URL</label>
-              <div>
-                <input id="img_url" ref="img_url" type="text" placeholder="Image URL" />
-              </div>
+            <Dropzone onDrop={this.onDrop} id="eventDropZone">
+              <div>Try dropping your image here, or click to select image to upload.</div>
+            </Dropzone>
+            {this.state.files.length > 0 ? <div>
+              <h5>Picture uploaded</h5>
+              <div>{this.state.files.map((file) => <img className="eventPreview" src={file.preview} /> )}</div>
+              </div> : null}
             </div>
             <div >
               <label htmlFor="name">Date</label>

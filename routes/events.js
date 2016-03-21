@@ -6,6 +6,15 @@ const bodyParser  = require('body-parser');
 const db          = require('./../db/pg/events');
 const invitations = require('./../db/pg/invitations');
 const users       = require('./../db/pg/users');
+const multer  = require('multer');
+const upload = multer({ dest: 'public/uploads/' });
+
+
+// event picture upload handler
+events.post('/upload', upload.any(), db.insertEventPhoto, (req, res) => {
+  console.log(req.files, req.body);
+  res.send(req.files);
+});
 
 events.route('/')
   .get( db.allEvents, (req,res)=>res.json(res.events) )

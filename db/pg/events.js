@@ -34,8 +34,7 @@ function newEvents(req, res, next) {
       event_date,
       event_time,
       description,
-      location,
-      img_url)
+      location)
   values
   ($/name/,
     $/user_id/,
@@ -44,8 +43,7 @@ function newEvents(req, res, next) {
     $/event_date/,
     $/event_time/,
     $/description/,
-    $/location/,
-    $/img_url/)
+    $/location/)
   returning event_id`,req.body)
     .then(function(data) {
       res.event_id = data;
@@ -134,6 +132,20 @@ function saveEvent(req, res, next) {
   db.none(`update events set saved = true where`)
 }
 
+function insertEventPhoto(req, res, next) {
+  req.body.filename = req.files[0].filename;
+  db.none(`update events set
+    img_url = $/filename/
+    where event_id = $/event_id/`,
+      req.body)
+    .then(() => {
+      console.log('inserted event picture');
+    })
+    .catch((err) => {
+      console.error('error inserting event pic: ', err);
+    })
+}
+
 module.exports.allEvents = allEvents;
 module.exports.newEvents = newEvents;
 module.exports.myEvents = myEvents;
@@ -142,3 +154,4 @@ module.exports.oneEventByName = oneEventByName;
 module.exports.oneEventByOwner = oneEventByOwner;
 module.exports.deleteMyEvent = deleteMyEvent;
 module.exports.mySavedEvents = mySavedEvents;
+module.exports.insertEventPhoto = insertEventPhoto;

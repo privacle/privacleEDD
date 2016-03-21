@@ -84,7 +84,7 @@ const Event = React.createClass({
           <div className="map-card">
             <div className="card" style={{height:'500px', width: "250px"}}>
               <div className="card-image waves-effect waves-block waves-light">
-              <img src={this.props.details.img_url} alt="event image" className="circle responsive-img activator card-profile-image" style={{height: '250px'}} />
+              <img src={"../uploads/" + this.props.details.img_url} alt="event image" className="circle responsive-img activator card-profile-image" style={{height: '250px'}} />
               </div>
               <div className="card-content">
                 <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">

@@ -8,7 +8,7 @@ const secret      = "sweet sweet secret";
 const expressJWT  = require('express-jwt');
 const jwt         = require('jsonwebtoken');
 const multer  = require('multer');
-const upload = multer({ dest: 'public/uploads/' })
+const upload = multer({ dest: 'public/uploads/' });
 
 
 // profile picture upload handler
