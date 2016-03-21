@@ -89,7 +89,7 @@ const Friend = React.createClass({
   },
   renderOptions : function(key) {
     return (
-      <DropOption key={key} index={key} details={this.state.droplist[key]} />
+      <DropOption key={key} index={key} details={this.state.droplist[key]} friend_id={this.props.details.user_id} />
     )
   },
   handleClick : function(event) {
@@ -134,15 +134,21 @@ const DropOption = React.createClass({
 
   handleClick : function() {
 
+    let circleObj = {
+      friend: this.props.friend_id,
+      circle: this.props.details
+    }
+
     $.ajax({
-      url: '',
+      url: '/api/friends/circles',
       type: 'POST',
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() );
-      }
+      },
+      data: circleObj
     })
     .done(() => {
-      
+      console.log('success on circles');
     })
   },
   render : function() {

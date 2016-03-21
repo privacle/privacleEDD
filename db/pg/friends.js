@@ -35,6 +35,7 @@ function deleteFriend(req, res, next) {
 }
 
 function addFriendToCircle(req, res, next) {
+  console.log(req.body);
   db.none(`insert into circles (friendship, tag)
   values ((select friend_id from friends where
       user_1 = $1  and user_2 = $2), $3)`,
