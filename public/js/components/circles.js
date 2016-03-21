@@ -28,11 +28,11 @@ const Circles = React.createClass({
   },
   render : function() {
     return(
-      <div>
+      <div className="row">
         <h1>My Circles</h1>
           <div>
             <ul>
-              
+
               {
                 Object.keys(this.state.circles).map(this.renderCircles)
               }

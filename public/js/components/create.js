@@ -19,7 +19,7 @@ const Create = React.createClass({
     let arrCircles = [];
     $('.clicked').each((index,value) => {
       arrCircles.push($(value).text())
-    })    
+    })
 
     // event object to DB
     let newEvent = {
@@ -31,7 +31,7 @@ const Create = React.createClass({
       img_url: this.refs.img_url.value,
       lat: +(localStorage.lat),
       lng: +(localStorage.lng),
-      circles: arrCircles 
+      circles: arrCircles
     }
 
     // posting new event to DB
@@ -145,7 +145,7 @@ const CircleBtn = React.createClass({
     return (
       <li>
         <div style={{fontWeight: 'bold'}}>
-          <div onClick={this.handleClick} value={this.props.details.tag}>{this.props.details.tag}</div>
+          <button onClick={this.handleClick} value={this.props.details.tag}>{this.props.details.tag}</button>
         </div>
       </li>
     )

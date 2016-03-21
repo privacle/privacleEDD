@@ -50,9 +50,9 @@ const Friends = React.createClass({
   },
   render : function() {
     return (
-      <div>
+      <div className="row">
         <h1>My Friends</h1>
-        <div className="col s12 m6 l4 row">
+        <div>
           <ul>
             {
               Object.keys(this.state.friends).map(this.renderFriend)
@@ -73,7 +73,7 @@ const Friend = React.createClass({
   },
 
   componentWillMount : function() {
-    
+
     $.ajax({
       url: 'api/friends/circles',
       beforeSend: function( xhr ) {
@@ -101,25 +101,29 @@ const Friend = React.createClass({
 
     return (
       <li>
-        <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 300, height: 480, overflow: 'hidden'}}>
-          <div className="card-content">
-            <img src="http://g-ecx.images-amazon.com/images/G/01/img15/pet-products/small-tiles/23695_pets_vertical_store_dogs_small_tile_8._CB312176604_.jpg" alt className="circle responsive-img activator card-profile-image" />
-            <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
-            <i className="mdi-action-account-circle" />
-            </a>
-            <span className="card-title grey-text text-darken-4">User Email: {this.props.details.email}</span>
-          </div>
+        <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 350, height: 'auto', overflow: 'hidden'}}>
+          <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 300, height: 480, overflow: 'hidden'}}>
+            <div className="card-content">
+              <img src="http://g-ecx.images-amazon.com/images/G/01/img15/pet-products/small-tiles/23695_pets_vertical_store_dogs_small_tile_8._CB312176604_.jpg" alt className="circle responsive-img activator card-profile-image" />
+              <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
+              <i className="mdi-action-account-circle" />
+              </a>
+              <span className="card-title grey-text text-darken-4">{this.props.details.first_name} {this.props.details.last_name}</span>
+              <p><i className="cyan-text text-darken-2" />User ID: {this.props.details.user_id}</p>
+              <p><i className="mdi-communication-email cyan-text text-darken-2" />Email: {this.props.details.email}</p>
+              <p><i className="mdi-action-perm-identity cyan-text text-darken-2" />Bio: {this.props.details.bio}</p>
+            </div>
 
-          <div className="card-reveal" style={{display: 'none', transform: 'translateY(0px)'}}>
-            <span className="card-title grey-text text-darken-4">User ID: {this.props.details.user_id}<i className="mdi-navigation-close right" /></span>
-            <span><h5>Add to circle</h5></span>
-            <ul>
-              {
-                Object.keys(this.state.droplist).map(this.renderOptions) 
-              }
-            </ul>
-            <p>Here is some more information about this card.</p>
-            <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 200, position:"absolute", display:"block"}} onClick={this.handleClick} >Unfriend</button>
+            <div className="card-reveal" style={{display: 'none', transform: 'translateY(0px)'}}>
+              <span className="card-title grey-text text-darken-4">User ID: {this.props.details.user_id}<i className="mdi-navigation-close right" /></span>
+              <span><h5>Add to circle</h5></span>
+              <ul>
+                {
+                  Object.keys(this.state.droplist).map(this.renderOptions)
+                }
+              </ul>
+              <button className="btn right waves-effect waves-light light-blue darken-4" style={{top:400, width: 200, position:"absolute", display:"block"}} onClick={this.handleClick} >Unfriend</button>
+            </div>
           </div>
         </div>
       </li>
@@ -153,7 +157,7 @@ const DropOption = React.createClass({
   },
   render : function() {
     return (
-      <li><div onClick={this.handleClick} >{this.props.details}</div></li>
+      <button onClick={this.handleClick} className="btn right waves-effect waves-light light-blue darken-4">{this.props.details}</button>
     )
   }
 });
