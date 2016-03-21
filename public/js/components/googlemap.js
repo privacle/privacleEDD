@@ -11,11 +11,6 @@ const GoogleMap = React.createClass({
   render : function() {
     return (
       <div>
-        <div>
-          <ul>
-            <p>list of events</p>
-          </ul>
-        </div>
         <div id="map">
         </div>
       </div>

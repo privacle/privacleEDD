@@ -19,7 +19,7 @@ const Create = React.createClass({
     let arrCircles = [];
     $('.clicked').each((index,value) => {
       arrCircles.push($(value).text());
-    })    
+    })
 
     arrCircles = JSON.stringify(arrCircles);
     // event object to DB
@@ -32,7 +32,7 @@ const Create = React.createClass({
       img_url: this.refs.img_url.value,
       lat: +(localStorage.lat),
       lng: +(localStorage.lng),
-      circles: arrCircles,
+      circles: arrCircles
     }
 
     // posting new event to DB
@@ -110,13 +110,15 @@ const Create = React.createClass({
               </div>
             </div>
 
-            <div>
-              <label htmlFor="name">Add to circle</label>
-              <div>
-                <ul>
-                {
-                  Object.keys(this.state.circles).map(this.renderCircleBtns)
-                }
+            <div className="input-field col s12 m6">
+              <div className="select-wrapper">
+                <span className="caret">▼</span>
+                <input type="text" className="select-dropdown" readOnly="true" data-activates="circles" defaultValue="Choose a circle" />
+                <label htmlFor="name">Circles</label>
+                <ul id="circles" className="dropdown-content select-dropdown" style={{width: 412, position: 'absolute', top: 0, left: 0, opacity: 1, display: 'none'}}>
+                  {
+                    Object.keys(this.state.circles).map(this.renderCircleBtns)
+                  }
                 </ul>
               </div>
             </div>
@@ -144,10 +146,10 @@ const CircleBtn = React.createClass({
   },
   render : function() {
     return (
-      <li>
-        <div style={{fontWeight: 'bold'}}>
-          <div onClick={this.handleClick} value={this.props.details.tag}>{this.props.details.tag}</div>
-        </div>
+      <li value={this.props.details.tag}>
+        <span>
+          {this.props.details.tag}
+        </span>
       </li>
     )
   }

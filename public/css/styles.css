@@ -12,7 +12,8 @@ html{
 }
 
 #map {
-  left: 700px;
+  top: -460px;
+  left: 10px;
   height: 500px;
   width: 40%;
   border: 1px solid black;
@@ -54,3 +55,7 @@ a {
     from {background-color: red;}
     to {background-color: yellow;}
 }*/
+
+#messages { list-style-type: none; margin: 0; padding: 0; }
+#messages li { padding: 5px 10px; }
+#messages li:nth-child(odd) { background: #eee; }

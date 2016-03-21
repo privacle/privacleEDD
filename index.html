@@ -21,6 +21,18 @@
   <script src="js/initmap.js" class="keep"></script>
   <script src="js/eventmap.js" class="keep"></script>
   <script src="js/bundle.js" class="keep"></script>
-  
+
+  <script src="/socket.io/socket.io.js" class="keep"></script>
+    <script class="keep">
+    var socket = io();
+    $('form').submit(function(){
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+    socket.on('chat message', function(msg){
+      $('#messages').append($('<li>').text(msg));
+    });
+    </script>
 </body>
 </html>

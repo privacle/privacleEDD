@@ -82,9 +82,9 @@ const Event = React.createClass({
       <li>
         <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 350, height: 'auto', overflow: 'hidden'}}>
           <div className="map-card">
-            <div className="card" style={{height:'560px', width: "250px"}}>
+            <div className="card" style={{height:'500px', width: "250px"}}>
               <div className="card-image waves-effect waves-block waves-light">
-              <img src={this.props.details.img_url} alt="event image" className="circle responsive-img activator card-profile-image" />
+              <img src={this.props.details.img_url} alt="event image" className="circle responsive-img activator card-profile-image" style={{height: '250px'}} />
               </div>
               <div className="card-content">
                 <a className="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">

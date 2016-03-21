@@ -1,6 +1,7 @@
 const React = require('react');
 const auth = require('../auth');
 const GoogleMap = require('./googlemap.js');
+const Chatroom = require('./chatroom.js')
 
 const Dashboard = React.createClass({
   getInitialState : function() {
@@ -34,6 +35,9 @@ const Dashboard = React.createClass({
     return (
       <div>
         <h1>Events Map</h1>
+        <div>
+          <Chatroom />
+        </div>
         <GoogleMap />
       </div>
     )

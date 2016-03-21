@@ -48,9 +48,9 @@ const Friends = React.createClass({
   },
   render : function() {
     return (
-      <div>
+      <div className="row">
         <h1>My Friends</h1>
-        <div className="col s12 m6 l4 row">
+        <div>
           <ul>
             {
               Object.keys(this.state.friends).map(this.renderFriend)
@@ -71,7 +71,7 @@ const Friend = React.createClass({
   },
 
   componentWillMount : function() {
-    
+
     $.ajax({
       url: 'api/friends/circles',
       beforeSend: function( xhr ) {
@@ -97,6 +97,7 @@ const Friend = React.createClass({
 
     return (
       <li>
+      <div className="col s12 m12 l4" style={{marginTop: 30, marginLeft: 30, width: 350, height: 'auto', overflow: 'hidden'}}>
         <div id="profile-card" className="card" style={{marginTop: 30, marginLeft: 30, width: 300, height: 480, overflow: 'hidden'}}>
           <div className="card-content">
             <img src={"../uploads/" + this.props.details.photo} alt className="circle responsive-img activator card-profile-image" />
@@ -122,11 +123,15 @@ const Friend = React.createClass({
             <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 200, position:"absolute", display:"block"}} onClick={this.handleClick} >Unfriend</button>
           </div>
         </div>
+        </div>
       </li>
     )
   }
 });
 
+
+
+            
 
 
 
@@ -153,7 +158,7 @@ const DropOption = React.createClass({
   },
   render : function() {
     return (
-      <li><div onClick={this.handleClick} >{this.props.details}</div></li>
+      <button onClick={this.handleClick} className="btn right waves-effect waves-light light-blue darken-4">{this.props.details}</button>
     )
   }
 });
