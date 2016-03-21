@@ -4,9 +4,10 @@ const auth = require('../auth');
 const UserResult = React.createClass({
 
   addFriend : function(event) {
-    $('#searchbyEvent').show()
-    $('#searchbyUser').show()
+    let email = this.props.details.email;
     $('#usersResults').empty()
+    $('#findBox').hide();
+    $('#findPage').append('<h1>').addClass('card-panel').text('You have added ' + email)
     console.log('adding friend');
 
     $.ajax({
