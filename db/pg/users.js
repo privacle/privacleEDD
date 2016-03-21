@@ -125,6 +125,9 @@ function myCircles(req, res, next) {
 }
 
 function aCircle(req, res, next) {
+  console.log(req.user.user_id);
+  console.log(req.params.circle_name);
+
   db.any(`select * from circles
     left join friends on circles.friendship = friends.friend_id
     inner join users on users.user_id = friends.user_2

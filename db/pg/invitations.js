@@ -35,6 +35,7 @@ function allMyInvitationsWhere(req, res, next) {
 }
 
 function sendInvitation(invatee) {
+  console.log('Invite: ', invatee);
   db.none(`insert into invitations
     (user_id, event_id)
     values ($1, $2)`,
