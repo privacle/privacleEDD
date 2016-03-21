@@ -86,7 +86,7 @@ const Circle = React.createClass({
                     <button className="btn right waves-effect waves-light light-blue darken-4" style={{width: 96.6719, position:"absolute"}} >Delete</button>
                   </div>
                   <div className="card-reveal">
-                  <span className="card-title grey-text text-darken-4">Name<i className="mdi-navigation-close right" /></span>
+                  <span className="card-title grey-text text-darken-4">{this.props.details.tag}<i className="mdi-navigation-close right" /></span>
                   <h2>Firends in this circle</h2>
 
                   <ul>

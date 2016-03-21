@@ -46,7 +46,7 @@ function setMyLocation(map) {
   var marker = new google.maps.Marker({
     position: {lat: user_position.latitude, lng: user_position.longitude},
     map: map,
-    icon: 'https://lh4.googleusercontent.com/Ucqe1j7Ule377j-8wHVHAdnCIg_IlvQR3k87eAH99NNr5LRm7VUHNlS-80XTkweJ4hT6NQ=s190'
+    icon: 'https://lh3.googleusercontent.com/RotOzuzPPq-RNuY6QAvPcG6uWrBsBBHiB9-IoYlkJklrq7zjNQTf0v0wLXE0hZ0mHJshOA=s190'
   });
 }
 
