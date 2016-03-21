@@ -48,7 +48,7 @@ a {
 #welcome {
   animation-name: welcome;
   animation-duration: 4s;
-  background: url('../img/background.png')
+  background-repeat: no-repeat;
 }
 
 /*@keyframes welcome {
